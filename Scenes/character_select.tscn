@@ -1,0 +1,149 @@
+[gd_scene load_steps=9 format=3 uid="uid://cr41ba30c5yxt"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/character_select.gd" id="1_v7x74"]
+[ext_resource type="Script" path="res://Scripts/Controls/Cursor.gd" id="2_gyo8w"]
+
+[sub_resource type="SystemFont" id="SystemFont_6mk43"]
+font_names = PackedStringArray("Times New Roman")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o132t"]
+size = Vector2(442, 99)
+
+[sub_resource type="SystemFont" id="SystemFont_vi6p7"]
+font_names = PackedStringArray("Times New Roman")
+
+[sub_resource type="SystemFont" id="SystemFont_b8pp5"]
+font_names = PackedStringArray("Times New Roman")
+
+[sub_resource type="SphereMesh" id="SphereMesh_pi2tc"]
+radius = 25.0
+height = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8n2iv"]
+radius = 23.0
+
+[node name="Character_select" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v7x74")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.307
+anchor_top = 0.276
+anchor_right = 0.693
+anchor_bottom = 0.724
+offset_left = 0.324005
+offset_top = 0.195969
+offset_right = -0.324036
+offset_bottom = -0.196045
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="Pilot" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_6mk43")
+theme_override_font_sizes/font_size = 70
+text = "Pilot"
+
+[node name="Area2D" type="Area2D" parent="MarginContainer/VBoxContainer/Pilot"]
+collision_layer = 131072
+collision_mask = 65536
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/Pilot/Area2D"]
+position = Vector2(222.012, 49.5)
+shape = SubResource("RectangleShape2D_o132t")
+
+[node name="Gunner" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_vi6p7")
+theme_override_font_sizes/font_size = 70
+text = "Gunner"
+
+[node name="Gunner_Area" type="Area2D" parent="MarginContainer/VBoxContainer/Gunner"]
+collision_layer = 131072
+collision_mask = 65536
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/Gunner/Gunner_Area"]
+position = Vector2(222.012, 49.5)
+shape = SubResource("RectangleShape2D_o132t")
+
+[node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_b8pp5")
+theme_override_font_sizes/font_size = 70
+text = "Go Back"
+
+[node name="Area2D" type="Area2D" parent="MarginContainer/VBoxContainer/Back"]
+collision_layer = 131072
+collision_mask = 65536
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/Back/Area2D"]
+position = Vector2(222.012, 49.5)
+shape = SubResource("RectangleShape2D_o132t")
+
+[node name="CPU" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_b8pp5")
+theme_override_font_sizes/font_size = 70
+text = "CPU"
+
+[node name="CPU_Area" type="Area2D" parent="MarginContainer/VBoxContainer/CPU"]
+collision_layer = 131072
+collision_mask = 65536
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/CPU/CPU_Area"]
+position = Vector2(222.012, 49.5)
+shape = SubResource("RectangleShape2D_o132t")
+
+[node name="P1" type="CharacterBody2D" parent="."]
+position = Vector2(221, 162)
+collision_layer = 65536
+collision_mask = 131072
+script = ExtResource("2_gyo8w")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="P1"]
+mesh = SubResource("SphereMesh_pi2tc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P1"]
+shape = SubResource("CircleShape2D_8n2iv")
+
+[node name="P2" type="CharacterBody2D" parent="."]
+position = Vector2(903, 165)
+collision_layer = 65536
+collision_mask = 131072
+script = ExtResource("2_gyo8w")
+playerid = 2
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="P2"]
+mesh = SubResource("SphereMesh_pi2tc")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="P2"]
+shape = SubResource("CircleShape2D_8n2iv")
+
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Pilot/Area2D" to="P1" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Pilot/Area2D" to="P2" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="MarginContainer/VBoxContainer/Pilot/Area2D" to="P1" method="_on_area_2d_body_exited"]
+[connection signal="body_exited" from="MarginContainer/VBoxContainer/Pilot/Area2D" to="P2" method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Gunner/Gunner_Area" to="P1" method="_on_gunner_area_body_entered"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Gunner/Gunner_Area" to="P2" method="_on_gunner_area_body_entered"]
+[connection signal="body_exited" from="MarginContainer/VBoxContainer/Gunner/Gunner_Area" to="P1" method="_on_gunner_area_body_exited"]
+[connection signal="body_exited" from="MarginContainer/VBoxContainer/Gunner/Gunner_Area" to="P2" method="_on_gunner_area_body_exited"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/CPU/CPU_Area" to="P1" method="_on_cpu_area_body_entered"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/CPU/CPU_Area" to="P2" method="_on_cpu_area_body_entered"]
+[connection signal="body_exited" from="MarginContainer/VBoxContainer/CPU/CPU_Area" to="P1" method="_on_cpu_area_body_exited"]
+[connection signal="body_exited" from="MarginContainer/VBoxContainer/CPU/CPU_Area" to="P2" method="_on_cpu_area_body_exited"]

@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://5onto4dvfxg2"]
+
+[ext_resource type="PackedScene" uid="uid://bs6b1ckd3y2fq" path="res://art/Zenith.gltf" id="1_q5i2k"]
+[ext_resource type="Script" path="res://Scripts/zenith.gd" id="2_fmlvo"]
+[ext_resource type="Script" path="res://Scripts/Turret_controller.gd" id="3_x2ab2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3km7o"]
+size = Vector3(1.3, 1.2, 11.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nbhac"]
+size = Vector3(3.8, 3.6, 0.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f6x15"]
+
+[node name="Zenith" instance=ExtResource("1_q5i2k")]
+motion_mode = 1
+script = ExtResource("2_fmlvo")
+
+[node name="Zenith2" parent="." index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.628887, 2.13178)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.27488, -0.497035)
+shape = SubResource("BoxShape3D_3km7o")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.661215, 3.72517)
+shape = SubResource("BoxShape3D_nbhac")
+
+[node name="Camera3D" type="Camera3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.975638, 0.219386, 0, -0.219386, 0.975638, 0, 4.71092, 10.0232)
+
+[node name="Node3D" type="CharacterBody3D" parent="." index="4" node_paths=PackedStringArray("Camera_controller", "turret_body")]
+script = ExtResource("3_x2ab2")
+Camera_controller = NodePath("Camera_Pivot/Camera2")
+turret_body = NodePath("")
+
+[node name="Turret" type="Node3D" parent="Node3D" index="0"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Turret" index="0"]
+mesh = SubResource("BoxMesh_f6x15")
+
+[node name="Camera_Pivot" type="Node3D" parent="Node3D" index="1"]
+
+[node name="Camera2" type="Camera3D" parent="Node3D/Camera_Pivot" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06594, 0.425588)

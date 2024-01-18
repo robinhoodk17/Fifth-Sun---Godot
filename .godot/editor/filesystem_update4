@@ -1,0 +1,9 @@
+res://Scenes/Scene1.tscn
+res://Scenes/main_menu.tscn
+res://Scenes/character_select.tscn
+res://Scenes/physics trial.tscn
+res://Prefabs/zenith.tscn
+res://Prefabs/RouteNode.tscn
+res://Scripts/AI/RouteNode.gd
+res://Scripts/Controls/Turret_controller.gd
+res://Scripts/global_variables.gd

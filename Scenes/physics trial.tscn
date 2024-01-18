@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv62mfsx8ode"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wr2b0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1hxk5"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Node3D"]
+freeze = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/RigidBody3D"]
+mesh = SubResource("BoxMesh_wr2b0")
+skeleton = NodePath("../..")
+
+[node name="Node3D3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Node3D3"]
+gravity_scale = 9.82
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D3/RigidBody3D"]
+shape = SubResource("BoxShape3D_1hxk5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D3/RigidBody3D"]
+mesh = SubResource("BoxMesh_wr2b0")
+skeleton = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.425364, 15.7134)
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.30049, 0)
+node_a = NodePath("../Node3D/RigidBody3D")
+node_b = NodePath("../Node3D3/RigidBody3D")
+linear_limit_x/enabled = false
+linear_limit_y/enabled = false
+linear_limit_z/enabled = false
+linear_spring_y/enabled = true
+linear_spring_y/stiffness = 1.0
+linear_spring_y/damping = 1.0
