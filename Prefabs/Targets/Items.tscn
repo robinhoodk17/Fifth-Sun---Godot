@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddg3yfb5vd6lp"]
+
+[ext_resource type="Script" path="res://Scripts/Non-player prefabs/Items.gd" id="1_jgpjf"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_p5g23"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nvco5"]
+
+[node name="Items" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_jgpjf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_p5g23")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_nvco5")

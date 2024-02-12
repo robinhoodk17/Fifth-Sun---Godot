@@ -60,11 +60,11 @@ radius = 1.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vjyen"]
 margin = 0.1
-radius = 0.6
+radius = 0.8
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gjuq4"]
 margin = 0.01
-radius = 0.2
+radius = 0.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_f6x15"]
 
@@ -99,9 +99,11 @@ fov = 90.0
 [node name="Turret" type="Node3D" parent="."]
 top_level = true
 
-[node name="Camera_Pivot" type="CharacterBody3D" parent="Turret" node_paths=PackedStringArray("Camera_controller", "turret_body", "Ship_body", "AimAssist_Big", "AimAssist_Small", "AimAssist_Center")]
+[node name="Camera_Pivot" type="CharacterBody3D" parent="Turret" node_paths=PackedStringArray("Camera_controller", "turret_body", "Ship_body", "AimAssist_Big", "AimAssist_Small", "AimAssist_Center", "grappling_hook")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.066, 0)
 motion_mode = 1
+platform_on_leave = 2
+safe_margin = 0.01
 script = ExtResource("3_k3fb5")
 Camera_controller = NodePath("Camera2")
 turret_body = NodePath(".")
@@ -109,14 +111,15 @@ Ship_body = NodePath("../..")
 AimAssist_Big = NodePath("Camera2/AimAssist_Big")
 AimAssist_Small = NodePath("Camera2/AimAssist_Small")
 AimAssist_Center = NodePath("Camera2/AimAssist_center")
+grappling_hook = NodePath("Grapple")
 controller_sensitivity = 2.0
 
 [node name="Grapple" type="Node3D" parent="Turret/Camera_Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.431565, 0.665022)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.743913, -0.938747)
 visible = false
 
 [node name="Line" type="MeshInstance3D" parent="Turret/Camera_Pivot/Grapple"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.67858)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 mesh = SubResource("BoxMesh_vyobk")
 
 [node name="Camera2" type="Camera3D" parent="Turret/Camera_Pivot"]
@@ -135,7 +138,7 @@ collision_mask = 4
 [node name="AimAssist_center" type="ShapeCast3D" parent="Turret/Camera_Pivot/Camera2"]
 shape = SubResource("SphereShape3D_gjuq4")
 target_position = Vector3(0, 0, -300)
-collision_mask = 4
+collision_mask = 5
 debug_shape_custom_color = Color(0.0705882, 0, 0, 1)
 
 [node name="TurretMesh" type="Node3D" parent="Turret/Camera_Pivot/Camera2"]

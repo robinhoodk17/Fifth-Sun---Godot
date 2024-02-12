@@ -3,7 +3,7 @@ extends CharacterBody3D
 @export_group("Nodes for function")
 @export var Camera : Marker3D
 @export var Turret : Node3D
-@export var AIPilotNode : Node3D
+
 @export_group("Ship stats")
 @export var max_speed : float = 50.0
 @export var acceleration : float = 0.4
@@ -16,11 +16,11 @@ extends CharacterBody3D
 @export var yaw_response : float = 1.2
 @export var roll_response : float = 15.0
 @export_group("Hookshot stats")
-@export var hookshot_strength : float = 2.0
+@export var hookshot_strength : float = 4.0
 @export_group("Controller")
 @export var Controller_Sensitivity : float = 1
 
-
+@onready var AIPilotNode : Node3D = $"../1"
 @onready var Camera_offset : Vector3 = Camera.position
 @onready var Pilot = GlobalVariables.Pilot 
 
@@ -35,6 +35,7 @@ var look_at : Vector3
 var hooked : bool = false
 var hookshot_length
 var hookshot_landing_point
+var held_Item = null
 
 
 func _ready():
@@ -59,6 +60,10 @@ func get_input(delta):
 			is_accelerating = true
 		if Input.is_action_pressed("Brake_%s" % [Pilot]):
 			is_braking = true
+		if Input.is_action_pressed("Secondary_%s" % [Pilot]):
+			if held_Item == "boost":
+				held_Item = null
+				forward_speed += 10
 
 func move_turret_and_camera():
 	Turret.position = position
@@ -88,6 +93,9 @@ func _hooked_movement(delta):
 		vector_lookingat_hook = vector_lookingat_hook.normalized()
 		vector_lookingat_hook = vector_lookingat_hook * (distance_to_hook - hookshot_length) * hookshot_strength
 		velocity += vector_lookingat_hook
+		var targetposition = position + velocity
+		transform.looking_at(targetposition)
+		#transform.basis.z = velocity.normalized()
 func setTargetPosition(target):
 	AIPilotNode = target
 func autoPilot(delta):
@@ -102,7 +110,7 @@ func autoPilot(delta):
 	pitch_input = lerp(pitch_input,clamp((upOrDown),-1.0,1.0),pitch_response)
 	roll_input = lerp(roll_input,Roll,roll_response*delta)
 	
-	if frontorBack <= 0:
+	if frontorBack <= 0 and !hooked:
 		is_braking = true
 		is_accelerating = false
 	else: 
@@ -110,7 +118,6 @@ func autoPilot(delta):
 		is_braking = false
 	
 func _physics_process(delta):
-	forward_speed = velocity.length()
 	is_accelerating = false
 	is_braking = false
 	get_input(delta)
@@ -128,6 +135,7 @@ func _physics_process(delta):
 		_hooked_movement(delta)
 	move_and_slide( )
 	move_turret_and_camera()
+	forward_speed = velocity.length()
 	"""
 	#only rotating the camera around 2 axes to prevent dizziness
 	var rocket_euler = transform.basis.get_euler()

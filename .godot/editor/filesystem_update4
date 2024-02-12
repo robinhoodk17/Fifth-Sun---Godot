@@ -1,9 +1,13 @@
+res://Prefabs/zenith.tscn
+res://Scripts/Controls/Turret_controller.gd
 res://Scenes/Scene1.tscn
+res://Scripts/global_variables.gd
 res://Scenes/main_menu.tscn
 res://Scenes/character_select.tscn
 res://Scenes/physics trial.tscn
-res://Prefabs/zenith.tscn
 res://Prefabs/RouteNode.tscn
-res://Scripts/AI/RouteNode.gd
-res://Scripts/Controls/Turret_controller.gd
-res://Scripts/global_variables.gd
+res://Prefabs/Targets/Items.tscn
+res://Scripts/Controls/speedometer.gd
+res://Scripts/Controls/zenith.gd
+res://Scripts/Non-player prefabs/AI/RouteNode.gd
+res://Scenes/Track1.tscn
