@@ -5,8 +5,9 @@ extends CharacterBody3D
 @export var Turret : Node3D
 
 @export_group("Ship stats")
-@export var max_speed : float = 50.0
-@export var acceleration : float = 0.4
+@export var max_speed : float = 100.0
+@export var acceleration : float = 16.0
+@export var boost : float = 30.0
 @export var braking : float = 1.2
 @export var roll_speed : float = 1.2
 @export var yaw_speed : float = 2.0
@@ -16,7 +17,7 @@ extends CharacterBody3D
 @export var yaw_response : float = 1.2
 @export var roll_response : float = 15.0
 @export_group("Hookshot stats")
-@export var hookshot_strength : float = 4.0
+@export var hookshot_strength : float = 1.6
 @export_group("Controller")
 @export var Controller_Sensitivity : float = 1
 
@@ -27,6 +28,8 @@ extends CharacterBody3D
 var is_accelerating : bool = false
 var is_braking : bool = false
 var forward_speed : float = 0.0
+var previous_speed  = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+var speed_array_counter : int = 0
 var pitch_input : float = 0.0
 var yaw_input : float = 0.0
 var roll_input : float = 0.0
@@ -36,6 +39,7 @@ var hooked : bool = false
 var hookshot_length
 var hookshot_landing_point
 var held_Item = null
+var draft : bool = true
 
 
 func _ready():
@@ -67,9 +71,16 @@ func get_input(delta):
 
 func move_turret_and_camera():
 	Turret.position = position
-	
-	Camera.position = Camera.position.lerp(position,.3)
-	
+	var last_speed
+	if(speed_array_counter < 19):
+		last_speed = speed_array_counter+1
+	else:
+		last_speed = 0
+	var instantaneous_acceleration = 1/(1+50*(forward_speed-previous_speed[last_speed]))
+	if instantaneous_acceleration < 0:
+		instantaneous_acceleration = .8
+	var lerp_speed = clamp(instantaneous_acceleration,.001,.8)
+	Camera.position = Camera.position.lerp(position,.2)
 	var a = Quaternion(transform.basis)
 	var b = Quaternion(Camera.transform.basis)
 	var c = b.slerp(a, 0.1)
@@ -88,14 +99,33 @@ func _hooked_movement(delta):
 	transform.basis = transform.basis.orthonormalized()
 	velocity = -transform.basis.z * forward_speed
 	var distance_to_hook = position.distance_to(hookshot_landing_point)
+	
+	#Here we handle how the hookshot interacts with the ship
 	if (distance_to_hook  > hookshot_length):
-		var vector_lookingat_hook : Vector3 = (hookshot_landing_point - global_position)
-		vector_lookingat_hook = vector_lookingat_hook.normalized()
-		vector_lookingat_hook = vector_lookingat_hook * (distance_to_hook - hookshot_length) * hookshot_strength
-		velocity += vector_lookingat_hook
-		var targetposition = position + velocity
-		transform.looking_at(targetposition)
-		#transform.basis.z = velocity.normalized()
+		var vector_lookingat_hook : Vector3 = (hookshot_landing_point - global_position).normalized()
+		var rightdotproduct = vector_lookingat_hook.dot(global_transform.basis.x)
+		var frontdotproduct = vector_lookingat_hook.dot(global_transform.basis.z)
+		var updotproduct = vector_lookingat_hook.dot(global_transform.basis.y)
+		var rightdirection = global_transform.basis.x * delta * hookshot_strength * rightdotproduct
+		var frontdirection : Vector3 = Vector3 (0,0,0)
+		if frontdotproduct >0:
+			frontdirection = -global_transform.basis.z * delta * hookshot_strength * frontdotproduct * acceleration * 1.5
+		var updirection = global_transform.basis.y * delta * hookshot_strength * updotproduct
+		var  direction = (updirection + rightdirection + velocity.normalized()).normalized()
+		velocity = (direction * forward_speed) - frontdirection
+		var look_at_vector = transform.looking_at(transform.origin + velocity)
+		transform.basis.x = look_at_vector.basis.x
+		transform.basis.y = look_at_vector.basis.y
+		transform.basis.z = look_at_vector.basis.z
+		transform.basis.orthonormalized()
+		
+		#the previous way of handling the hookshot
+#		var vector_lookingat_hook : Vector3 = (hookshot_landing_point - global_position)
+#		vector_lookingat_hook = vector_lookingat_hook.normalized()
+#		vector_lookingat_hook = vector_lookingat_hook * (distance_to_hook - hookshot_length) * hookshot_strength
+#		velocity += vector_lookingat_hook
+#		var targetposition = position + velocity
+#		transform.looking_at(targetposition)
 func setTargetPosition(target):
 	AIPilotNode = target
 func autoPilot(delta):
@@ -116,8 +146,15 @@ func autoPilot(delta):
 	else: 
 		is_accelerating = true
 		is_braking = false
-	
+"""
+forward speed also gets changed by the RouteNode script on entering if it is a booster node
+and by the TUrret_controller script when the hookshot gets unhooked
+"""
 func _physics_process(delta):
+	#here we record the previous 5 speeds. We increase the speed_array_counter at the end of physiscs process
+	previous_speed[speed_array_counter] = forward_speed
+	if draft:
+		forward_speed -= 2 * delta
 	is_accelerating = false
 	is_braking = false
 	get_input(delta)
@@ -133,9 +170,15 @@ func _physics_process(delta):
 		_normal_movement(delta)
 	else:
 		_hooked_movement(delta)
+	
+	forward_speed = velocity.length()
 	move_and_slide( )
 	move_turret_and_camera()
 	forward_speed = velocity.length()
+	if speed_array_counter < 19:
+		speed_array_counter += 1
+	else:
+		speed_array_counter = 0
 	"""
 	#only rotating the camera around 2 axes to prevent dizziness
 	var rocket_euler = transform.basis.get_euler()
@@ -168,6 +211,16 @@ func _physics_process(delta):
 		if(camera_euler.z - rocket_euler.z <.05 and camera_euler.z - rocket_euler.z > -.05):
 			rotating_on_z = false"""
 	
-	
+func find_largest_dict_key(dict):
+	var max_val = -999999
+	var max_var
+	var key
+	for i in dict:
+		var val =  dict[i]
+		if val > max_val:
+			max_val = val
+			max_var = i
+			key = i
+	return key
 
 	

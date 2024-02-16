@@ -1,3 +1,4 @@
+RayCast3D
 DirectionalLight3D
 Node3D
 MarginContainer
@@ -12,7 +13,6 @@ ShapeCast3D
 CollisionShape2D
 StaticBody3D
 Camera3D
-RayCast3D
 Sprite2D
 CharacterBody3D
 Generic6DOFJoint3D

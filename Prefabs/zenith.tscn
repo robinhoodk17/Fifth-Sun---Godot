@@ -56,15 +56,14 @@ size = Vector3(0.03, 0.03, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vfuy0"]
 margin = 0.1
-radius = 1.2
+radius = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vjyen"]
 margin = 0.1
-radius = 0.8
+radius = 1.6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gjuq4"]
-margin = 0.01
-radius = 0.4
+radius = 0.8
 
 [sub_resource type="BoxMesh" id="BoxMesh_f6x15"]
 
@@ -74,7 +73,6 @@ collision_mask = 11
 script = ExtResource("1_out30")
 Camera = NodePath("Marker3D")
 Turret = NodePath("Turret")
-hookshot_strength = 50.0
 
 [node name="Zenith2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.628887, 2.13178)
@@ -99,7 +97,7 @@ fov = 90.0
 [node name="Turret" type="Node3D" parent="."]
 top_level = true
 
-[node name="Camera_Pivot" type="CharacterBody3D" parent="Turret" node_paths=PackedStringArray("Camera_controller", "turret_body", "Ship_body", "AimAssist_Big", "AimAssist_Small", "AimAssist_Center", "grappling_hook")]
+[node name="Camera_Pivot" type="CharacterBody3D" parent="Turret" node_paths=PackedStringArray("Camera_controller", "turret_body", "Ship_body", "AimAssist_Big", "AimAssist_Small", "AimAssist_Center", "ray", "grappling_hook")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.066, 0)
 motion_mode = 1
 platform_on_leave = 2
@@ -111,6 +109,7 @@ Ship_body = NodePath("../..")
 AimAssist_Big = NodePath("Camera2/AimAssist_Big")
 AimAssist_Small = NodePath("Camera2/AimAssist_Small")
 AimAssist_Center = NodePath("Camera2/AimAssist_center")
+ray = NodePath("Camera2/RayCast3D")
 grappling_hook = NodePath("Grapple")
 controller_sensitivity = 2.0
 
@@ -127,19 +126,27 @@ mesh = SubResource("BoxMesh_vyobk")
 [node name="AimAssist_Big" type="ShapeCast3D" parent="Turret/Camera_Pivot/Camera2"]
 shape = SubResource("SphereShape3D_vfuy0")
 target_position = Vector3(0, 0, -300)
+margin = 2.0
 collision_mask = 4
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="AimAssist_Small" type="ShapeCast3D" parent="Turret/Camera_Pivot/Camera2"]
 shape = SubResource("SphereShape3D_vjyen")
 target_position = Vector3(0, 0, -300)
+margin = 1.6
 collision_mask = 4
 
 [node name="AimAssist_center" type="ShapeCast3D" parent="Turret/Camera_Pivot/Camera2"]
 shape = SubResource("SphereShape3D_gjuq4")
 target_position = Vector3(0, 0, -300)
-collision_mask = 5
+margin = 0.8
+collision_mask = 3
 debug_shape_custom_color = Color(0.0705882, 0, 0, 1)
+
+[node name="RayCast3D" type="RayCast3D" parent="Turret/Camera_Pivot/Camera2"]
+target_position = Vector3(0, 0, -500)
+collision_mask = 3
+debug_shape_custom_color = Color(0, 1, 0, 1)
 
 [node name="TurretMesh" type="Node3D" parent="Turret/Camera_Pivot/Camera2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.06594, -0.425588)

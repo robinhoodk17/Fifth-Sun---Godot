@@ -17,10 +17,10 @@ size = Vector3(60, 2, 60)
 size = Vector3(60, 2, 60)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gfd4v"]
-size = Vector3(5, 5, 5)
+size = Vector3(10, 10, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_jdqr2"]
-size = Vector3(5, 5, 5)
+size = Vector3(10, 10, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_h87kl"]
 size = Vector3(200, 200, 2)
@@ -51,7 +51,6 @@ mesh = SubResource("BoxMesh_ovdl8")
 [node name="Ship" parent="." instance=ExtResource("1_7reif")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 max_speed = 150.0
-acceleration = 15.0
 braking = 30.0
 
 [node name="GridContainer" type="GridContainer" parent="."]
@@ -173,7 +172,7 @@ shape = SubResource("BoxShape3D_gfd4v")
 mesh = SubResource("BoxMesh_jdqr2")
 
 [node name="Node3D3" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.213, 43.421, -402.807)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.4693, 43.421, 87.171)
 collision_layer = 5
 collision_mask = 3
 
@@ -225,12 +224,14 @@ transform = Transform3D(-0.00338594, -0.999994, 0, 0.999994, -0.00338594, 0, 0, 
 visible = false
 PreviousNode = NodePath("../1")
 NextNode = NodePath("../3")
+Type = 0
 
 [node name="3" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("5_tplye")]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -11.2697, 19.1551, -316.7)
 visible = false
 PreviousNode = NodePath("../2")
 NextNode = NodePath("../4")
+Type = 0
 
 [node name="4" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("5_tplye")]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -11.2697, 19.1551, -350.236)
@@ -293,7 +294,13 @@ PreviousNode = NodePath("../12")
 NextNode = NodePath("../14")
 
 [node name="14" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("5_tplye")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.44879, 19.1551, 38.2772)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -96.8738, 19.1551, 233.853)
 visible = false
 PreviousNode = NodePath("../13")
+NextNode = NodePath("../15")
+
+[node name="15" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("5_tplye")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.44879, 19.1551, 44.3419)
+visible = false
+PreviousNode = NodePath("../14")
 NextNode = NodePath("../1")
