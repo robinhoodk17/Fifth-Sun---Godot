@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @export_group("Nodes for function")
+##The marker3D, not the actual camera
 @export var Camera : Marker3D
 @export var Turret : Node3D
 

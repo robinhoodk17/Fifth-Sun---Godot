@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bosbcn4jsochj" path="res://art/Sprites/Speedom-hand.png" id="4_3r0y7"]
 [ext_resource type="Texture2D" uid="uid://dvvoftavsla7y" path="res://art/Sprites/Red dot.png" id="5_iyngq"]
 [ext_resource type="Texture2D" uid="uid://dbaa33ud0yxvr" path="res://art/Sprites/Outer aim.png" id="6_dg2bt"]
-[ext_resource type="PackedScene" uid="uid://5onto4dvfxg2" path="res://Prefabs/zenith.tscn" id="7_h00lt"]
+[ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="8_mj124"]
 [ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/RouteNode.tscn" id="8_nbu7b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7uyjm"]
@@ -118,12 +118,6 @@ texture = ExtResource("5_iyngq")
 [node name="OuterAim" type="Sprite2D" parent="GridContainer/SubViewportContainer2/SubViewport/UI_turret/Aim"]
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("6_dg2bt")
-
-[node name="Ship" parent="." instance=ExtResource("7_h00lt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 678.716)
-max_speed = 80.0
-acceleration = 15.0
-braking = 30.0
 
 [node name="Node3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.1137, 23.2539, 674.062)
@@ -242,3 +236,5 @@ visible = false
 PreviousNode = NodePath("../4")
 NextNode = NodePath("../1")
 Type = 0
+
+[node name="Ship" parent="." instance=ExtResource("8_mj124")]

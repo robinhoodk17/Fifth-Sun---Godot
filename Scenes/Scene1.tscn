@@ -1,6 +1,5 @@
 [gd_scene load_steps=16 format=3 uid="uid://c0egdsequgqio"]
 
-[ext_resource type="PackedScene" uid="uid://5onto4dvfxg2" path="res://Prefabs/zenith.tscn" id="1_7reif"]
 [ext_resource type="Script" path="res://Scripts/Cameras/2P_SplitScreen.gd" id="2_vgrxu"]
 [ext_resource type="Script" path="res://Scripts/Controls/speedometer.gd" id="3_jv7mh"]
 [ext_resource type="Texture2D" uid="uid://dvvoftavsla7y" path="res://art/Sprites/Red dot.png" id="3_tjsfh"]
@@ -9,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bosbcn4jsochj" path="res://art/Sprites/Speedom-hand.png" id="5_ktwof"]
 [ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/RouteNode.tscn" id="5_tplye"]
 [ext_resource type="PackedScene" uid="uid://bswyng0o2wou2" path="res://blender/mountain 2.blend" id="6_i020r"]
+[ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="9_55x6l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fkw74"]
 size = Vector3(60, 2, 60)
@@ -47,11 +47,6 @@ shape = SubResource("BoxShape3D_fkw74")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_ovdl8")
-
-[node name="Ship" parent="." instance=ExtResource("1_7reif")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-max_speed = 150.0
-braking = 30.0
 
 [node name="GridContainer" type="GridContainer" parent="."]
 anchors_preset = 15
@@ -185,9 +180,6 @@ mesh = SubResource("BoxMesh_jdqr2")
 [node name="mountain 2" parent="." instance=ExtResource("6_i020r")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13.4909, -6.87695, -131.008)
 
-[node name="mountain 3" parent="." instance=ExtResource("6_i020r")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -6.877, -328.924)
-
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -457.191)
 collision_mask = 2
@@ -304,3 +296,5 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.448
 visible = false
 PreviousNode = NodePath("../14")
 NextNode = NodePath("../1")
+
+[node name="Ship" parent="." instance=ExtResource("9_55x6l")]

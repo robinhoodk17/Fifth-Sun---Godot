@@ -1,10 +1,11 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1707290316
+::res://::1709381693
 CharacterBodyGravityTrial.gd::GDScript::-1::1699464730::0::1::::<>CharacterBody3D<>::
 default_bus_layout.tres::AudioBusLayout::-1::1697550547::0::1::::<><>::
 default_env.tres::Environment::-1::1697550547::0::1::::<><>::
 icon.png::CompressedTexture2D::81677642418255241::1606009720::1697550596::1::::<><>::
-::res://addons/::1707290541
+new_standard_material_3d.tres::StandardMaterial3D::3058607239832461095::1709101504::0::1::::<><>::
+::res://addons/::1709105301
 ::res://addons/godot-jolt/::1699812433
 godot-jolt.gdextension::GDExtension::-1::1699812432::0::1::::<><>::
 LICENSE.txt::TextFile::-1::1699812432::0::1::::<><>::
@@ -29,41 +30,58 @@ player.glb::PackedScene::1185037675818460167::1606514058::1697550599::1::::<><>:
 pupil.material::StandardMaterial3D::-1::1606514142::0::1::::<><>::
 Zenith.gltf::PackedScene::3713922847857273606::1621597552::1697627671::1::::<><>::
 Zenith_Zenith_Orange.png::CompressedTexture2D::9092763812345692954::1697627149::1697627164::1::::<><>::
-::res://art/Sprites/::1707582158
+::res://art/Sprites/::1709378062
+Low_poly_textures.png::CompressedTexture2D::3943294327389080537::1708788486::1708857577::1::::<><>::
+Low_poly_textures_2.png::CompressedTexture2D::4399454248303869011::1709378032::1709378062::1::::<><>::
 Outer aim.png::CompressedTexture2D::7229502398667250279::1700551746::1700551749::1::::<><>::
 Red dot.png::CompressedTexture2D::8677439666103777648::1698167558::1698167598::1::::<><>::
 Speedom-hand.png::CompressedTexture2D::3406288310815612271::1707582158::1707582163::1::::<><>::
 speedometer.png::CompressedTexture2D::845210347951215490::1707581875::1707581893::1::::<><>::
-::res://blender/::1706467496
-mountain 2.blend::PackedScene::3696716957347427675::1706467381::1706467496::1::::<><>::
+::res://blender/::1709381823
+collision1.tres::BoxShape3D::8818988917019345278::1709378464::0::1::::<><>::
+mountain 2.blend::PackedScene::3696716957347427675::1709190551::1709190551::1::::<><>::
+Ship1-new_Low_poly_textures-jpeg.jpg::CompressedTexture2D::485517872142114241::1709381084::1709381617::1::::<><>::
+Ship1-new_Low_poly_textures.png::CompressedTexture2D::4780918856120745843::1709381846::1709381849::1::::<><>::
+Ship1.blend::PackedScene::4884325864194273686::1709377414::1709377429::1::::<><>::
+Ship1.glb::PackedScene::5021487672106048065::1709191274::1709377984::1::::<><>::
+ship_material.tres::StandardMaterial3D::2854420681246296404::1709381664::0::1::::<><>::
 ::res://fonts/::1697550595
 LICENSE.txt::TextFile::-1::1605988452::0::1::::<><>::
 Montserrat-Medium.ttf::FontFile::5293367909236287338::1323702000::1697550595::1::::<><>::
-::res://Prefabs/::1707575910
-RouteNode.tscn::PackedScene::2302122874349452920::1707575910::0::1::::<><>::res://Scripts/Non-player prefabs/AI/RouteNode.gd
-zenith.tscn::PackedScene::2135390628978788187::1707575910::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://d2suqygx0y5wg::::res://art/Zenith_Zenith_Orange.png<>res://Scripts/Controls/Turret_controller.gd
-::res://Prefabs/Targets/::1707575910
-Items.tscn::PackedScene::7383958048921772521::1707575910::0::1::::<><>::res://Scripts/Non-player prefabs/Items.gd
-::res://Scenes/::1707575910
-character_select.tscn::PackedScene::6027499136100608689::1707575909::0::1::::<><>::res://Scripts/Menus/character_select.gd<>res://Scripts/Controls/Cursor.gd
-main_menu.tscn::PackedScene::3622791666755024439::1707575909::0::1::::<><>::res://Scripts/Menus/main_menu.gd
-physics trial.tscn::PackedScene::255849545814655514::1707575910::0::1::::<><>::
-Scene1.tscn::PackedScene::6536190581045032654::1707575909::0::1::::<><>::uid://5onto4dvfxg2::::res://Prefabs/zenith.tscn<>res://Scripts/Cameras/2P_SplitScreen.gd<>uid://dvvoftavsla7y::::res://art/Sprites/Red dot.png<>uid://dbaa33ud0yxvr::::res://art/Sprites/Outer aim.png<>uid://72fvljgdgqke::::res://Prefabs/RouteNode.tscn<>uid://bswyng0o2wou2::::res://blender/mountain 2.blend
-::res://Scripts/::1707575862
-global_variables.gd::GDScript::-1::1707575862::0::1::::<>Node<>::
-::res://Scripts/Cameras/::1705264257
-2P_SplitScreen.gd::GDScript::-1::1705264256::0::1::::<>GridContainer<>::
+::res://Prefabs/::1709379754
+RouteNode.tscn::PackedScene::2302122874349452920::1709379754::0::1::::<><>::res://Scripts/Non-player prefabs/AI/RouteNode.gd
+zenith.tscn::PackedScene::4667910374448414827::1709379753::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://d2suqygx0y5wg
+::res://Prefabs/Ship1/::1709381350
+ship1_mesh.tscn::PackedScene::2546017407261911072::1709381349::0::1::::<><>::uid://cbuaesge6xt2m
+ship.tscn::PackedScene::3438134223398746093::1709381350::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://bgwx5kw24feoq
+::res://Prefabs/Targets/::1709379754
+Items.tscn::PackedScene::7383958048921772521::1709379754::0::1::::<><>::res://Scripts/Non-player prefabs/Items.gd
+::res://Scenes/::1709381348
+character_select.tscn::PackedScene::6027499136100608689::1709379753::0::1::::<><>::res://Scripts/Menus/character_select.gd<>res://Scripts/Controls/Cursor.gd
+main_menu.tscn::PackedScene::3622791666755024439::1709379753::0::1::::<><>::res://Scripts/Menus/main_menu.gd
+physics trial.tscn::PackedScene::255849545814655514::1709379753::0::1::::<><>::
+Scene1.tscn::PackedScene::6536190581045032654::1709381348::0::1::::<><>::res://Scripts/Cameras/2P_SplitScreen.gd<>res://Scripts/Controls/speedometer.gd<>uid://dvvoftavsla7y
+Track1.tscn::PackedScene::7696100263117359506::1709379754::0::1::::<><>::res://Scripts/Cameras/2P_SplitScreen.gd<>res://Scripts/Controls/speedometer.gd<>uid://mboqxscd4faw
+::res://Scripts/::1708871242
+global_variables.gd::GDScript::-1::1707981629::0::1::::<>Node<>::
+Ship_builder.gd::GDScript::-1::1708871242::0::1::::<>Node3D<>::
+::res://Scripts/Cameras/::1709381664
+2P_SplitScreen.gd::GDScript::-1::1709381663::0::1::::<>GridContainer<>::
 SpaceShip_camera.gd::GDScript::-1::1697647853::0::1::::<>Camera3D<>::
-::res://Scripts/Controls/::1707461206
+::res://Scripts/Controls/::1709379625
 Cursor.gd::GDScript::-1::1704781128::0::1::::<>CharacterBody2D<>::
-Turret_controller.gd::GDScript::-1::1707461206::0::1::::<>CharacterBody3D<>::
-zenith.gd::GDScript::-1::1707114861::0::1::::<>CharacterBody3D<>::
+speedometer.gd::GDScript::-1::1707648758::0::1::::<>Node<>::
+Turret_controller.gd::GDScript::-1::1709379597::0::1::::<>CharacterBody3D<>::
+zenith.gd::GDScript::-1::1709379625::0::1::::<>CharacterBody3D<>::
 ::res://Scripts/Menus/::1704905198
 character_select.gd::GDScript::-1::1704780496::0::1::::<>Control<>::
 main_menu.gd::GDScript::-1::1697792027::0::1::::<>Control<>::
 ::res://Scripts/Non-player prefabs/::1706552669
 Items.gd::GDScript::-1::1706552669::0::1::::<>RigidBody3D<>::
-::res://Scripts/Non-player prefabs/AI/::1705300792
-RouteNode.gd::GDScript::-1::1705300792::0::1::::<>Area3D<>::
+::res://Scripts/Non-player prefabs/AI/::1707895950
+RouteNode.gd::GDScript::-1::1707895950::0::1::::<>Area3D<>::
+::res://Shaders/::1709190488
+new_shader.tres::VisualShader::7644381285183150484::1709190052::0::1::::<><>::
+Outline_Shader.gdshader::Shader::-1::1709190488::0::1::::<><>::
 ::res://Shapes/::1697628282
 new_box_shape_3d.tres::BoxShape3D::5599570036740045217::1697628282::0::1::::<><>::

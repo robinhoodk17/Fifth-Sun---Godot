@@ -1,0 +1,31 @@
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://dg583wnxqrd4g"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hs7sm"]
+load_path = "res://.godot/imported/Ship1-new_Low_poly_textures.png-cf09e7ae896c97cebc3e142b17e2710e.s3tc.ctex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_tw8k6"]
+texture = SubResource("CompressedTexture2D_hs7sm")
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D tex_frg_2;
+
+
+
+void fragment() {
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, UV);
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(118.327, 114.787)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_tw8k6")
+nodes/fragment/2/position = Vector2(180, 160)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)
