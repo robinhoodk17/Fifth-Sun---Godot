@@ -37,41 +37,40 @@ Outer aim.png::CompressedTexture2D::7229502398667250279::1700551746::1700551749:
 Red dot.png::CompressedTexture2D::8677439666103777648::1698167558::1698167598::1::::<><>::
 Speedom-hand.png::CompressedTexture2D::3406288310815612271::1707582158::1707582163::1::::<><>::
 speedometer.png::CompressedTexture2D::845210347951215490::1707581875::1707581893::1::::<><>::
-::res://blender/::1709381823
+::res://blender/::1709382707
 collision1.tres::BoxShape3D::8818988917019345278::1709378464::0::1::::<><>::
 mountain 2.blend::PackedScene::3696716957347427675::1709190551::1709190551::1::::<><>::
-Ship1-new_Low_poly_textures-jpeg.jpg::CompressedTexture2D::485517872142114241::1709381084::1709381617::1::::<><>::
-Ship1-new_Low_poly_textures.png::CompressedTexture2D::4780918856120745843::1709381846::1709381849::1::::<><>::
+Ship1-new_Low_poly_textures.png::CompressedTexture2D::4780918856120745843::1709381846::1709463732::1::::<><>::
 Ship1.blend::PackedScene::4884325864194273686::1709377414::1709377429::1::::<><>::
 Ship1.glb::PackedScene::5021487672106048065::1709191274::1709377984::1::::<><>::
-ship_material.tres::StandardMaterial3D::2854420681246296404::1709381664::0::1::::<><>::
+ship_material.tres::StandardMaterial3D::2854420681246296404::1709382707::0::1::::<><>::uid://cad6bgr8bfspv::::res://blender/Ship1-new_Low_poly_textures.png
 ::res://fonts/::1697550595
 LICENSE.txt::TextFile::-1::1605988452::0::1::::<><>::
 Montserrat-Medium.ttf::FontFile::5293367909236287338::1323702000::1697550595::1::::<><>::
 ::res://Prefabs/::1709379754
 RouteNode.tscn::PackedScene::2302122874349452920::1709379754::0::1::::<><>::res://Scripts/Non-player prefabs/AI/RouteNode.gd
 zenith.tscn::PackedScene::4667910374448414827::1709379753::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://d2suqygx0y5wg
-::res://Prefabs/Ship1/::1709381350
-ship1_mesh.tscn::PackedScene::2546017407261911072::1709381349::0::1::::<><>::uid://cbuaesge6xt2m
-ship.tscn::PackedScene::3438134223398746093::1709381350::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://bgwx5kw24feoq
+::res://Prefabs/Ship1/::1709463305
+ship1_mesh.tscn::PackedScene::2546017407261911072::1709458419::0::1::::<><>::uid://cbuaesge6xt2m::::res://blender/Ship1.blend
+ship.tscn::PackedScene::3438134223398746093::1709463305::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://bgwx5kw24feoq::::res://blender/ship_material.tres<>uid://dxv8puui0e5kc::::res://blender/collision1.tres<>res://Scripts/Controls/Turret_controller.gd
 ::res://Prefabs/Targets/::1709379754
 Items.tscn::PackedScene::7383958048921772521::1709379754::0::1::::<><>::res://Scripts/Non-player prefabs/Items.gd
-::res://Scenes/::1709381348
+::res://Scenes/::1709463305
 character_select.tscn::PackedScene::6027499136100608689::1709379753::0::1::::<><>::res://Scripts/Menus/character_select.gd<>res://Scripts/Controls/Cursor.gd
 main_menu.tscn::PackedScene::3622791666755024439::1709379753::0::1::::<><>::res://Scripts/Menus/main_menu.gd
 physics trial.tscn::PackedScene::255849545814655514::1709379753::0::1::::<><>::
-Scene1.tscn::PackedScene::6536190581045032654::1709381348::0::1::::<><>::res://Scripts/Cameras/2P_SplitScreen.gd<>res://Scripts/Controls/speedometer.gd<>uid://dvvoftavsla7y
+Scene1.tscn::PackedScene::6536190581045032654::1709463305::0::1::::<><>::res://Scripts/Cameras/2P_SplitScreen.gd<>res://Scripts/Controls/speedometer.gd<>uid://dvvoftavsla7y::::res://art/Sprites/Red dot.png<>uid://mboqxscd4faw::::res://art/Sprites/speedometer.png<>uid://dbaa33ud0yxvr::::res://art/Sprites/Outer aim.png<>uid://bosbcn4jsochj::::res://art/Sprites/Speedom-hand.png<>uid://72fvljgdgqke::::res://Prefabs/RouteNode.tscn<>uid://bswyng0o2wou2::::res://blender/mountain 2.blend<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn
 Track1.tscn::PackedScene::7696100263117359506::1709379754::0::1::::<><>::res://Scripts/Cameras/2P_SplitScreen.gd<>res://Scripts/Controls/speedometer.gd<>uid://mboqxscd4faw
-::res://Scripts/::1708871242
-global_variables.gd::GDScript::-1::1707981629::0::1::::<>Node<>::
+::res://Scripts/::1709458417
+global_variables.gd::GDScript::-1::1709458417::0::1::::<>Node<>::
 Ship_builder.gd::GDScript::-1::1708871242::0::1::::<>Node3D<>::
-::res://Scripts/Cameras/::1709381664
-2P_SplitScreen.gd::GDScript::-1::1709381663::0::1::::<>GridContainer<>::
+::res://Scripts/Cameras/::1709463173
+2P_SplitScreen.gd::GDScript::-1::1709463173::0::1::::<>GridContainer<>::
 SpaceShip_camera.gd::GDScript::-1::1697647853::0::1::::<>Camera3D<>::
-::res://Scripts/Controls/::1709379625
+::res://Scripts/Controls/::1709463109
 Cursor.gd::GDScript::-1::1704781128::0::1::::<>CharacterBody2D<>::
 speedometer.gd::GDScript::-1::1707648758::0::1::::<>Node<>::
-Turret_controller.gd::GDScript::-1::1709379597::0::1::::<>CharacterBody3D<>::
+Turret_controller.gd::GDScript::-1::1709463109::0::1::::<>CharacterBody3D<>::
 zenith.gd::GDScript::-1::1709379625::0::1::::<>CharacterBody3D<>::
 ::res://Scripts/Menus/::1704905198
 character_select.gd::GDScript::-1::1704780496::0::1::::<>Control<>::

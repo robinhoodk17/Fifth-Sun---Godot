@@ -8,7 +8,8 @@ extends CharacterBody3D
 ##the turrett's camera, labeled Camera2 below the Marker3D
 @export var Camera_controller : Camera3D
 ##The Camera_Pivot
-@export var turret_body : CharacterBody3D
+@export var turret_body_y : CharacterBody3D
+@export var turret_body_x : Marker3D
 @export var Ship_body : CharacterBody3D
 @export var AimAssist_Big : ShapeCast3D
 @export var AimAssist_Small : ShapeCast3D
@@ -19,9 +20,9 @@ extends CharacterBody3D
 @export var grappling_hook : Node3D
 
 @export_group("Controller sensitivity")
-@export var controller_sensitivity : float = 1.5
-@export var aim_Assist_Strength : float = 12
-@export var gravity_well_strength : float = 60
+@export var controller_sensitivity : float = 1.25
+@export var aim_Assist_Strength : float = 15
+@export var gravity_well_strength : float = 240
 @export_group("ship Stats")
 ##shots per minute
 @export var fire_rate : float = 65
@@ -33,6 +34,7 @@ var aim_DistancetoTarget : float = 1
 var autoGunner : bool = false
 var controller_strength
 var gravity_well_counter = 0
+var aimAssist_Point
 var current_item = null
 enum Hookshot_States {ready, flying, anchored, retracting}
 var _hookshot_state = Hookshot_States.ready
@@ -43,16 +45,19 @@ var time_hookshot_pressed : int = 0
 var time_shot_pressed : int = 0
 
 
+
 func _ready():
 	controller_strength = controller_sensitivity
 	AimAssist_Big.add_exception(Ship_body)
-	AimAssist_Big.add_exception(turret_body)
+	AimAssist_Big.add_exception(turret_body_y)
 	AimAssist_Small.add_exception(Ship_body)
-	AimAssist_Small.add_exception(turret_body)
+	AimAssist_Small.add_exception(turret_body_y)
 	AimAssist_Center.add_exception(Ship_body)
-	AimAssist_Center.add_exception(turret_body)
+	AimAssist_Center.add_exception(turret_body_y)
+	aim_assist_ray.add_exception(turret_body_y)
+	aim_assist_ray.add_exception(Ship_body)
 	ray.add_exception(Ship_body)
-	ray.add_exception(turret_body)
+	ray.add_exception(turret_body_y)
 	
 	if Gunner == null:
 		autoGunner = true
@@ -62,46 +67,84 @@ func _ready():
 func _unhandled_input(event):
 	_mouse_input = event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
 	if _mouse_input and Gunner == 2:
-		_rotation_input = -event.relative.normalized().x * controller_sensitivity * 1.5
-		_tilt_input =  -event.relative.normalized().y * controller_sensitivity * 1.5
+		_rotation_input = -event.relative.normalized().x * controller_sensitivity * 1.25
+		_tilt_input =  -event.relative.normalized().y * controller_sensitivity * 1.25
 
 func _aim_assist(delta):
 	if Gunner != null:
 		if aim_assist_ray.is_colliding():
-			controller_strength = controller_sensitivity/1.5
+			controller_strength = controller_sensitivity/(aim_Assist_Strength/10)
 			gravity_well_counter = gravity_well_strength
+			aimAssist_Point = aim_assist_ray.get_collision_point()
+		else:
+			controller_strength = controller_sensitivity
+		if _rotation_input == 0 and _tilt_input == 0 and Gunner != null:
+			_tilt_input = Input.get_axis("Go_down_%s" % [Gunner],"Go_up_%s" % [Gunner]) * controller_strength/screen_ratio
+			_rotation_input = Input.get_axis("Go_right_%s" % [Gunner], "Go_left_%s" % [Gunner]) * controller_strength
 	
+		turret_body_y.rotate_y(deg_to_rad(_rotation_input * controller_strength))
+		turret_body_x.rotate_x(deg_to_rad(_tilt_input * controller_strength))
+		turret_body_x.transform.basis = turret_body_x.transform.basis.orthonormalized()
+		turret_body_y.transform.basis = turret_body_y.transform.basis.orthonormalized()
 		
 func _gravity_well(delta):
-	if AimAssist_Small.is_colliding() and gravity_well_counter > 0:
-		var aimingAt = AimAssist_Small.get_collider(0).call("get", "global_position")
-		var look_atVector = turret_body.global_transform.looking_at(aimingAt, turret_body.global_transform.basis.y)
+	if AimAssist_Small.is_colliding() and gravity_well_counter > 0 and !aim_assist_ray.is_colliding():
+		var aimingAt = aimAssist_Point
+		var look_atMatrix = turret_body_x.global_transform.looking_at(aimingAt, turret_body_x.global_transform.basis.y)
 		var aimStrength = delta * aim_Assist_Strength
-		turret_body.transform.basis.y=lerp(turret_body.transform.basis.y, look_atVector.basis.y, aimStrength)
-		turret_body.transform.basis.x=lerp(turret_body.transform.basis.x, look_atVector.basis.x, aimStrength)
-		turret_body.transform.basis = transform.basis.orthonormalized()
+		var y_angle = 1
+		var x_angle = 1
+		if(look_atMatrix.basis.tdotx(turret_body_x.global_transform.basis.z) > 0):
+			y_angle = -1
+		if(look_atMatrix.basis.tdoty(turret_body_x.global_transform.basis.z) < 0):
+			x_angle = -1
+		
+		turret_body_y.rotate_y(deg_to_rad(delta * aimStrength*350*y_angle))
+		turret_body_y.transform.basis = turret_body_y.transform.basis.orthonormalized()
+		
+		turret_body_x.rotate_x(deg_to_rad(delta * aimStrength*200*x_angle))
+		turret_body_x.transform.basis = turret_body_x.transform.basis.orthonormalized()
 func _shoot():
 	if(time_shot_pressed >= fire_rate):
-		AimAssist_Center.set_process(true)
-		if AimAssist_Center.is_colliding():
-			var aimingAt = AimAssist_Center.get_collision_point(0)
-			turret_body.look_at(aimingAt)
+		if AimAssist_Small.is_colliding():
+			var aimingAt = AimAssist_Small.get_collision_point(0)
+			var look_atMatrix = turret_body_x.global_transform.looking_at(aimingAt, turret_body_x.global_transform.basis.y)
+			var y_angle = 1
+			var x_angle = 1
+			if(look_atMatrix.basis.tdotx(turret_body_x.global_transform.basis.z) > 0):
+				y_angle = -1
+			if(look_atMatrix.basis.tdoty(turret_body_x.global_transform.basis.z) < 0):
+				x_angle = -1
+				
+			turret_body_y.rotate_y(deg_to_rad(y_angle))
+			turret_body_y.transform.basis = turret_body_y.transform.basis.orthonormalized()
+			
+			turret_body_x.rotate_x(deg_to_rad(x_angle))
+			turret_body_x.transform.basis = turret_body_x.transform.basis.orthonormalized()
 
-		var space = get_world_3d().direct_space_state
-		var query = PhysicsRayQueryParameters3D.create(Camera_controller.global_position,
-				Camera_controller.global_position - Camera_controller.global_transform.basis.z * 500)
-		var rid_array : Array[RID]
-		rid_array.append(Ship_body.get_rid())
-		rid_array.append(turret_body.get_rid())
-		query.exclude = rid_array
-		var collision = space.intersect_ray(query)
+		if ray.is_colliding():
+			pass
 
 func _shoot_hookshot():
-	if _hookshot_state == Hookshot_States.ready and time_hookshot_pressed <= 20:
+	if _hookshot_state == Hookshot_States.ready and time_hookshot_pressed < 15:
 		#handle aim assist
-		if AimAssist_Center.is_colliding():
-			var aimingAt = AimAssist_Center.get_collision_point(0)
-			turret_body.look_at(aimingAt)
+		# and time_hookshot_pressed <= 20
+		if AimAssist_Small.is_colliding():
+			var aimingAt = AimAssist_Small.get_collision_point(0)
+			var look_atMatrix = turret_body_x.global_transform.looking_at(aimingAt, turret_body_x.global_transform.basis.y)
+			var y_angle = 1
+			var x_angle = 1
+			if(look_atMatrix.basis.tdotx(turret_body_x.global_transform.basis.z) > 0):
+				y_angle = -1
+			if(look_atMatrix.basis.tdoty(turret_body_x.global_transform.basis.z) < 0):
+				x_angle = -1
+				
+			turret_body_y.rotate_y(deg_to_rad(y_angle))
+			turret_body_y.transform.basis = turret_body_y.transform.basis.orthonormalized()
+			
+			turret_body_x.rotate_x(deg_to_rad(x_angle))
+			turret_body_x.transform.basis = turret_body_x.transform.basis.orthonormalized()
+
 		
 		#handle hookshot shot
 		if ray.is_colliding():
@@ -152,12 +195,6 @@ func _physics_process(delta):
 	#Gunner is assigned in the global_variables during the character select screen and also is player 2 by default
 	if Gunner != null:
 		_aim_assist(delta)
-		if _rotation_input == 0 and _tilt_input == 0 and Gunner != null:
-			_tilt_input = Input.get_axis("Go_down_%s" % [Gunner],"Go_up_%s" % [Gunner]) * controller_strength/screen_ratio
-			_rotation_input = Input.get_axis("Go_right_%s" % [Gunner], "Go_left_%s" % [Gunner]) * controller_strength
-		turret_body.transform.basis =turret_body.transform.basis.rotated(turret_body.transform.basis.x, _tilt_input * delta)
-		turret_body.transform.basis = turret_body.transform.basis.rotated(turret_body.transform.basis.y, _rotation_input * delta)
-		turret_body.transform.basis = turret_body.transform.basis.orthonormalized()
 		_rotation_input = 0
 		_tilt_input = 0
 		move_and_slide()
