@@ -5,3 +5,4 @@ res://Prefabs/Ship1/ship1_mesh.tscn
 res://Prefabs/Ship1/ship.tscn
 res://Scripts/Controls/Turret_controller.gd
 res://Scripts/global_variables.gd
+res://blender/collision1.tres

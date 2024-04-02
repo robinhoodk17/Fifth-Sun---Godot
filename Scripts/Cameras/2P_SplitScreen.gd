@@ -3,7 +3,8 @@ extends GridContainer
 @onready var viewport1: SubViewport = $SubViewportContainer/SubViewport
 @onready var viewport2: SubViewport = $SubViewportContainer2/SubViewport
 @onready var Camera1: Camera3D = get_node("../Ship/Marker3D/Camera3D")
-@onready var Camera2: Camera3D = get_node("../Ship/Turret/Camera_Pivot/Camera2")
+@onready var Camera2: Camera3D = get_node("../Ship/Turret/Turret_body_y/Turret_body_x/Camera2")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var Camera_rid1 = Camera1.get_camera_rid()
