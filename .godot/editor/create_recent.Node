@@ -1,3 +1,6 @@
+Area3D
+CollisionShape3D
+MeshInstance3D
 Marker3D
 RayCast3D
 DirectionalLight3D
@@ -6,10 +9,7 @@ MarginContainer
 Node2D
 RichTextLabel
 JoltHingeJoint3D
-CollisionShape3D
-MeshInstance3D
 RigidBody3D
-Area3D
 ShapeCast3D
 CollisionShape2D
 StaticBody3D

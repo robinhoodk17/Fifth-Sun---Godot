@@ -1,12 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://c0egdsequgqio"]
+[gd_scene load_steps=12 format=3 uid="uid://c0egdsequgqio"]
 
-[ext_resource type="Script" path="res://Scripts/Cameras/2P_SplitScreen.gd" id="2_vgrxu"]
-[ext_resource type="Script" path="res://Scripts/Controls/speedometer.gd" id="3_jv7mh"]
-[ext_resource type="Texture2D" uid="uid://dvvoftavsla7y" path="res://art/Sprites/Red dot.png" id="3_tjsfh"]
-[ext_resource type="Texture2D" uid="uid://mboqxscd4faw" path="res://art/Sprites/speedometer.png" id="4_7swh4"]
-[ext_resource type="Texture2D" uid="uid://dbaa33ud0yxvr" path="res://art/Sprites/Outer aim.png" id="4_wk2ry"]
-[ext_resource type="Texture2D" uid="uid://bosbcn4jsochj" path="res://art/Sprites/Speedom-hand.png" id="5_ktwof"]
-[ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/RouteNode.tscn" id="5_tplye"]
+[ext_resource type="PackedScene" uid="uid://he7ivklp1ig8" path="res://Prefabs/Player_related/2playerCamera.tscn" id="1_k1gp5"]
+[ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="5_tplye"]
+[ext_resource type="PackedScene" uid="uid://cwlqunbu74xt4" path="res://Prefabs/Track Objects/boost_ring.tscn" id="5_wvwva"]
 [ext_resource type="PackedScene" uid="uid://bswyng0o2wou2" path="res://blender/mountain 2.blend" id="6_i020r"]
 [ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="9_55x6l"]
 
@@ -48,101 +44,7 @@ shape = SubResource("BoxShape3D_fkw74")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_ovdl8")
 
-[node name="GridContainer" type="GridContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-script = ExtResource("2_vgrxu")
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="GridContainer"]
-clip_contents = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(574, 648)
-render_target_update_mode = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="GridContainer/SubViewportContainer/SubViewport"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="UI pilot" type="Control" parent="GridContainer/SubViewportContainer/SubViewport/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("3_jv7mh")
-metadata/_edit_use_anchors_ = true
-
-[node name="Speedometer" type="Node2D" parent="GridContainer/SubViewportContainer/SubViewport/MarginContainer/UI pilot"]
-
-[node name="Sprite2D" type="Sprite2D" parent="GridContainer/SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer"]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_7swh4")
-
-[node name="Node2D" type="Node2D" parent="GridContainer/SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer"]
-rotation = 1.15541
-
-[node name="Hand" type="Sprite2D" parent="GridContainer/SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer/Node2D"]
-position = Vector2(7.2, 25)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("5_ktwof")
-
-[node name="Node2D2" type="Node2D" parent="GridContainer/SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer"]
-position = Vector2(-14.435, 16.39)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GridContainer/SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer/Node2D2"]
-offset_right = 40.0
-offset_bottom = 40.0
-text = "000"
-
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="GridContainer"]
-clip_contents = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer2"]
-handle_input_locally = false
-size = Vector2i(574, 648)
-render_target_update_mode = 4
-
-[node name="UI_turret" type="Control" parent="GridContainer/SubViewportContainer2/SubViewport"]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-metadata/_edit_use_anchors_ = true
-
-[node name="Aim" type="Node2D" parent="GridContainer/SubViewportContainer2/SubViewport/UI_turret"]
-
-[node name="Sprite2D" type="Sprite2D" parent="GridContainer/SubViewportContainer2/SubViewport/UI_turret/Aim"]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_tjsfh")
-
-[node name="OuterAim" type="Sprite2D" parent="GridContainer/SubViewportContainer2/SubViewport/UI_turret/Aim"]
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("4_wk2ry")
+[node name="GridContainer" parent="." instance=ExtResource("1_k1gp5")]
 
 [node name="Node3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2131, 27.7103, -402.807)
@@ -298,3 +200,6 @@ PreviousNode = NodePath("../14")
 NextNode = NodePath("../1")
 
 [node name="Ship" parent="." instance=ExtResource("9_55x6l")]
+
+[node name="boost_ring" parent="." instance=ExtResource("5_wvwva")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 64, 176)

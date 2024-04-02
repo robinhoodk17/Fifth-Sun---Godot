@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwlqunbu74xt4"]
+
+[ext_resource type="Material" uid="uid://b7e4jahtpoaoe" path="res://art/Materials/Toon_shader_thick_outlines.tres" id="1_cph0p"]
+[ext_resource type="PackedScene" uid="uid://bb4dbf6hnngj0" path="res://art/3D/Track objects/boost_ring.glb" id="1_v6wkj"]
+[ext_resource type="Script" path="res://Scripts/Non-player prefabs/boost_ring.gd" id="2_7p27b"]
+[ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="2_awj16"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1ue3j"]
+height = 0.5
+radius = 10.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_36886"]
+size = Vector3(60, 60, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_grmxm"]
+size = Vector3(60, 60, 1)
+
+[node name="boost_ring" node_paths=PackedStringArray("RouteNode") instance=ExtResource("1_v6wkj")]
+script = ExtResource("2_7p27b")
+RouteNode = NodePath("RouteNode")
+
+[node name="Torus" parent="." index="0"]
+surface_material_override/0 = ExtResource("1_cph0p")
+
+[node name="Area3D" type="Area3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1.78814e-07, -1, 0, 1, 1.78814e-07, 0, 0, 0)
+
+[node name="Inner_CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.84217e-14, 0, 2.84217e-14, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_1ue3j")
+
+[node name="RouteNode" parent="." index="2" instance=ExtResource("2_awj16")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+visible = false
+Type = 0
+
+[node name="MeshInstance3D" parent="RouteNode" index="0"]
+mesh = SubResource("BoxMesh_36886")
+
+[node name="CollisionShape3D" parent="RouteNode" index="1"]
+shape = SubResource("BoxShape3D_grmxm")
+
+[editable path="RouteNode"]

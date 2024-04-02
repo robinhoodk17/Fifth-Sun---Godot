@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhu7nafouqcb0"]
+
+[ext_resource type="PackedScene" uid="uid://he7ivklp1ig8" path="res://Prefabs/Player_related/2playerCamera.tscn" id="1_f83m5"]
+[ext_resource type="PackedScene" uid="uid://cdspfytkegy06" path="res://art/3D/Ships/Ship1.glb" id="2_f2ww3"]
+[ext_resource type="PackedScene" uid="uid://cwlqunbu74xt4" path="res://Prefabs/Track Objects/boost_ring.tscn" id="3_w4duq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1cawe"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vgetm"]
+size = Vector3(60, 2, 60)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GridContainer" parent="." instance=ExtResource("1_f83m5")]
+
+[node name="Ship1" parent="." instance=ExtResource("2_f2ww3")]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_1cawe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_vgetm")
+
+[node name="boost_ring" parent="." instance=ExtResource("3_w4duq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00994873, -3, -67.6752)
+
+[editable path="GridContainer"]

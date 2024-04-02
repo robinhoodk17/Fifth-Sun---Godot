@@ -1,8 +1,11 @@
 res://Scenes/Scene1.tscn
 res://Scripts/Cameras/2P_SplitScreen.gd
 res://blender/ship_material.tres
-res://Prefabs/Ship1/ship1_mesh.tscn
 res://Prefabs/Ship1/ship.tscn
-res://Scripts/Controls/Turret_controller.gd
-res://Scripts/global_variables.gd
-res://blender/collision1.tres
+res://Prefabs/zenith.tscn
+res://art/Materials/Toon_shader.tres
+res://art/Materials/Toon_shader_thick_outlines.tres
+res://Prefabs/Track Objects/boost_ring.tscn
+res://Scripts/Non-player prefabs/boost_ring.gd
+res://Prefabs/Track Objects/RouteNode.tscn
+res://Scenes/Track2.tscn

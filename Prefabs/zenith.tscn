@@ -97,14 +97,13 @@ fov = 90.0
 [node name="Turret" type="Node3D" parent="."]
 top_level = true
 
-[node name="Camera_Pivot" type="CharacterBody3D" parent="Turret" node_paths=PackedStringArray("Camera_controller", "turret_body", "Ship_body", "AimAssist_Big", "AimAssist_Small", "AimAssist_Center", "ray", "grappling_hook")]
+[node name="Camera_Pivot" type="CharacterBody3D" parent="Turret" node_paths=PackedStringArray("Camera_controller", "Ship_body", "AimAssist_Big", "AimAssist_Small", "AimAssist_Center", "ray", "grappling_hook")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.066, 0)
 motion_mode = 1
 platform_on_leave = 2
 safe_margin = 0.01
 script = ExtResource("3_k3fb5")
 Camera_controller = NodePath("Camera2")
-turret_body = NodePath(".")
 Ship_body = NodePath("../..")
 AimAssist_Big = NodePath("Camera2/AimAssist_Big")
 AimAssist_Small = NodePath("Camera2/AimAssist_Small")
