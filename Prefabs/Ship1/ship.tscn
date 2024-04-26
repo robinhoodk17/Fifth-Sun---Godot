@@ -1,8 +1,7 @@
-[gd_scene load_steps=46 format=3 uid="uid://bo8ptladpikfl"]
+[gd_scene load_steps=47 format=3 uid="uid://bo8ptladpikfl"]
 
 [ext_resource type="Script" path="res://Scripts/Controls/zenith.gd" id="1_08faa"]
 [ext_resource type="Material" uid="uid://bgwx5kw24feoq" path="res://art/Materials/Toon_shader.tres" id="2_lhrga"]
-[ext_resource type="Shape3D" uid="uid://dxv8puui0e5kc" path="res://blender/collision1.tres" id="3_inapd"]
 [ext_resource type="Script" path="res://Scripts/Controls/Turret_controller.gd" id="4_urwk6"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_q1s4u"]
@@ -307,8 +306,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_u450y")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2gw2q"]
-size = Vector3(3, 15, 2.02)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ft0k4"]
+height = 15.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rdnkt"]
+height = 17.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y4b0t"]
+radius = 1.0
+height = 16.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vfuy0"]
 margin = 0.1
@@ -490,13 +496,17 @@ mesh = SubResource("ArrayMesh_85hlo")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_lhrga")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.13465, 1.011)
-shape = ExtResource("3_inapd")
+[node name="Wing-Front" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -3.13465, -0.0846934)
+shape = SubResource("CapsuleShape3D_ft0k4")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+[node name="Wing-Back" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -3.13465, 2.00708)
+shape = SubResource("CapsuleShape3D_rdnkt")
+
+[node name="Body" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -2.8247, -1.1062)
-shape = SubResource("BoxShape3D_2gw2q")
+shape = SubResource("CapsuleShape3D_y4b0t")
 
 [node name="Marker3D" type="Marker3D" parent="."]
 top_level = true

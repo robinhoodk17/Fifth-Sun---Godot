@@ -1,11 +1,11 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1712047136
+::res://::1713115810
 CharacterBodyGravityTrial.gd::GDScript::-1::1699468330::0::1::::<>CharacterBody3D<>::
 default_bus_layout.tres::AudioBusLayout::-1::1697554147::0::1::::<><>::
 default_env.tres::Environment::-1::1697554147::0::1::::<><>::
 icon.png::CompressedTexture2D::81677642418255241::1606013320::1697554196::1::::<><>::
 new_standard_material_3d.tres::StandardMaterial3D::3058607239832461095::1709105104::0::1::::<><>::
-::res://addons/::1709108901
+::res://addons/::1712814204
 ::res://addons/godot-jolt/::1699816033
 godot-jolt.gdextension::GDExtension::-1::1699816032::0::1::::<><>::
 LICENSE.txt::TextFile::-1::1699816032::0::1::::<><>::
@@ -19,26 +19,29 @@ THIRDPARTY.txt::TextFile::-1::1699816032::0::1::::<><>::
 ::res://addons/godot-jolt/macos/godot-jolt_macos_editor.framework/Resources/::1699816033
 ::res://addons/godot-jolt/macos/godot-jolt_macos_editor.framework/_CodeSignature/::1699816033
 ::res://addons/godot-jolt/windows/::1699816034
-::res://art/::1712047108
+::res://art/::1712508599
 body.material::StandardMaterial3D::-1::1605912108::0::1::::<><>::
 eye.material::StandardMaterial3D::-1::1606517742::0::1::::<><>::
 House In a Forest Loop.ogg::AudioStreamOggVorbis::5083316129763607899::1580877609::1697554195::1::::<><>::
-mob.glb::PackedScene::3848017764527724413::1606517580::1697554198::1::::<><>::
+mob.glb::PackedScene::3848017764527724413::1606517580::1712508599::1::::<><>::
 mob_body.material::StandardMaterial3D::-1::1606517742::0::1::::<><>::
 mob_eye.material::StandardMaterial3D::-1::1605973415::0::1::::<><>::
-player.glb::PackedScene::1185037675818460167::1606517658::1697554199::1::::<><>::
+player.glb::PackedScene::1185037675818460167::1606517658::1712508599::1::::<><>::
 pupil.material::StandardMaterial3D::-1::1606517742::0::1::::<><>::
-Zenith.gltf::PackedScene::3713922847857273606::1621601152::1697631271::1::::<><>::
+Zenith.gltf::PackedScene::3713922847857273606::1621601152::1712508599::1::::<><>::
 Zenith_Zenith_Orange.png::CompressedTexture2D::9092763812345692954::1697630749::1697630764::1::::<><>::
 ::res://art/3D/::1712046862
-::res://art/3D/Ships/::1712053225
-Ship1.glb::PackedScene::5021487672106048065::1712053601::1712053603::1::::<><>::
-::res://art/3D/Track objects/::1712046890
-boost_ring.glb::PackedScene::2516660729812697403::1712046822::1712046890::1::::<><>::uid://dh6e4f0uuonm1
+::res://art/3D/Ships/::1712508599
+Ship1.glb::PackedScene::5021487672106048065::1712053601::1712508599::1::::<><>::
+::res://art/3D/Track objects/::1713939209
+boost_ring.glb::PackedScene::2516660729812697403::1713843885::1713843889::1::::<><>::uid://dh6e4f0uuonm1::::res://art/3D/Track objects/boost_ring_Ship1-new_Low_poly_textures.png
 boost_ring_Ship1-new_Low_poly_textures.png::CompressedTexture2D::7714874625088552790::1712046890::1712046890::1::::<><>::
-::res://art/Materials/::1712052704
-Toon_shader.tres::StandardMaterial3D::2854420681246296404::1712052704::0::1::::<><>::uid://cad6bgr8bfspv::::res://blender/Ship1-new_Low_poly_textures.png
-Toon_shader_thick_outlines.tres::StandardMaterial3D::4642498067759247712::1712052648::0::1::::<><>::uid://cad6bgr8bfspv::::res://blender/Ship1-new_Low_poly_textures.png
+Curve_1.glb::PackedScene::2779831359399669042::1713459501::1713459504::1::::<><>::
+Zigzag-1.glb::PackedScene::969669851280398547::1713844171::1713844175::1::::<><>::
+Zigzag_1.glb::PackedScene::5248368841312571912::1713939197::1713939209::1::::<><>::
+::res://art/Materials/::1713116042
+Toon_shader.tres::StandardMaterial3D::2854420681246296404::1713116041::0::1::::<><>::uid://cad6bgr8bfspv::::res://blender/Ship1-new_Low_poly_textures.png
+Toon_shader_thick_outlines.tres::StandardMaterial3D::4642498067759247712::1713116042::0::1::::<><>::uid://cad6bgr8bfspv::::res://blender/Ship1-new_Low_poly_textures.png
 ::res://art/Sprites/::1709381662
 Low_poly_textures.png::CompressedTexture2D::3943294327389080537::1708792086::1708861177::1::::<><>::
 Low_poly_textures_2.png::CompressedTexture2D::4399454248303869011::1709381632::1709381662::1::::<><>::
@@ -46,44 +49,50 @@ Outer aim.png::CompressedTexture2D::7229502398667250279::1700555346::1700555349:
 Red dot.png::CompressedTexture2D::8677439666103777648::1698171158::1698171198::1::::<><>::
 Speedom-hand.png::CompressedTexture2D::3406288310815612271::1707585758::1707585763::1::::<><>::
 speedometer.png::CompressedTexture2D::845210347951215490::1707585475::1707585493::1::::<><>::
-::res://blender/::1712053593
-boost_ring.blend::PackedScene::4962076892229072034::1712052754::1712053024::1::::<><>::uid://cad6bgr8bfspv::::res://blender/Ship1-new_Low_poly_textures.png
+::res://blender/::1714103496
+boost_ring.blend::PackedScene::4962076892229072034::1713843876::1713843894::1::::<><>::uid://cad6bgr8bfspv::::res://blender/Ship1-new_Low_poly_textures.png
 boost_ring_Ship1-new_Low_poly_textures.png::CompressedTexture2D::6865380275374294739::1712046824::1712046824::1::::<><>::
 collision1.tres::BoxShape3D::8818988917019345278::1709471723::0::1::::<><>::
-mountain 2.blend::PackedScene::3696716957347427675::1709194151::1709194151::1::::<><>::
+mountain 2.blend::PackedScene::3696716957347427675::1709194151::1712508599::1::::<><>::
 Ship1-new_Low_poly_textures.png::CompressedTexture2D::4780918856120745843::1709385446::1709467332::1::::<><>::
-Ship1.blend::PackedScene::4884325864194273686::1712053593::1712053614::1::::<><>::
+Ship1.blend::PackedScene::4884325864194273686::1712053593::1712508599::1::::<><>::
+Straight_1.blend::PackedScene::8994932226057030779::1713682131::1713682221::1::::<><>::
+Zigzag-1.blend::PackedScene::3115423597607399541::1714103496::1714103658::1::::<><>::
 ::res://fonts/::1697554195
 LICENSE.txt::TextFile::-1::1605992052::0::1::::<><>::
 Montserrat-Medium.ttf::FontFile::5293367909236287338::1323705600::1697554195::1::::<><>::
-::res://Prefabs/::1712052277
-zenith.tscn::PackedScene::4667910374448414827::1712047036::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://d2suqygx0y5wg::::res://art/Zenith_Zenith_Orange.png<>res://Scripts/Controls/Turret_controller.gd
-::res://Prefabs/Player_related/::1712052314
-2playerCamera.tscn::PackedScene::501537765561495085::1712052314::0::1::::<><>::res://Scripts/Cameras/2P_SplitScreen.gd<>res://Scripts/Controls/speedometer.gd<>uid://mboqxscd4faw::::res://art/Sprites/speedometer.png<>uid://bosbcn4jsochj::::res://art/Sprites/Speedom-hand.png<>uid://dvvoftavsla7y::::res://art/Sprites/Red dot.png<>uid://dbaa33ud0yxvr::::res://art/Sprites/Outer aim.png
-::res://Prefabs/Ship1/::1712052741
-ship.tscn::PackedScene::3438134223398746093::1712052741::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://bgwx5kw24feoq::::res://art/Materials/Toon_shader.tres<>uid://dxv8puui0e5kc::::res://blender/collision1.tres<>res://Scripts/Controls/Turret_controller.gd
-::res://Prefabs/Targets/::1709383354
-Items.tscn::PackedScene::7383958048921772521::1709383354::0::1::::<><>::res://Scripts/Non-player prefabs/Items.gd
-::res://Prefabs/Track Objects/::1712052742
-boost_ring.tscn::PackedScene::6340711955780928039::1712052742::0::1::::<><>::uid://b7e4jahtpoaoe::::res://art/Materials/Toon_shader_thick_outlines.tres<>uid://bb4dbf6hnngj0::::res://art/3D/Track objects/boost_ring.glb<>res://Scripts/Non-player prefabs/boost_ring.gd<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn
-RouteNode.tscn::PackedScene::2302122874349452920::1712052741::0::1::::<><>::res://Scripts/Non-player prefabs/AI/RouteNode.gd
-::res://Scenes/::1712052741
-character_select.tscn::PackedScene::6027499136100608689::1709383353::0::1::::<><>::res://Scripts/Menus/character_select.gd<>res://Scripts/Controls/Cursor.gd
-main_menu.tscn::PackedScene::3622791666755024439::1709383353::0::1::::<><>::res://Scripts/Menus/main_menu.gd
-physics trial.tscn::PackedScene::255849545814655514::1709383353::0::1::::<><>::
-Scene1.tscn::PackedScene::6536190581045032654::1712052741::0::1::::<><>::uid://he7ivklp1ig8::::res://Prefabs/Player_related/2playerCamera.tscn<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://cwlqunbu74xt4::::res://Prefabs/Track Objects/boost_ring.tscn<>uid://bswyng0o2wou2::::res://blender/mountain 2.blend<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn
-Track1.tscn::PackedScene::7696100263117359506::1709383354::0::1::::<><>::res://Scripts/Cameras/2P_SplitScreen.gd<>res://Scripts/Controls/speedometer.gd<>uid://mboqxscd4faw
+::res://Prefabs/::1712635350
+zenith.tscn::PackedScene::4667910374448414827::1712508599::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://d2suqygx0y5wg::::res://art/Zenith_Zenith_Orange.png<>res://Scripts/Controls/Turret_controller.gd
+::res://Prefabs/Player_related/::1712506841
+2playerCamera.tscn::PackedScene::501537765561495085::1712506841::0::1::::<><>::res://Scripts/Cameras/2P_SplitScreen.gd<>res://Scripts/Controls/speedometer.gd<>uid://mboqxscd4faw::::res://art/Sprites/speedometer.png<>uid://bosbcn4jsochj::::res://art/Sprites/Speedom-hand.png<>uid://dvvoftavsla7y::::res://art/Sprites/Red dot.png<>uid://dbaa33ud0yxvr::::res://art/Sprites/Outer aim.png
+::res://Prefabs/Ship1/::1713939978
+ship.tscn::PackedScene::3438134223398746093::1713939978::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://bgwx5kw24feoq::::res://art/Materials/Toon_shader.tres<>res://Scripts/Controls/Turret_controller.gd
+::res://Prefabs/Targets/::1712506842
+Items.tscn::PackedScene::7383958048921772521::1712506842::0::1::::<><>::res://Scripts/Non-player prefabs/Items.gd
+::res://Prefabs/Track Objects/::1713939979
+boost_ring.tscn::PackedScene::6340711955780928039::1713682950::0::1::::<><>::uid://b7e4jahtpoaoe::::res://art/Materials/Toon_shader_thick_outlines.tres<>uid://bb4dbf6hnngj0::::res://art/3D/Track objects/boost_ring.glb<>res://Scripts/Non-player prefabs/boost_ring.gd<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn
+RouteNode.tscn::PackedScene::2302122874349452920::1713939979::0::1::::<><>::res://Scripts/Non-player prefabs/AI/RouteNode.gd
+::res://Scenes/::1713940044
+character_select.tscn::PackedScene::6027499136100608689::1712506843::0::1::::<><>::res://Scripts/Menus/character_select.gd<>res://Scripts/Controls/Cursor.gd
+main_menu.tscn::PackedScene::3622791666755024439::1712506843::0::1::::<><>::res://Scripts/Menus/main_menu.gd
+physics trial.tscn::PackedScene::255849545814655514::1712506843::0::1::::<><>::
+Scene1.tscn::PackedScene::6536190581045032654::1713939978::0::1::::<><>::uid://he7ivklp1ig8::::res://Prefabs/Player_related/2playerCamera.tscn<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://cwlqunbu74xt4::::res://Prefabs/Track Objects/boost_ring.tscn<>uid://bswyng0o2wou2::::res://blender/mountain 2.blend<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn
+Track1.tscn::PackedScene::7696100263117359506::1712508599::0::1::::<><>::res://Scripts/Cameras/2P_SplitScreen.gd<>res://Scripts/Controls/speedometer.gd<>uid://mboqxscd4faw::::res://art/Sprites/speedometer.png<>uid://bosbcn4jsochj::::res://art/Sprites/Speedom-hand.png<>uid://dvvoftavsla7y::::res://art/Sprites/Red dot.png<>uid://dbaa33ud0yxvr::::res://art/Sprites/Outer aim.png<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn<>uid://72fvljgdgqke::::res://Prefabs/RouteNode.tscn
+Track2.tscn::PackedScene::2920996311717289731::1713940044::0::1::::<><>::uid://he7ivklp1ig8::::res://Prefabs/Player_related/2playerCamera.tscn<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn<>uid://bb4dbf6hnngj0::::res://art/3D/Track objects/boost_ring.glb<>uid://cwlqunbu74xt4::::res://Prefabs/Track Objects/boost_ring.tscn<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://cg1l4rows3ace::::res://art/3D/Track objects/Zigzag_1.glb<>uid://c5a054dts7q12::::res://Shaders/Day_clear_sky_material.tres
+::res://Scenes/Track2/::1712814190
+::res://Scenes/Track2/Scene/::1713115414
+Track2.tscn::PackedScene::2920996311717289731::1713115414::0::1::::<><>::uid://he7ivklp1ig8::::res://Prefabs/Player_related/2playerCamera.tscn<>uid://cwlqunbu74xt4::::res://Prefabs/Track Objects/boost_ring.tscn<>uid://c5a054dts7q12::::res://Shaders/Day_clear_sky_material.tres<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn
 ::res://Scripts/::1709495630
 global_variables.gd::GDScript::-1::1709495630::0::1::::<>Node<>::
 Ship_builder.gd::GDScript::-1::1708874842::0::1::::<>Node3D<>::
-::res://Scripts/Cameras/::1712047015
-2P_SplitScreen.gd::GDScript::-1::1712047015::0::1::::<>GridContainer<>::
+::res://Scripts/Cameras/::1713116041
+2P_SplitScreen.gd::GDScript::-1::1713116041::0::1::::<>GridContainer<>::
 SpaceShip_camera.gd::GDScript::-1::1697651453::0::1::::<>Camera3D<>::
-::res://Scripts/Controls/::1709499352
+::res://Scripts/Controls/::1713116042
 Cursor.gd::GDScript::-1::1704784728::0::1::::<>CharacterBody2D<>::
 speedometer.gd::GDScript::-1::1707652358::0::1::::<>Node<>::
 Turret_controller.gd::GDScript::-1::1709499352::0::1::::<>CharacterBody3D<>::
-zenith.gd::GDScript::-1::1709383225::0::1::::<>CharacterBody3D<>::
+zenith.gd::GDScript::-1::1713116042::0::1::::<>CharacterBody3D<>::
 ::res://Scripts/Menus/::1704908798
 character_select.gd::GDScript::-1::1704784096::0::1::::<>Control<>::
 main_menu.gd::GDScript::-1::1697795627::0::1::::<>Control<>::
@@ -92,7 +101,8 @@ boost_ring.gd::GDScript::-1::1712052233::0::1::::<>Node3D<>::
 Items.gd::GDScript::-1::1706556269::0::1::::<>RigidBody3D<>::
 ::res://Scripts/Non-player prefabs/AI/::1707899550
 RouteNode.gd::GDScript::-1::1707899550::0::1::::<>Area3D<>::
-::res://Shaders/::1709194088
+::res://Shaders/::1713118361
+Day_clear_sky_material.tres::ProceduralSkyMaterial::6880079703863653775::1713118361::0::1::::<><>::
 new_shader.tres::VisualShader::7644381285183150484::1709193652::0::1::::<><>::
 Outline_Shader.gdshader::Shader::-1::1709194088::0::1::::<><>::
 ::res://Shapes/::1697631882

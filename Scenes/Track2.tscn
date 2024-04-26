@@ -1,32 +1,83 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhu7nafouqcb0"]
+[gd_scene load_steps=12 format=3 uid="uid://bhu7nafouqcb0"]
 
 [ext_resource type="PackedScene" uid="uid://he7ivklp1ig8" path="res://Prefabs/Player_related/2playerCamera.tscn" id="1_f83m5"]
-[ext_resource type="PackedScene" uid="uid://cdspfytkegy06" path="res://art/3D/Ships/Ship1.glb" id="2_f2ww3"]
+[ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="2_ci54k"]
+[ext_resource type="PackedScene" uid="uid://bb4dbf6hnngj0" path="res://art/3D/Track objects/boost_ring.glb" id="3_8kmh8"]
 [ext_resource type="PackedScene" uid="uid://cwlqunbu74xt4" path="res://Prefabs/Track Objects/boost_ring.tscn" id="3_w4duq"]
+[ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="4_vdksf"]
+[ext_resource type="PackedScene" uid="uid://cg1l4rows3ace" path="res://art/3D/Track objects/Zigzag_1.glb" id="5_2iycd"]
+[ext_resource type="Material" uid="uid://c5a054dts7q12" path="res://Shaders/Day_clear_sky_material.tres" id="5_co2rx"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1cawe"]
-size = Vector3(60, 2, 60)
+[sub_resource type="Sky" id="Sky_cli5s"]
+sky_material = ExtResource("5_co2rx")
+radiance_size = 1
 
-[sub_resource type="BoxMesh" id="BoxMesh_vgetm"]
-size = Vector3(60, 2, 60)
+[sub_resource type="Environment" id="Environment_jnruu"]
+background_mode = 2
+sky = SubResource("Sky_cli5s")
+ambient_light_source = 1
+reflected_light_source = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_23t2g"]
+size = Vector3(1000, 1, 3000)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ueipm"]
+size = Vector2(1000, 3000)
 
 [node name="Node3D" type="Node3D"]
 
 [node name="GridContainer" parent="." instance=ExtResource("1_f83m5")]
 
-[node name="Ship1" parent="." instance=ExtResource("2_f2ww3")]
+[node name="Ship" parent="." instance=ExtResource("2_ci54k")]
+transform = Transform3D(0.999962, 0.00685396, -0.00535505, -0.00684632, 0.999975, 0.00144305, 0.00536482, -0.00140631, 0.999985, 0, 5, 800)
 
-[node name="Ground" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
-collision_mask = 3
+[node name="Track_objects" type="Node3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-shape = SubResource("BoxShape3D_1cawe")
+[node name="Boosts" type="Node3D" parent="Track_objects"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-mesh = SubResource("BoxMesh_vgetm")
+[node name="boost_ring1" parent="Track_objects/Boosts" instance=ExtResource("3_8kmh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 7.5, 600)
 
-[node name="boost_ring" parent="." instance=ExtResource("3_w4duq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00994873, -3, -67.6752)
+[node name="boost_ring2" parent="Track_objects/Boosts" instance=ExtResource("3_8kmh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 7.5, 400)
+
+[node name="boost_ring3" parent="Track_objects/Boosts" instance=ExtResource("3_8kmh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 7.5, 200)
+
+[node name="boost_ring4" parent="Track_objects/Boosts" instance=ExtResource("3_w4duq")]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 14.5974, 7.5, 81.844)
+
+[node name="boost_ring5" parent="Track_objects/Boosts" instance=ExtResource("3_w4duq")]
+transform = Transform3D(3.52464e-10, 0.00806338, 0.999967, 1, -4.37114e-08, -1.91333e-15, 4.371e-08, 0.999967, -0.00806338, -215.014, 102.744, -93.6495)
+
+[node name="Route_nodes" type="Node3D" parent="Track_objects"]
+visible = false
+
+[node name="1" parent="Track_objects/Route_nodes" instance=ExtResource("4_vdksf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 38.9145)
+
+[node name="Track" type="Node3D" parent="Track_objects"]
+
+[node name="Zigzag_1" parent="Track_objects/Track" instance=ExtResource("5_2iycd")]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 0, 0, -40)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jnruu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.636078, 0.771625, 0, -0.771625, 0.636078, 0, 0, 0)
+light_energy = 1.681
+shadow_enabled = true
+
+[node name="Ground" type="RigidBody3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 305.804)
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Ground"]
+shape = SubResource("BoxShape3D_23t2g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/Ground"]
+mesh = SubResource("PlaneMesh_ueipm")
+skeleton = NodePath("../../..")
 
 [editable path="GridContainer"]

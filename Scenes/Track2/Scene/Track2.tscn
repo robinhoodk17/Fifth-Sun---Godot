@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhu7nafouqcb0"]
+
+[ext_resource type="PackedScene" uid="uid://he7ivklp1ig8" path="res://Prefabs/Player_related/2playerCamera.tscn" id="1_87huo"]
+[ext_resource type="PackedScene" uid="uid://cwlqunbu74xt4" path="res://Prefabs/Track Objects/boost_ring.tscn" id="2_1ur5o"]
+[ext_resource type="Material" uid="uid://c5a054dts7q12" path="res://Shaders/Day_clear_sky_material.tres" id="3_7ugi4"]
+[ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="3_t5sym"]
+[ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="7_g1t5j"]
+
+[sub_resource type="Sky" id="Sky_8hmc1"]
+sky_material = ExtResource("3_7ugi4")
+radiance_size = 2
+
+[sub_resource type="Environment" id="Environment_7jhj4"]
+background_mode = 2
+sky = SubResource("Sky_8hmc1")
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_exposure = 0.5
+volumetric_fog_emission_energy = 181.04
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GridContainer" parent="." instance=ExtResource("1_87huo")]
+
+[node name="TrackObjects" type="Node3D" parent="."]
+
+[node name="Boost_rings" type="Node3D" parent="TrackObjects"]
+
+[node name="boost_ring_1" parent="TrackObjects/Boost_rings" node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("2_1ur5o")]
+PreviousNode = NodePath("../../AINodes/1")
+NextNode = NodePath("../boost_ring_2")
+
+[node name="boost_ring_2" parent="TrackObjects/Boost_rings" node_paths=PackedStringArray("RouteNode", "PreviousNode", "NextNode") instance=ExtResource("2_1ur5o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -10)
+RouteNode = NodePath("../boost_ring_1/RouteNode")
+PreviousNode = NodePath("../../AINodes/1")
+NextNode = NodePath("../../AINodes/2")
+
+[node name="AINodes" type="Node3D" parent="TrackObjects"]
+visible = false
+
+[node name="1" parent="TrackObjects/AINodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_t5sym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 76.0551)
+NextNode = NodePath("../../Boost_rings/boost_ring_1")
+
+[node name="2" parent="TrackObjects/AINodes" instance=ExtResource("3_t5sym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -222.301)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7jhj4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.0279216, -0.734628, -0.677895, 0, -0.67816, 0.734915, -0.99961, -0.02052, -0.0189353, 0, 124, 0)
+light_energy = 5.0
+light_indirect_energy = 0.1
+
+[node name="Ship" parent="." instance=ExtResource("7_g1t5j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
+
+[editable path="GridContainer"]

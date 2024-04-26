@@ -1,11 +1,10 @@
-res://Scenes/Scene1.tscn
+res://Scenes/Track2.tscn
 res://Scripts/Cameras/2P_SplitScreen.gd
-res://blender/ship_material.tres
-res://Prefabs/Ship1/ship.tscn
-res://Prefabs/zenith.tscn
 res://art/Materials/Toon_shader.tres
 res://art/Materials/Toon_shader_thick_outlines.tres
-res://Prefabs/Track Objects/boost_ring.tscn
-res://Scripts/Non-player prefabs/boost_ring.gd
+res://Scripts/Controls/zenith.gd
+res://Scenes/Scene1.tscn
+res://Prefabs/Ship1/ship.tscn
 res://Prefabs/Track Objects/RouteNode.tscn
-res://Scenes/Track2.tscn
+res://Prefabs/Track Objects/boost_ring.tscn
+res://Shaders/Day_clear_sky_material.tres

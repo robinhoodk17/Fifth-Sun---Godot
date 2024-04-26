@@ -22,7 +22,7 @@ extends CharacterBody3D
 @export_group("Controller")
 @export var Controller_Sensitivity : float = 1
 
-@onready var AIPilotNode : Node3D = $"../1"
+@onready var AIPilotNode : Node3D = $"../Track_objects/Route_nodes/1"
 @onready var Camera_offset : Vector3 = Camera.position
 @onready var Pilot = GlobalVariables.Pilot 
 
