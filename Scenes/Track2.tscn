@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhu7nafouqcb0"]
+[gd_scene load_steps=11 format=3 uid="uid://bhu7nafouqcb0"]
 
 [ext_resource type="PackedScene" uid="uid://he7ivklp1ig8" path="res://Prefabs/Player_related/2playerCamera.tscn" id="1_f83m5"]
 [ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="2_ci54k"]
-[ext_resource type="PackedScene" uid="uid://bb4dbf6hnngj0" path="res://art/3D/Track objects/boost_ring.glb" id="3_8kmh8"]
-[ext_resource type="PackedScene" uid="uid://cwlqunbu74xt4" path="res://Prefabs/Track Objects/boost_ring.tscn" id="3_w4duq"]
+[ext_resource type="PackedScene" uid="uid://bk7st5tijr6ni" path="res://Prefabs/Track Objects/boost_ring.tscn" id="3_w4duq"]
 [ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="4_vdksf"]
 [ext_resource type="PackedScene" uid="uid://cg1l4rows3ace" path="res://art/3D/Track objects/Zigzag_1.glb" id="5_2iycd"]
 [ext_resource type="Material" uid="uid://c5a054dts7q12" path="res://Shaders/Day_clear_sky_material.tres" id="5_co2rx"]
@@ -35,26 +34,50 @@ transform = Transform3D(0.999962, 0.00685396, -0.00535505, -0.00684632, 0.999975
 
 [node name="Boosts" type="Node3D" parent="Track_objects"]
 
-[node name="boost_ring1" parent="Track_objects/Boosts" instance=ExtResource("3_8kmh8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 7.5, 600)
+[node name="boost_ring1" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 20, 7.5, 600)
+NextNode = NodePath("../boost_ring2")
 
-[node name="boost_ring2" parent="Track_objects/Boosts" instance=ExtResource("3_8kmh8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 7.5, 400)
+[node name="boost_ring2" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, -20, 7.5, 400)
+NextNode = NodePath("../boost_ring3")
 
-[node name="boost_ring3" parent="Track_objects/Boosts" instance=ExtResource("3_8kmh8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 7.5, 200)
+[node name="boost_ring3" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 20, 7.5, 200)
+NextNode = NodePath("../boost_ring4")
 
-[node name="boost_ring4" parent="Track_objects/Boosts" instance=ExtResource("3_w4duq")]
-transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 14.5974, 7.5, 81.844)
+[node name="boost_ring4" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 19.6786, 7.5, 81.844)
+NextNode = NodePath("../boost_ring5")
 
-[node name="boost_ring5" parent="Track_objects/Boosts" instance=ExtResource("3_w4duq")]
-transform = Transform3D(3.52464e-10, 0.00806338, 0.999967, 1, -4.37114e-08, -1.91333e-15, 4.371e-08, 0.999967, -0.00806338, -215.014, 102.744, -93.6495)
+[node name="boost_ring5" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
+transform = Transform3D(6.68289e-10, 0.0152885, 0.999883, 1, -4.37114e-08, -3.71038e-15, 4.37063e-08, 0.999883, -0.0152885, -167.055, 84.4298, -130.836)
+NextNode = NodePath("../boost_ring6")
+
+[node name="boost_ring6" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
+transform = Transform3D(2.7855e-08, 0.637249, 0.770658, 1, -4.37114e-08, -3.16392e-15, 3.36865e-08, 0.770658, -0.637249, -273.94, 126.739, -106.124)
+NextNode = NodePath("../boost_ring7")
+
+[node name="boost_ring7" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
+transform = Transform3D(-0.0939737, 0.918597, -0.383861, 0.888754, -0.0963484, -0.448144, -0.448648, -0.383271, -0.807352, -283.215, 170.183, -6.32735)
+NextNode = NodePath("../boost_ring8")
+
+[node name="boost_ring8" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
+transform = Transform3D(-0.361966, 0.174404, 0.915731, 0.932191, 0.0677202, 0.355575, 4.29396e-08, 0.982343, -0.18709, -195.129, 220.169, 34.0299)
+NextNode = NodePath("../boost_ring9")
+
+[node name="boost_ring9" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
+transform = Transform3D(-0.0241328, -0.960309, -0.277894, 0.978953, 0.0336488, -0.201293, 0.202654, -0.276903, 0.939285, -126.918, 268.343, -33.7624)
+NextNode = NodePath("../boost_ring10")
+
+[node name="boost_ring10" parent="Track_objects/Boosts" instance=ExtResource("3_w4duq")]
+transform = Transform3D(0.288447, 0.172501, -0.941829, 0.957496, -0.0519662, 0.283727, -4.29962e-08, -0.983638, -0.180159, -183.848, 331.549, -134.573)
 
 [node name="Route_nodes" type="Node3D" parent="Track_objects"]
-visible = false
 
-[node name="1" parent="Track_objects/Route_nodes" instance=ExtResource("4_vdksf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 38.9145)
+[node name="1" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("4_vdksf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 700)
+NextNode = NodePath("../../Boosts/boost_ring1")
 
 [node name="Track" type="Node3D" parent="Track_objects"]
 
@@ -81,3 +104,7 @@ mesh = SubResource("PlaneMesh_ueipm")
 skeleton = NodePath("../../..")
 
 [editable path="GridContainer"]
+[editable path="Track_objects/Boosts/boost_ring1"]
+[editable path="Track_objects/Boosts/boost_ring1/boost_ring"]
+[editable path="Track_objects/Boosts/boost_ring1/Route_node"]
+[editable path="Track_objects/Track/Zigzag_1"]

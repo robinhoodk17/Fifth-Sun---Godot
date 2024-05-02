@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://he7ivklp1ig8" path="res://Prefabs/Player_related/2playerCamera.tscn" id="1_k1gp5"]
 [ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="5_tplye"]
-[ext_resource type="PackedScene" uid="uid://cwlqunbu74xt4" path="res://Prefabs/Track Objects/boost_ring.tscn" id="5_wvwva"]
+[ext_resource type="PackedScene" uid="uid://bk7st5tijr6ni" path="res://Prefabs/Track Objects/boost_ring.tscn" id="5_wvwva"]
 [ext_resource type="PackedScene" uid="uid://bswyng0o2wou2" path="res://blender/mountain 2.blend" id="6_i020r"]
 [ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="9_55x6l"]
 

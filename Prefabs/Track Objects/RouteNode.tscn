@@ -8,11 +8,12 @@ size = Vector3(30, 15, 5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_448cu"]
 size = Vector3(30, 15, 5)
 
-[node name="1" type="Area3D"]
+[node name="1" type="Area3D" node_paths=PackedStringArray("rotation_indicator")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -22.27)
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_o73go")
+rotation_indicator = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_iiudt")
