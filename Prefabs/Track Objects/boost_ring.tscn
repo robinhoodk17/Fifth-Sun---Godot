@@ -15,7 +15,7 @@ radius = 7.0
 size = Vector3(50, 50, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yc5y4"]
-size = Vector3(50, 50, 1)
+size = Vector3(100, 100, 1)
 
 [node name="1" type="Area3D" node_paths=PackedStringArray("rotation_indicator", "child")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -22.27)

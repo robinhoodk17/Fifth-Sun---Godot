@@ -3,7 +3,13 @@ extends CharacterBody3D
 @export_group("Nodes for function")
 ##The marker3D, not the actual camera
 @export var Camera : Marker3D
+##The 3D node labeled "Turret"
 @export var Turret : Node3D
+##The root node
+@export var BodyCollider : CollisionShape3D
+@export var Wing_FrontCollider : CollisionShape3D
+@export var Wing_BackCollider : CollisionShape3D
+
 
 @export_group("Ship stats")
 @export var max_speed : float = 100.0
@@ -17,6 +23,7 @@ extends CharacterBody3D
 @export var pitch_response : float = 1.2
 @export var yaw_response : float = 1.2
 @export var roll_response : float = 15.0
+@export var grip : float = .8
 @export_group("Hookshot stats")
 @export var hookshot_strength : float = 1.6
 @export_group("Controller")
@@ -29,6 +36,8 @@ extends CharacterBody3D
 var is_accelerating : bool = false
 var is_braking : bool = false
 var forward_speed : float = 0.0
+var collision_suspension_time = 100
+var collision_time = collision_suspension_time+1
 var previous_speed  = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
 var speed_array_counter : int = 0
 var pitch_input : float = 0.0
@@ -82,17 +91,31 @@ func move_turret_and_camera():
 		instantaneous_acceleration = .8
 	var lerp_speed = clamp(instantaneous_acceleration,.001,.8)
 	Camera.position = Camera.position.lerp(position,.2)
-	var a = Quaternion(transform.basis)
-	var b = Quaternion(Camera.transform.basis)
+	var a = Quaternion(transform.basis.orthonormalized())
+	var b = Quaternion(Camera.transform.basis.orthonormalized())
 	var c = b.slerp(a, 0.1)
 	Camera.transform.basis = Basis(c)
 
 func _normal_movement(delta):
-	transform.basis = transform.basis.rotated(transform.basis.z, roll_input * roll_speed * delta)
-	transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
-	transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
-	transform.basis = transform.basis.orthonormalized()
-	velocity = -transform.basis.z * forward_speed
+	if(collision_time > collision_suspension_time):
+		transform.basis = transform.basis.rotated(transform.basis.z, roll_input * roll_speed * delta)
+		transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
+		transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
+		transform.basis = transform.basis.orthonormalized()
+		velocity = -transform.basis.z * forward_speed
+	else:
+		var aimingAt = position + velocity
+		var look_atMatrix = global_transform.looking_at(aimingAt, global_transform.basis.y)
+		global_transform.basis.y=lerp(global_transform.basis.y, look_atMatrix.basis.y, delta*5)
+		global_transform.basis.x=lerp(global_transform.basis.x, look_atMatrix.basis.x, delta*5)
+		global_transform.basis.z=lerp(global_transform.basis.z, look_atMatrix.basis.z, delta*5)
+		transform.basis = transform.basis.orthonormalized()
+		transform.basis = transform.basis.rotated(transform.basis.z, roll_input * roll_speed * delta)
+		transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
+		transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
+		transform.basis = transform.basis.orthonormalized()
+
+
 func _hooked_movement(delta):
 	transform.basis = transform.basis.rotated(transform.basis.z, roll_input * roll_speed * delta)
 	transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
@@ -127,6 +150,7 @@ func _hooked_movement(delta):
 #		velocity += vector_lookingat_hook
 #		var targetposition = position + velocity
 #		transform.looking_at(targetposition)
+
 func setTargetPosition(target):
 	AIPilotNode = target
 func autoPilot(delta):
@@ -153,6 +177,7 @@ and by the TUrret_controller script when the hookshot gets unhooked
 """
 func _physics_process(delta):
 	#here we record the previous 5 speeds. We increase the speed_array_counter at the end of physiscs process
+	collision_time += 1
 	previous_speed[speed_array_counter] = forward_speed
 	if draft:
 		forward_speed -= 2 * delta
@@ -173,44 +198,15 @@ func _physics_process(delta):
 		_hooked_movement(delta)
 	
 	forward_speed = velocity.length()
-	move_and_slide( )
+	var collisions = move_and_collide(velocity*delta)
+	if collisions:
+		collide_and_slide(collisions, delta)
 	move_turret_and_camera()
 	forward_speed = velocity.length()
 	if speed_array_counter < 19:
 		speed_array_counter += 1
 	else:
 		speed_array_counter = 0
-	"""
-	#only rotating the camera around 2 axes to prevent dizziness
-	var rocket_euler = transform.basis.get_euler()
-	var camera_euler = Camera.transform.basis.get_euler()
-	var target_eulerxy = Vector3(rocket_euler.x,rocket_euler.y,camera_euler.z)
-	var target_quatxy = Quaternion.from_euler(target_eulerxy)
-	
-	var b = Quaternion(Camera.transform.basis)
-	var c = b.slerp(target_quatxy, 0.1)
-	Camera.transform.basis = Basis(c)
-	
-	#Here we rotate on the last axis
-	var target_eulerz = Vector3(camera_euler.x,camera_euler.y,rocket_euler.z)
-	var target_quatz = Quaternion.from_euler(target_eulerz)
-	b = Quaternion(Camera.transform.basis)
-	c = b.slerp(target_quatz, 0.01)
-	Camera.transform.basis = Basis(c)
-	
-	"""
-	"""
-	#Here we rotate on the last axis
-	camera_euler = Camera.transform.basis.get_euler()
-	if(camera_euler.z - rocket_euler.z > .52 or camera_euler.z - rocket_euler.z < -.52 or rotating_on_z):
-		rotating_on_z = true
-		var target_eulerz = Vector3(camera_euler.x,camera_euler.y,rocket_euler.z)
-		var target_quatz = Quaternion.from_euler(target_eulerz)
-		b = Quaternion(Camera.transform.basis)
-		c = b.slerp(target_quatz, 0.1)
-		Camera.transform.basis = Basis(c)
-		if(camera_euler.z - rocket_euler.z <.05 and camera_euler.z - rocket_euler.z > -.05):
-			rotating_on_z = false"""
 	
 func find_largest_dict_key(dict):
 	var max_val = -999999
@@ -223,5 +219,11 @@ func find_largest_dict_key(dict):
 			max_var = i
 			key = i
 	return key
-
-	
+func collide_and_slide(currentcollision : KinematicCollision3D, delta):
+	collision_time = 0
+	var normal = currentcollision.get_normal()
+	var previous_directoin = velocity.normalized()
+	velocity = velocity.bounce(normal)
+	var new_direction = velocity.normalized()
+	velocity = abs(new_direction.dot(previous_directoin)*velocity)
+	hooked = false

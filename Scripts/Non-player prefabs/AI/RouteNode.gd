@@ -11,10 +11,8 @@ func _ready():
 	rotation_indicator.visible = false
 	if child != null:
 		child.NextNode = NextNode
-		print(child.NextNode)
 
 func _on_body_entered(body):
-	print("entered")
 	if body.is_in_group("Ship"):
 		body.AIPilotNode = NextNode
 		if Type == RouteTypes.boost:
