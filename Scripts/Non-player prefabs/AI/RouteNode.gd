@@ -2,7 +2,7 @@ extends Area3D
 
 @export var PreviousNode : Node3D = null
 @export var NextNode : Node3D
-@export var rotation_indicator : MeshInstance3D
+@export var rotation_indicator : Node3D
 enum RouteTypes {boost, AI}
 @export var Type : RouteTypes = RouteTypes.AI
 @export var child: Node3D

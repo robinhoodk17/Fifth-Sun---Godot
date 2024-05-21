@@ -1,11 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://bk7st5tijr6ni"]
+[gd_scene load_steps=9 format=3 uid="uid://bk7st5tijr6ni"]
 
 [ext_resource type="Script" path="res://Scripts/Non-player prefabs/AI/RouteNode.gd" id="1_8lh1k"]
 [ext_resource type="PackedScene" uid="uid://bb4dbf6hnngj0" path="res://art/3D/Track objects/boost_ring.glb" id="2_8o6gv"]
 [ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="3_4bxdn"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_hx20d"]
-size = Vector3(1, 15, 1)
+size = Vector3(15, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_00nlv"]
+size = Vector3(1, 2, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_krym8"]
 height = 1.0
@@ -22,12 +25,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -22.27)
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_8lh1k")
-rotation_indicator = NodePath("MeshInstance3D")
+rotation_indicator = NodePath("Rotation_indicator")
 Type = 0
 child = NodePath("Route_node")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Rotation_indicator" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rotation_indicator"]
 mesh = SubResource("BoxMesh_hx20d")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Rotation_indicator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.42595, 0)
+mesh = SubResource("BoxMesh_00nlv")
+skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)

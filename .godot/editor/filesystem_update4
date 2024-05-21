@@ -1,16 +1,13 @@
 res://Scenes/Scene1.tscn
 res://Scripts/Cameras/2P_SplitScreen.gd
 res://art/Materials/Toon_shader.tres
+res://art/Materials/Toon_shader_thin_outlines.tres
 res://Shaders/Day_clear_sky_material.tres
-res://Prefabs/Ship1/ship.tscn
 res://Prefabs/Track Objects/RouteNode.tscn
 res://Scenes/Track2.tscn
 res://Prefabs/Track Objects/boost_ring.tscn
+res://Prefabs/Track Objects/InvisibleAimAssist.tscn
+res://Prefabs/Ship1/ship.tscn
 res://Scripts/Controls/zenith.gd
 res://Scripts/Non-player prefabs/AI/RouteNode.gd
-res://art/3D/Track objects/InvisibleAimAssist.tscn
-res://Scripts/Non-player prefabs/InvisibleAimAssist.gd
-res://Prefabs/Track Objects/InvisibleAimAssist.tscn
-res://art/Materials/Toon_shader_thick_outlines.tres
-res://art/Materials/Toon_shader_thin_outlines.tres
 res://Scripts/global_variables.gd

@@ -36,8 +36,12 @@ extends CharacterBody3D
 var is_accelerating : bool = false
 var is_braking : bool = false
 var forward_speed : float = 0.0
-var collision_suspension_time = 100
+"""collision variables"""
+var collision_suspension_time = 40
 var collision_time = collision_suspension_time+1
+var is_skidding = false
+var minimum_speed_after_collision = .3
+""""""
 var previous_speed  = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
 var speed_array_counter : int = 0
 var pitch_input : float = 0.0
@@ -97,23 +101,33 @@ func move_turret_and_camera():
 	Camera.transform.basis = Basis(c)
 
 func _normal_movement(delta):
-	if(collision_time > collision_suspension_time):
+	if(collision_time > collision_suspension_time and !is_skidding):
 		transform.basis = transform.basis.rotated(transform.basis.z, roll_input * roll_speed * delta)
 		transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
 		transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
 		transform.basis = transform.basis.orthonormalized()
 		velocity = -transform.basis.z * forward_speed
 	else:
-		var aimingAt = position + velocity
-		var look_atMatrix = global_transform.looking_at(aimingAt, global_transform.basis.y)
-		global_transform.basis.y=lerp(global_transform.basis.y, look_atMatrix.basis.y, delta*5)
-		global_transform.basis.x=lerp(global_transform.basis.x, look_atMatrix.basis.x, delta*5)
-		global_transform.basis.z=lerp(global_transform.basis.z, look_atMatrix.basis.z, delta*5)
-		transform.basis = transform.basis.orthonormalized()
-		transform.basis = transform.basis.rotated(transform.basis.z, roll_input * roll_speed * delta)
-		transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
-		transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
-		transform.basis = transform.basis.orthonormalized()
+		if is_skidding:
+			transform.basis = transform.basis.rotated(transform.basis.z, roll_input * roll_speed * delta)
+			transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
+			transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
+			transform.basis = transform.basis.orthonormalized()
+			if(velocity.length() < max_speed):
+				velocity = velocity - transform.basis.z * acceleration*delta
+		if !is_skidding:
+			var aimingAt = position + velocity
+			var look_atMatrix = global_transform.looking_at(aimingAt, global_transform.basis.y)
+			global_transform.basis.y=lerp(global_transform.basis.y, look_atMatrix.basis.y, delta*10)
+			global_transform.basis.x=lerp(global_transform.basis.x, look_atMatrix.basis.x, delta*10)
+			global_transform.basis.z=lerp(global_transform.basis.z, look_atMatrix.basis.z, delta*10)
+			transform.basis = transform.basis.orthonormalized()
+			transform.basis = transform.basis.rotated(transform.basis.z, roll_input * roll_speed * delta)
+			transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
+			transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
+			transform.basis = transform.basis.orthonormalized()
+			velocity = velocity.normalized() * forward_speed
+		
 
 
 func _hooked_movement(delta):
@@ -132,7 +146,7 @@ func _hooked_movement(delta):
 		var updotproduct = vector_lookingat_hook.dot(global_transform.basis.y)
 		var rightdirection = global_transform.basis.x * delta * hookshot_strength * rightdotproduct
 		var frontdirection : Vector3 = Vector3 (0,0,0)
-		if frontdotproduct >0:
+		if frontdotproduct > 0:
 			frontdirection = -global_transform.basis.z * delta * hookshot_strength * frontdotproduct * acceleration * 1.5
 		var updirection = global_transform.basis.y * delta * hookshot_strength * updotproduct
 		var  direction = (updirection + rightdirection + velocity.normalized()).normalized()
@@ -203,6 +217,9 @@ func _physics_process(delta):
 		collide_and_slide(collisions, delta)
 	move_turret_and_camera()
 	forward_speed = velocity.length()
+	if collision_time > collision_suspension_time/2:
+		if !is_accelerating:
+			is_skidding = false
 	if speed_array_counter < 19:
 		speed_array_counter += 1
 	else:
@@ -221,9 +238,10 @@ func find_largest_dict_key(dict):
 	return key
 func collide_and_slide(currentcollision : KinematicCollision3D, delta):
 	collision_time = 0
-	var normal = currentcollision.get_normal()
-	var previous_directoin = velocity.normalized()
-	velocity = velocity.bounce(normal)
-	var new_direction = velocity.normalized()
-	velocity = abs(new_direction.dot(previous_directoin)*velocity)
+	var collision_normal = currentcollision.get_normal()
+	var velocity_loss = (1 - abs(collision_normal.normalized().dot(velocity.normalized())))
+	velocity_loss = clamp(velocity_loss,minimum_speed_after_collision,.95)
+	if(velocity_loss <= minimum_speed_after_collision):
+		is_skidding = true 
+	velocity = velocity.bounce(collision_normal) * velocity_loss
 	hooked = false

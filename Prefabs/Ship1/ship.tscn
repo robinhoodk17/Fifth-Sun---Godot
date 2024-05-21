@@ -1,11 +1,11 @@
-[gd_scene load_steps=41 format=3 uid="uid://bo8ptladpikfl"]
+[gd_scene load_steps=40 format=3 uid="uid://bo8ptladpikfl"]
 
 [ext_resource type="Script" path="res://Scripts/Controls/zenith.gd" id="1_08faa"]
 [ext_resource type="Material" uid="uid://bgwx5kw24feoq" path="res://art/Materials/Toon_shader.tres" id="2_lhrga"]
 [ext_resource type="Material" uid="uid://ey3gnh2bhlrb" path="res://art/Materials/Toon_shader_thin_outlines.tres" id="4_n8agw"]
 [ext_resource type="Script" path="res://Scripts/Controls/Turret_controller.gd" id="4_urwk6"]
 
-[sub_resource type="Image" id="Image_tqyng"]
+[sub_resource type="Image" id="Image_hpr0q"]
 data = {
 "data": PackedByteArray(255, 255, 255, 195, 195, 195, 88, 88, 88, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 242, 0, 179, 170, 0, 91, 86, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 208, 0, 0, 164, 0, 0, 119, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 0, 0, 182, 0, 0, 118, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 255, 0, 0, 153, 0, 0, 94, 0, 0, 61, 0, 168, 243, 0, 133, 193, 0, 90, 131, 255, 255, 255, 226, 123, 39, 168, 92, 29, 121, 66, 20, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 193, 0, 193, 130, 0, 130, 81, 0, 81, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 240, 227, 255, 200, 150, 234, 201, 148, 219, 179, 115, 193, 148, 75, 167, 122, 48, 147, 102, 28, 92, 58, 2),
 "format": "RGB8",
@@ -16,7 +16,7 @@ data = {
 
 [sub_resource type="ImageTexture" id="ImageTexture_48b1p"]
 resource_name = "Low_poly_textures"
-image = SubResource("Image_tqyng")
+image = SubResource("Image_hpr0q")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhnbg"]
 resource_name = "Material.001"
@@ -332,17 +332,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1jh2o")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ft0k4"]
-radius = 0.05
-height = 3.75
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rdnkt"]
-radius = 0.05
-height = 4.1
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y4b0t"]
 radius = 0.3
 height = 3.9
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bvyn5"]
+size = Vector3(1.5, 0.01, 0.685)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vfuy0"]
 margin = 0.1
@@ -451,15 +446,13 @@ shadow_mesh = SubResource("ArrayMesh_c11js")
 [sub_resource type="BoxMesh" id="BoxMesh_vyobk"]
 size = Vector3(0.03, 0.03, 1)
 
-[node name="Ship" type="CharacterBody3D" node_paths=PackedStringArray("Camera", "Turret", "BodyCollider", "Wing_FrontCollider", "Wing_BackCollider") groups=["Ship"]]
+[node name="Ship" type="CharacterBody3D" node_paths=PackedStringArray("Camera", "Turret", "BodyCollider") groups=["Ship"]]
 collision_layer = 6
 collision_mask = 11
 script = ExtResource("1_08faa")
 Camera = NodePath("Marker3D")
 Turret = NodePath("Turret")
 BodyCollider = NodePath("Body")
-Wing_FrontCollider = NodePath("Wing-Front")
-Wing_BackCollider = NodePath("Wing-Back")
 acceleration = 14.0
 boost = 7.0
 braking = 30.0
@@ -527,17 +520,17 @@ mesh = SubResource("ArrayMesh_sf5p5")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_lhrga")
 
-[node name="Wing-Front" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -0.349815, -0.0504052)
-shape = SubResource("CapsuleShape3D_ft0k4")
-
-[node name="Wing-Back" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -0.34959, 0.393256)
-shape = SubResource("CapsuleShape3D_rdnkt")
-
 [node name="Body" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.334474, -0.300494)
 shape = SubResource("CapsuleShape3D_y4b0t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1031, -0.382103, 0.195586)
+shape = SubResource("BoxShape3D_bvyn5")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.103, -0.382, 0.196)
+shape = SubResource("BoxShape3D_bvyn5")
 
 [node name="Marker3D" type="Marker3D" parent="."]
 top_level = true
