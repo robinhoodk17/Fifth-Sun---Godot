@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://Scripts/Non-player prefabs/InvisibleAimAssist.gd" id="1_12luv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c6td3"]
-size = Vector3(5, 5, 5)
+size = Vector3(20, 20, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_s0s60"]
-size = Vector3(5, 5, 5)
+size = Vector3(20, 20, 20)
 
 [node name="InvisibleAimAssist" type="StaticBody3D" node_paths=PackedStringArray("mesh")]
 collision_layer = 4

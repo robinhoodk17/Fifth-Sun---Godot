@@ -11,4 +11,4 @@ func _ready():
 func _process(delta):
 	var speed = ship.velocity.length() 
 	hand.rotation_degrees = speed + 67
-	text.text = str(floor(speed))
+	text.text = str(floor(speed*7.2))

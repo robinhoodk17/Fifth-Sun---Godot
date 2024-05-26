@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://ey3gnh2bhlrb" path="res://art/Materials/Toon_shader_thin_outlines.tres" id="4_n8agw"]
 [ext_resource type="Script" path="res://Scripts/Controls/Turret_controller.gd" id="4_urwk6"]
 
-[sub_resource type="Image" id="Image_hpr0q"]
+[sub_resource type="Image" id="Image_mirkg"]
 data = {
 "data": PackedByteArray(255, 255, 255, 195, 195, 195, 88, 88, 88, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 242, 0, 179, 170, 0, 91, 86, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 208, 0, 0, 164, 0, 0, 119, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 0, 0, 182, 0, 0, 118, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 255, 0, 0, 153, 0, 0, 94, 0, 0, 61, 0, 168, 243, 0, 133, 193, 0, 90, 131, 255, 255, 255, 226, 123, 39, 168, 92, 29, 121, 66, 20, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 193, 0, 193, 130, 0, 130, 81, 0, 81, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 240, 227, 255, 200, 150, 234, 201, 148, 219, 179, 115, 193, 148, 75, 167, 122, 48, 147, 102, 28, 92, 58, 2),
 "format": "RGB8",
@@ -16,7 +16,7 @@ data = {
 
 [sub_resource type="ImageTexture" id="ImageTexture_48b1p"]
 resource_name = "Low_poly_textures"
-image = SubResource("Image_hpr0q")
+image = SubResource("Image_mirkg")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhnbg"]
 resource_name = "Material.001"
@@ -456,7 +456,7 @@ BodyCollider = NodePath("Body")
 acceleration = 14.0
 boost = 7.0
 braking = 30.0
-hookshot_strength = 2.0
+hookshot_strength = 0.015
 
 [node name="Ship1" type="Node3D" parent="."]
 

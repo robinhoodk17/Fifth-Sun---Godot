@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dhwbv83rpfuak"]
+[gd_scene load_steps=14 format=3 uid="uid://dhwbv83rpfuak"]
 
 [ext_resource type="Script" path="res://Scripts/Cameras/2P_SplitScreen.gd" id="1_7bfc5"]
 [ext_resource type="Script" path="res://Scripts/Controls/speedometer.gd" id="2_umw2c"]
@@ -7,7 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dvvoftavsla7y" path="res://art/Sprites/Red dot.png" id="5_iyngq"]
 [ext_resource type="Texture2D" uid="uid://dbaa33ud0yxvr" path="res://art/Sprites/Outer aim.png" id="6_dg2bt"]
 [ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="8_mj124"]
-[ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/RouteNode.tscn" id="8_nbu7b"]
+[ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="8_nbu7b"]
+[ext_resource type="PackedScene" uid="uid://bk7st5tijr6ni" path="res://Prefabs/Track Objects/boost_ring.tscn" id="9_jk6ws"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7uyjm"]
 size = Vector3(5, 5, 5)
@@ -120,7 +121,7 @@ scale = Vector2(0.05, 0.05)
 texture = ExtResource("6_dg2bt")
 
 [node name="Node3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.1137, 23.2539, 674.062)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -80)
 collision_layer = 5
 collision_mask = 3
 
@@ -153,88 +154,27 @@ mesh = SubResource("BoxMesh_gps8s")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 19.2961, 95.515, 12.9777)
 
-[node name="1" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("8_nbu7b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 532.55)
-visible = false
-PreviousNode = NodePath("../4")
+[node name="Ship" parent="." instance=ExtResource("8_mj124")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 200)
+hookshot_strength = 0.015
+
+[node name="Track_objects" type="Node3D" parent="."]
+
+[node name="Route_nodes" type="Node3D" parent="Track_objects"]
+
+[node name="1" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode", "hookshotTarget") instance=ExtResource("8_nbu7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, -50)
 NextNode = NodePath("../2")
 Type = 0
+hookshotTarget = NodePath("../../../Node3D")
 
-[node name="2" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("8_nbu7b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 398.656)
-visible = false
-PreviousNode = NodePath("../1")
-NextNode = NodePath("../3")
-Type = 0
-
-[node name="3" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("8_nbu7b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 202.054)
-visible = false
-PreviousNode = NodePath("../2")
-NextNode = NodePath("../4")
-Type = 0
-
-[node name="4" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("8_nbu7b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -94.8412)
-visible = false
-PreviousNode = NodePath("../3")
-NextNode = NodePath("../5")
-Type = 0
-
-[node name="5" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("8_nbu7b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -267.385)
-visible = false
-PreviousNode = NodePath("../4")
-NextNode = NodePath("../6")
-Type = 0
-
-[node name="6" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("8_nbu7b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -473.635)
-visible = false
-PreviousNode = NodePath("../4")
-NextNode = NodePath("../7")
-Type = 0
-
-[node name="7" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("8_nbu7b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -624.654)
-visible = false
-PreviousNode = NodePath("../4")
-NextNode = NodePath("../8")
-Type = 0
-
-[node name="8" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("8_nbu7b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -758.548)
-visible = false
-PreviousNode = NodePath("../1")
-NextNode = NodePath("../9")
-Type = 0
-
-[node name="9" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("8_nbu7b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -955.15)
-visible = false
-PreviousNode = NodePath("../2")
-NextNode = NodePath("../10")
-Type = 0
-
-[node name="10" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("8_nbu7b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -1252.05)
-visible = false
-PreviousNode = NodePath("../3")
-NextNode = NodePath("../11")
-Type = 0
-
-[node name="11" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("8_nbu7b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -1424.59)
-visible = false
-PreviousNode = NodePath("../4")
-NextNode = NodePath("../12")
-Type = 0
-
-[node name="12" parent="." node_paths=PackedStringArray("PreviousNode", "NextNode") instance=ExtResource("8_nbu7b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -1630.84)
-visible = false
-PreviousNode = NodePath("../4")
+[node name="2" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("8_nbu7b")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 40, 15, -140)
 NextNode = NodePath("../1")
 Type = 0
 
-[node name="Ship" parent="." instance=ExtResource("8_mj124")]
+[node name="Boost_rings" type="Node3D" parent="Track_objects"]
+
+[node name="1" parent="Track_objects/Boost_rings" node_paths=PackedStringArray("NextNode") instance=ExtResource("9_jk6ws")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, -30)
+NextNode = NodePath("../../Route_nodes/1")

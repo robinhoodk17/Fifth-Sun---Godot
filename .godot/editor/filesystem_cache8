@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1716310536
+::res://::1716350386
 CharacterBodyGravityTrial.gd::GDScript::-1::1699468330::0::1::::<>CharacterBody3D<>::
 default_bus_layout.tres::AudioBusLayout::-1::1697554147::0::1::::<><>::
 default_env.tres::Environment::-1::1697554147::0::1::::<><>::
@@ -33,18 +33,18 @@ Zenith_Zenith_Orange.png::CompressedTexture2D::9092763812345692954::1697630749::
 ::res://art/3D/::1712046862
 ::res://art/3D/Ships/::1715252931
 Ship1.glb::PackedScene::5021487672106048065::1715252909::1715252912::1::::<><>::
-::res://art/3D/Track objects/::1715796294
-boost_ring.glb::PackedScene::2516660729812697403::1715278719::1715278721::1::::<><>::uid://dh6e4f0uuonm1
+::res://art/3D/Track objects/::1716742034
+boost_ring.glb::PackedScene::2516660729812697403::1716735873::1716735876::1::::<><>::uid://dh6e4f0uuonm1::::res://art/3D/Track objects/boost_ring_Ship1-new_Low_poly_textures.png
 boost_ring_Ship1-new_Low_poly_textures.png::CompressedTexture2D::7714874625088552790::1712046890::1712046890::1::::<><>::
 Curve_1.glb::PackedScene::2779831359399669042::1713459501::1713459504::1::::<><>::
-U-turn.glb::PackedScene::4299089505233465053::1715796292::1715796294::1::::<><>::
+U-turn.glb::PackedScene::4299089505233465053::1716742030::1716742034::1::::<><>::
 Zigzag-1.glb::PackedScene::969669851280398547::1714976449::1714976500::1::::<><>::
 Zigzag-2.glb::PackedScene::6030065391946447787::1715630122::1715630125::1::::<><>::
 Zigzag_1.glb::PackedScene::5248368841312571912::1714976801::1714976935::1::::<><>::
-::res://art/Materials/::1715538248
-Toon_shader.tres::StandardMaterial3D::2854420681246296404::1715538247::0::1::::<><>::uid://cad6bgr8bfspv::::res://blender/Ship1-new_Low_poly_textures.png<>uid://b3xemsho03uid::::res://art/Sprites/Low_poly_textures_2.png
+::res://art/Materials/::1716353403
+Toon_shader.tres::StandardMaterial3D::2854420681246296404::1716353403::0::1::::<><>::uid://cad6bgr8bfspv::::res://blender/Ship1-new_Low_poly_textures.png<>uid://b3xemsho03uid::::res://art/Sprites/Low_poly_textures_2.png
 Toon_shader_thick_outlines.tres::StandardMaterial3D::4642498067759247712::1715255469::0::1::::<><>::uid://cad6bgr8bfspv
-Toon_shader_thin_outlines.tres::StandardMaterial3D::332011926056018519::1715538248::0::1::::<><>::uid://cad6bgr8bfspv::::res://blender/Ship1-new_Low_poly_textures.png<>uid://b3xemsho03uid::::res://art/Sprites/Low_poly_textures_2.png
+Toon_shader_thin_outlines.tres::StandardMaterial3D::332011926056018519::1716353403::0::1::::<><>::uid://cad6bgr8bfspv::::res://blender/Ship1-new_Low_poly_textures.png<>uid://b3xemsho03uid::::res://art/Sprites/Low_poly_textures_2.png
 ::res://art/Sprites/::1715255759
 Low_poly_textures.png::CompressedTexture2D::3943294327389080537::1708792086::1708861177::1::::<><>::
 Low_poly_textures_2.png::CompressedTexture2D::4399454248303869011::1715255757::1715255759::1::::<><>::
@@ -52,15 +52,15 @@ Outer aim.png::CompressedTexture2D::7229502398667250279::1700555346::1700555349:
 Red dot.png::CompressedTexture2D::8677439666103777648::1698171158::1698171198::1::::<><>::
 Speedom-hand.png::CompressedTexture2D::3406288310815612271::1707585758::1707585763::1::::<><>::
 speedometer.png::CompressedTexture2D::845210347951215490::1707585475::1707585493::1::::<><>::
-::res://blender/::1715796518
-boost_ring.blend::PackedScene::4962076892229072034::1715469577::1715469717::1::::<><>::uid://cad6bgr8bfspv
+::res://blender/::1716742998
+boost_ring.blend::PackedScene::4962076892229072034::1716735868::1716735888::1::::<><>::uid://cad6bgr8bfspv::::res://blender/Ship1-new_Low_poly_textures.png
 boost_ring_Ship1-new_Low_poly_textures.png::CompressedTexture2D::6865380275374294739::1712046824::1712046824::1::::<><>::
 collision1.tres::BoxShape3D::8818988917019345278::1709471723::0::1::::<><>::
 mountain 2.blend::PackedScene::3696716957347427675::1709194151::1712508599::1::::<><>::
 Ship1-new_Low_poly_textures.png::CompressedTexture2D::4780918856120745843::1709385446::1709467332::1::::<><>::
 Ship1.blend::PackedScene::4884325864194273686::1715252902::1715252923::1::::<><>::
 Straight_1.blend::PackedScene::8994932226057030779::1713682131::1713682221::1::::<><>::
-U-turn.blend::PackedScene::7181163998123908545::1715796518::1716310581::1::::<><>::
+U-turn.blend::PackedScene::7181163998123908545::1716742998::1716743011::1::::<><>::
 Zigzag-1.blend::PackedScene::3115423597607399541::1715250646::1715251241::1::::<><>::
 Zigzag-2.blend::PackedScene::6089509939903664627::1715630117::1715630139::1::::<><>::
 ::res://fonts/::1697554195
@@ -70,46 +70,47 @@ Montserrat-Medium.ttf::FontFile::5293367909236287338::1323705600::1697554195::1:
 zenith.tscn::PackedScene::4667910374448414827::1712508599::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://d2suqygx0y5wg
 ::res://Prefabs/Player_related/::1712506841
 2playerCamera.tscn::PackedScene::501537765561495085::1712506841::0::1::::<><>::res://Scripts/Cameras/2P_SplitScreen.gd<>res://Scripts/Controls/speedometer.gd<>uid://mboqxscd4faw
-::res://Prefabs/Ship1/::1715796481
-ship.tscn::PackedScene::3438134223398746093::1715796481::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://bgwx5kw24feoq::::res://art/Materials/Toon_shader.tres<>uid://ey3gnh2bhlrb::::res://art/Materials/Toon_shader_thin_outlines.tres<>res://Scripts/Controls/Turret_controller.gd
+::res://Prefabs/Ship1/::1716742615
+ship.tscn::PackedScene::3438134223398746093::1716742615::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://bgwx5kw24feoq::::res://art/Materials/Toon_shader.tres<>uid://ey3gnh2bhlrb::::res://art/Materials/Toon_shader_thin_outlines.tres<>res://Scripts/Controls/Turret_controller.gd
 ::res://Prefabs/Targets/::1712506842
 Items.tscn::PackedScene::7383958048921772521::1712506842::0::1::::<><>::res://Scripts/Non-player prefabs/Items.gd
-::res://Prefabs/Track Objects/::1715796481
-boost_ring.tscn::PackedScene::3155497649585330198::1715796481::0::1::::<><>::res://Scripts/Non-player prefabs/AI/RouteNode.gd<>uid://bb4dbf6hnngj0::::res://art/3D/Track objects/boost_ring.glb<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn
-InvisibleAimAssist.tscn::PackedScene::2680411089957766545::1715796481::0::1::::<><>::res://Scripts/Non-player prefabs/InvisibleAimAssist.gd
-RouteNode.tscn::PackedScene::2302122874349452920::1715796480::0::1::::<><>::res://Scripts/Non-player prefabs/AI/RouteNode.gd
-::res://Scenes/::1715796510
+::res://Prefabs/Track Objects/::1716742614
+boost_ring.tscn::PackedScene::3155497649585330198::1716742614::0::1::::<><>::res://Scripts/Non-player prefabs/AI/RouteNode.gd<>uid://bb4dbf6hnngj0::::res://art/3D/Track objects/boost_ring.glb<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn
+InvisibleAimAssist.tscn::PackedScene::2680411089957766545::1716742614::0::1::::<><>::res://Scripts/Non-player prefabs/InvisibleAimAssist.gd
+RouteNode.tscn::PackedScene::2302122874349452920::1716742613::0::1::::<><>::res://Scripts/Non-player prefabs/AI/RouteNode.gd
+::res://Scenes/::1716742615
 character_select.tscn::PackedScene::6027499136100608689::1712506843::0::1::::<><>::res://Scripts/Menus/character_select.gd<>res://Scripts/Controls/Cursor.gd
 main_menu.tscn::PackedScene::3622791666755024439::1712506843::0::1::::<><>::res://Scripts/Menus/main_menu.gd
 physics trial.tscn::PackedScene::255849545814655514::1712506843::0::1::::<><>::
-Scene1.tscn::PackedScene::6536190581045032654::1715796480::0::1::::<><>::uid://he7ivklp1ig8::::res://Prefabs/Player_related/2playerCamera.tscn<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://bk7st5tijr6ni::::res://Prefabs/Track Objects/boost_ring.tscn<>uid://bswyng0o2wou2::::res://blender/mountain 2.blend<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn
-Track1.tscn::PackedScene::7696100263117359506::1712508599::0::1::::<><>::res://Scripts/Cameras/2P_SplitScreen.gd<>res://Scripts/Controls/speedometer.gd<>uid://mboqxscd4faw
-Track2.tscn::PackedScene::2920996311717289731::1715796510::0::1::::<><>::uid://he7ivklp1ig8::::res://Prefabs/Player_related/2playerCamera.tscn<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn<>uid://bk7st5tijr6ni::::res://Prefabs/Track Objects/boost_ring.tscn<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://c5a054dts7q12::::res://Shaders/Day_clear_sky_material.tres<>uid://b2irm1yejya5r::::res://art/3D/Track objects/U-turn.glb<>uid://begn8j1et4l3v::::res://Prefabs/Track Objects/InvisibleAimAssist.tscn
+Scene1.tscn::PackedScene::6536190581045032654::1716742613::0::1::::<><>::uid://he7ivklp1ig8::::res://Prefabs/Player_related/2playerCamera.tscn<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://bk7st5tijr6ni::::res://Prefabs/Track Objects/boost_ring.tscn<>uid://bswyng0o2wou2::::res://blender/mountain 2.blend<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn
+Track1.tscn::PackedScene::7696100263117359506::1716742615::0::1::::<><>::res://Scripts/Cameras/2P_SplitScreen.gd<>res://Scripts/Controls/speedometer.gd<>uid://mboqxscd4faw::::res://art/Sprites/speedometer.png<>uid://bosbcn4jsochj::::res://art/Sprites/Speedom-hand.png<>uid://dvvoftavsla7y::::res://art/Sprites/Red dot.png<>uid://dbaa33ud0yxvr::::res://art/Sprites/Outer aim.png<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://bk7st5tijr6ni::::res://Prefabs/Track Objects/boost_ring.tscn
+Track2.tscn::PackedScene::2920996311717289731::1716742614::0::1::::<><>::uid://he7ivklp1ig8::::res://Prefabs/Player_related/2playerCamera.tscn<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn<>uid://bk7st5tijr6ni::::res://Prefabs/Track Objects/boost_ring.tscn<>res://Scripts/Non-player prefabs/Make_invisible.gd<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://c5a054dts7q12::::res://Shaders/Day_clear_sky_material.tres<>uid://b2irm1yejya5r::::res://art/3D/Track objects/U-turn.glb<>uid://begn8j1et4l3v::::res://Prefabs/Track Objects/InvisibleAimAssist.tscn
 ::res://Scenes/Track2/::1712814190
 ::res://Scenes/Track2/Scene/::1713115414
 Track2.tscn::PackedScene::2920996311717289731::1713115414::0::1::::<><>::uid://he7ivklp1ig8
-::res://Scripts/::1715796442
-global_variables.gd::GDScript::-1::1715796442::0::1::::<>Node<>::
+::res://Scripts/::1716742613
+global_variables.gd::GDScript::-1::1716742613::0::1::::<>Node<>::
 Ship_builder.gd::GDScript::-1::1708874842::0::1::::<>Node3D<>::
-::res://Scripts/Cameras/::1715538246
-2P_SplitScreen.gd::GDScript::-1::1715538246::0::1::::<>GridContainer<>::
+::res://Scripts/Cameras/::1716403529
+2P_SplitScreen.gd::GDScript::-1::1716403528::0::1::::<>GridContainer<>::
 SpaceShip_camera.gd::GDScript::-1::1697651453::0::1::::<>Camera3D<>::
-::res://Scripts/Controls/::1715542908
+::res://Scripts/Controls/::1716742460
 Cursor.gd::GDScript::-1::1704784728::0::1::::<>CharacterBody2D<>::
 speedometer.gd::GDScript::-1::1714922666::0::1::::<>Node<>::
-Turret_controller.gd::GDScript::-1::1714922666::0::1::::<>CharacterBody3D<>::
-zenith.gd::GDScript::-1::1715542908::0::1::::<>CharacterBody3D<>::
+Turret_controller.gd::GDScript::-1::1716742460::0::1::::<>CharacterBody3D<>::
+zenith.gd::GDScript::-1::1716641005::0::1::::<>CharacterBody3D<>::
 ::res://Scripts/Menus/::1704908798
 character_select.gd::GDScript::-1::1704784096::0::1::::<>Control<>::
 main_menu.gd::GDScript::-1::1697795627::0::1::::<>Control<>::
-::res://Scripts/Non-player prefabs/::1715062438
-boost_ring.gd::GDScript::-1::1712052233::0::1::::<>Node3D<>::
+::res://Scripts/Non-player prefabs/::1716733339
+boost_ring.gd::GDScript::-1::1716638798::0::1::::<>Node3D<>::
 InvisibleAimAssist.gd::GDScript::-1::1715062438::0::1::::<>StaticBody3D<>::
 Items.gd::GDScript::-1::1706556269::0::1::::<>RigidBody3D<>::
-::res://Scripts/Non-player prefabs/AI/::1715576030
-RouteNode.gd::GDScript::-1::1715576030::0::1::::<>Area3D<>::
-::res://Shaders/::1715538249
-Day_clear_sky_material.tres::ProceduralSkyMaterial::6880079703863653775::1715538249::0::1::::<><>::
+Make_invisible.gd::GDScript::-1::1716733339::0::1::::<>Node3D<>::
+::res://Scripts/Non-player prefabs/AI/::1716742564
+RouteNode.gd::GDScript::-1::1716742564::0::1::::<>Area3D<>::
+::res://Shaders/::1716353403
+Day_clear_sky_material.tres::ProceduralSkyMaterial::6880079703863653775::1716353403::0::1::::<><>::
 new_shader.tres::VisualShader::7644381285183150484::1709193652::0::1::::<><>::
 Outline_Shader.gdshader::Shader::-1::1709194088::0::1::::<><>::
 ::res://Shapes/::1697631882

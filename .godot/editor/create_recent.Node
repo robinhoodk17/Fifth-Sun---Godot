@@ -1,12 +1,13 @@
-CollisionShape3D
 Node3D
+Node
+RigidBody3D
+Marker3D
+CollisionShape3D
 MeshInstance3D
 StaticBody3D
 Area3D
-RigidBody3D
 DirectionalLight3D
 WorldEnvironment
-Marker3D
 RayCast3D
 MarginContainer
 Node2D
@@ -23,7 +24,6 @@ Control
 ColorRect
 TextureRect
 ReflectionProbe
-Node
 MeshInstance2D
 CharacterBody2D
 Area2D
