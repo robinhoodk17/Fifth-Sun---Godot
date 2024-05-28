@@ -187,7 +187,7 @@ func autoPilot(delta):
 		var frontorBack : float = dirToMovePosition.dot(global_transform.basis.z)
 		var leftorRight : float = dirToMovePosition.dot(global_transform.basis.x)
 		var upOrDown : float = dirToMovePosition.dot(global_transform.basis.y) * (-1.0)
-		var Roll : float = AIPilotNode.basis.y.dot(global_transform.basis.y)-1
+		var Roll : float = (AIPilotNode.basis.y.dot(global_transform.basis.y)-1)*(-1.0)
 		
 		yaw_input = lerp(yaw_input,clamp((leftorRight),-1.0,1.0),yaw_response)
 		pitch_input = lerp(pitch_input,clamp((upOrDown),-1.0,1.0),pitch_response)

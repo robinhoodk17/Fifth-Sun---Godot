@@ -36,7 +36,7 @@ mesh = SubResource("BoxMesh_hx20d")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Rotation_indicator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.42595, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57405, 0)
 mesh = SubResource("BoxMesh_00nlv")
 skeleton = NodePath("../..")
 
@@ -53,7 +53,7 @@ visible = false
 [node name="MeshInstance3D" parent="Route_node" index="0"]
 mesh = SubResource("BoxMesh_sxnqm")
 
-[node name="CollisionShape3D" parent="Route_node" index="1"]
+[node name="CollisionShape3D" parent="Route_node" index="2"]
 shape = SubResource("BoxShape3D_yc5y4")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

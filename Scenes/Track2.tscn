@@ -40,29 +40,29 @@ boost = 5.0
 [node name="Boosts" type="Node3D" parent="Track_objects"]
 
 [node name="boost_ring1" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
-transform = Transform3D(1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0, 1, 30, 10, 180)
+transform = Transform3D(-2.18557e-07, -1, 0, 1, -2.18557e-07, 0, 0, 0, 1, 30, 10, 180)
 NextNode = NodePath("../boost_ring2")
 
 [node name="boost_ring2" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 30, 30, 100)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 30, 30, 100)
 NextNode = NodePath("../boost_ring3")
 
 [node name="boost_ring3" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 30, 40, 10)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 30, 40, 10)
 NextNode = NodePath("../../Route_nodes/U-turn-1-1")
 
 [node name="boost_ring4" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode", "hookshotTarget") instance=ExtResource("3_w4duq")]
-transform = Transform3D(7.54979e-08, 1, 0, -1, 7.54979e-08, 0, 0, 0, 1, 30, 50, -115)
+transform = Transform3D(-1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 30, 50, -115)
 NextNode = NodePath("../../Route_nodes/U-turn-1-2")
 hookshotTarget = NodePath("../../AimAssists/U-turn-1")
 
 [node name="boost_ring5" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode", "hookshotTarget") instance=ExtResource("3_w4duq")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -75, 50, 70)
+transform = Transform3D(1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0, 1, -75, 50, 70)
 NextNode = NodePath("../../Route_nodes/U-turn-2-2")
 hookshotTarget = NodePath("../../AimAssists/U-turn-2")
 
 [node name="boost_ring6" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
-transform = Transform3D(-1, 2.62268e-07, 0, -2.62268e-07, -1, 0, 0, 0, 1, -150, 50, -414.976)
+transform = Transform3D(1, -3.49691e-07, 0, 3.49691e-07, 1, 0, 0, 0, 1, -150, 50, -414.976)
 NextNode = NodePath(".")
 
 [node name="Route_nodes" type="Node3D" parent="Track_objects"]
@@ -78,19 +78,19 @@ NextNode = NodePath("../../Boosts/boost_ring4")
 hookshotTarget = NodePath("../../AimAssists/U-turn-1")
 
 [node name="U-turn-1-2" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("4_vdksf")]
-transform = Transform3D(-4.10753e-08, -0.939693, -0.34202, 1, -4.37114e-08, 0, -1.49502e-08, -0.34202, 0.939693, -62, 50, -125)
+transform = Transform3D(-4.10753e-08, 0.939692, -0.34202, -1, -4.37114e-08, 0, -1.49502e-08, 0.34202, 0.939692, -62, 50, -125)
 NextNode = NodePath("../U-turn-2-1")
 Type = 2
 
 [node name="U-turn-2-1" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode", "rotation_indicator", "hookshotTarget") instance=ExtResource("4_vdksf")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -70, 50, 60)
+transform = Transform3D(1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0, 1, -70, 50, 60)
 NextNode = NodePath("../../Boosts/boost_ring5")
 rotation_indicator = NodePath("../U-turn-1-2/MeshInstance3D")
 Type = 2
 hookshotTarget = NodePath("../../AimAssists/U-turn-2")
 
 [node name="U-turn-2-2" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode", "rotation_indicator") instance=ExtResource("4_vdksf")]
-transform = Transform3D(-3.78552e-08, -0.866025, 0.5, 1, -4.37114e-08, 0, 2.18557e-08, 0.5, 0.866025, -150, 50, 100)
+transform = Transform3D(8.15665e-08, 0.866025, 0.5, -1, 1.19422e-07, -4.37114e-08, -9.7566e-08, -0.5, 0.866025, -150, 50, 100)
 NextNode = NodePath("../../Boosts/boost_ring6")
 rotation_indicator = NodePath("../U-turn-1-2/MeshInstance3D")
 Type = 2
