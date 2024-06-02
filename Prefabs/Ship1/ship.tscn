@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://ey3gnh2bhlrb" path="res://art/Materials/Toon_shader_thin_outlines.tres" id="4_n8agw"]
 [ext_resource type="Script" path="res://Scripts/Controls/Turret_controller.gd" id="4_urwk6"]
 
-[sub_resource type="Image" id="Image_mirkg"]
+[sub_resource type="Image" id="Image_lvn7f"]
 data = {
 "data": PackedByteArray(255, 255, 255, 195, 195, 195, 88, 88, 88, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 242, 0, 179, 170, 0, 91, 86, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 208, 0, 0, 164, 0, 0, 119, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 0, 0, 182, 0, 0, 118, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 255, 0, 0, 153, 0, 0, 94, 0, 0, 61, 0, 168, 243, 0, 133, 193, 0, 90, 131, 255, 255, 255, 226, 123, 39, 168, 92, 29, 121, 66, 20, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 193, 0, 193, 130, 0, 130, 81, 0, 81, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 240, 227, 255, 200, 150, 234, 201, 148, 219, 179, 115, 193, 148, 75, 167, 122, 48, 147, 102, 28, 92, 58, 2),
 "format": "RGB8",
@@ -16,7 +16,7 @@ data = {
 
 [sub_resource type="ImageTexture" id="ImageTexture_48b1p"]
 resource_name = "Low_poly_textures"
-image = SubResource("Image_mirkg")
+image = SubResource("Image_lvn7f")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhnbg"]
 resource_name = "Material.001"
@@ -565,8 +565,9 @@ transform = Transform3D(1, 0, -1.77636e-15, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Camera2" type="Camera3D" parent="Turret/Turret_body_y/Turret_body_x"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, 0, 0, 1, 0, 0, 0.14)
+cull_mask = 1048573
 fov = 65.0
-near = 0.35
+near = 1.0
 
 [node name="AimAssist_Big" type="ShapeCast3D" parent="Turret/Turret_body_y/Turret_body_x/Camera2"]
 shape = SubResource("SphereShape3D_vfuy0")

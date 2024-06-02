@@ -11,7 +11,6 @@ config_version=5
 [application]
 
 config/name="Squash the Creeps (3D)"
-run/main_scene="res://Scenes/Scene1.tscn"
 config/features=PackedStringArray("4.1")
 config/icon="res://icon.png"
 
