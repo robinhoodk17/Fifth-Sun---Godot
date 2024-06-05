@@ -1,6 +1,15 @@
 res://Prefabs/Ship1/ship.tscn
 res://Scripts/Cameras/2P_SplitScreen.gd
 res://art/Materials/Toon_shader.tres
+res://addons/motion_blur/moblur_shader.gdshader
 res://art/Materials/Toon_shader_thin_outlines.tres
 res://Shaders/Day_clear_sky_material.tres
 res://Scenes/Track2.tscn
+res://Prefabs/Enemies/Basic_enemy.tscn
+res://addons/motion_blur/motion_blur.tscn
+res://addons/motion_blur/motion_blur.gd
+res://Scripts/Controls/zenith.gd
+res://Scripts/global_variables.gd
+res://Scripts/Controls/speedometer.gd
+res://Scripts/Controls/Turret_controller.gd
+res://Scripts/Non-player prefabs/AI/RouteNode.gd

@@ -1,3 +1,8 @@
+GPUParticles3D
+CPUParticles3D
+GPUParticlesCollisionBox3D
+NavigationAgent3D
+CharacterBody3D
 MeshInstance3D
 Node3D
 Node
@@ -17,7 +22,6 @@ ShapeCast3D
 CollisionShape2D
 Camera3D
 Sprite2D
-CharacterBody3D
 Generic6DOFJoint3D
 SliderJoint3D
 Control
@@ -26,7 +30,3 @@ TextureRect
 ReflectionProbe
 MeshInstance2D
 CharacterBody2D
-Area2D
-Button
-VBoxContainer
-MultiplayerSynchronizer

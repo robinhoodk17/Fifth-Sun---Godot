@@ -73,7 +73,7 @@ func _unhandled_input(event):
 		_rotation_input = -event.relative.normalized().x * controller_sensitivity * 1.25
 		_tilt_input =  -event.relative.normalized().y * controller_sensitivity * 1.25
 
-func _aim_assist(delta):
+func _aim_assist(_delta):
 	if Gunner != null:
 		if aim_assist_ray.is_colliding():
 			controller_strength = controller_sensitivity/(aim_Assist_Strength/10)
@@ -242,7 +242,10 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("Accelerate_%s" % [Gunner]):
 			time_shot_pressed = 0
 		if Input.is_action_pressed("Accelerate_%s" % [Gunner]):
-			_shoot()	
+			_shoot()
+		if _hookshot_state == Hookshot_States.anchored:
+			grappling_hook.look_at(hookshot_landing_point)	
+			grappling_hook.scale = Vector3 (1.0,1.0,position.distance_to(hookshot_landing_point))
 	else:
 		_AIShooter(delta)
 		if shootingHookshot:

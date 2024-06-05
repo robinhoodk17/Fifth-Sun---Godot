@@ -5,6 +5,8 @@ enum Gunnerbehaviors {normal, doNothing}
 var Pilot = null
 var Gunner = null
 
+var MotionBlurIntensity = .2
+var FOV = 100
 var pilotBehavior = Pilotbehaviors.normal
 var gunnerBehavior = Gunnerbehaviors.normal
 var Screen_ratio = 1.78

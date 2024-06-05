@@ -24,4 +24,5 @@ func _on_body_entered(body):
 		if hookshotTarget != null:
 			body.get_node("Turret/Turret_body_y").acquiring_target = true
 		if Type == RouteTypes.boost:
-			body.forward_speed += body.boost
+			body.boosting = true
+			body.hasBeenBoostingFor = 0.0

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn8mk1cgcgcl"]
+
+[ext_resource type="Script" path="res://Scripts/Non-player prefabs/AI/Enemy.gd" id="1_5m7kd"]
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_5m7kd")
