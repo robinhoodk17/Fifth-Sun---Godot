@@ -8,7 +8,7 @@ func _ready():
 	text = $Speedometer/Node2D2/RichTextLabel
 	ship = $"../../../../../Ship"
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	var speed = ship.velocity.length() 
 	hand.rotation_degrees = speed + 67
-	text.text = str(floor(speed))
+	text.text = str(floor(speed*7.2))

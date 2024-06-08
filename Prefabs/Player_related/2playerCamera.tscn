@@ -1,0 +1,104 @@
+[gd_scene load_steps=7 format=3 uid="uid://he7ivklp1ig8"]
+
+[ext_resource type="Script" path="res://Scripts/Cameras/2P_SplitScreen.gd" id="1_i86uw"]
+[ext_resource type="Script" path="res://Scripts/Controls/speedometer.gd" id="2_ciwyk"]
+[ext_resource type="Texture2D" uid="uid://mboqxscd4faw" path="res://art/Sprites/speedometer.png" id="3_j4bl7"]
+[ext_resource type="Texture2D" uid="uid://bosbcn4jsochj" path="res://art/Sprites/Speedom-hand.png" id="4_0omqy"]
+[ext_resource type="Texture2D" uid="uid://dvvoftavsla7y" path="res://art/Sprites/Red dot.png" id="5_pjndb"]
+[ext_resource type="Texture2D" uid="uid://dbaa33ud0yxvr" path="res://art/Sprites/Outer aim.png" id="6_x1knn"]
+
+[node name="GridContainer" type="GridContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+script = ExtResource("1_i86uw")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewportContainer/SubViewport"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="UI pilot" type="Control" parent="SubViewportContainer/SubViewport/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_ciwyk")
+metadata/_edit_use_anchors_ = true
+
+[node name="Speedometer" type="Node2D" parent="SubViewportContainer/SubViewport/MarginContainer/UI pilot"]
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_j4bl7")
+
+[node name="Node2D" type="Node2D" parent="SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer"]
+rotation = 1.15541
+
+[node name="Hand" type="Sprite2D" parent="SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer/Node2D"]
+position = Vector2(7.2, 25)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_0omqy")
+
+[node name="Node2D2" type="Node2D" parent="SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer"]
+position = Vector2(-14.435, 16.39)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer/Node2D2"]
+offset_right = 40.0
+offset_bottom = 40.0
+text = "000"
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="UI_turret" type="Control" parent="SubViewportContainer2/SubViewport"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Aim" type="Node2D" parent="SubViewportContainer2/SubViewport/UI_turret"]
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer2/SubViewport/UI_turret/Aim"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_pjndb")
+
+[node name="OuterAim" type="Sprite2D" parent="SubViewportContainer2/SubViewport/UI_turret/Aim"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("6_x1knn")

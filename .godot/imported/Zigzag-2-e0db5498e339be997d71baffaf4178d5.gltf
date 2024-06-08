@@ -1,0 +1,283 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v3.3.32",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "extras" : {
+                "automirror" : {
+                    "axis" : 2,
+                    "apply_mirror" : 0,
+                    "show_on_cage" : 0,
+                    "toggle_edit" : 1,
+                    "cut" : 1,
+                    "orientation" : 1
+                },
+                "scatter_properties" : {}
+            },
+            "name" : "Scene",
+            "nodes" : [
+                0,
+                1
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "extras" : {
+                "ant_landscape" : {
+                    "ant_terrain_name" : "Landscape",
+                    "at_cursor" : 1,
+                    "smooth_mesh" : 1,
+                    "tri_face" : 0,
+                    "sphere_mesh" : 0,
+                    "land_material" : "",
+                    "water_material" : "",
+                    "texture_block" : "",
+                    "subdivision_x" : 128,
+                    "subdivision_y" : 128,
+                    "mesh_size_x" : 2.0,
+                    "mesh_size_y" : 2.0,
+                    "mesh_size" : 2.0,
+                    "random_seed" : 7,
+                    "noise_offset_x" : 0.0,
+                    "noise_offset_y" : 0.0,
+                    "noise_offset_z" : 0.0,
+                    "noise_size_x" : 1.0,
+                    "noise_size_y" : 1.0,
+                    "noise_size_z" : 1.0,
+                    "noise_size" : 1.0,
+                    "noise_type" : 7,
+                    "basis_type" : 0,
+                    "vl_basis_type" : 1,
+                    "distortion" : 1.5,
+                    "hard_noise" : 0,
+                    "noise_depth" : 8,
+                    "amplitude" : 0.5,
+                    "frequency" : 1.7999999523162842,
+                    "dimension" : 1.0,
+                    "lacunarity" : 2.0,
+                    "offset" : 1.0,
+                    "gain" : 2.0,
+                    "marble_bias" : 2,
+                    "marble_sharp" : 4,
+                    "marble_shape" : 0,
+                    "height" : 0.800000011920929,
+                    "height_invert" : 0,
+                    "height_offset" : 0.0,
+                    "maximum" : 2.0,
+                    "minimum" : 0.0,
+                    "edge_falloff" : 3,
+                    "edge_level" : 0.0,
+                    "falloff_x" : 1.7999999523162842,
+                    "falloff_y" : 1.5,
+                    "strata_type" : 0,
+                    "strata" : 5.0,
+                    "water_plane" : 0,
+                    "water_level" : 0.009999999776482582,
+                    "vert_group" : "",
+                    "remove_double" : 0,
+                    "fx_mixfactor" : 0.0,
+                    "fx_mix_mode" : 1,
+                    "fx_type" : 15,
+                    "fx_bias" : 0,
+                    "fx_turb" : 0.5,
+                    "fx_depth" : 1,
+                    "fx_frequency" : 1.5,
+                    "fx_amplitude" : 0.3799999952316284,
+                    "fx_size" : 1.1500000953674316,
+                    "fx_loc_x" : -1.0,
+                    "fx_loc_y" : 1.0,
+                    "fx_height" : 1.0,
+                    "fx_offset" : 1.0,
+                    "fx_invert" : 0
+                }
+            },
+            "mesh" : 0,
+            "name" : "Landscape-col",
+            "scale" : [
+                20,
+                60,
+                20
+            ],
+            "translation" : [
+                -30.023910522460938,
+                0,
+                -0.24563054740428925
+            ]
+        },
+        {
+            "extras" : {
+                "ant_landscape" : {}
+            },
+            "mesh" : 1,
+            "name" : "Plane-col",
+            "scale" : [
+                110,
+                185,
+                90
+            ],
+            "translation" : [
+                -21.466197967529297,
+                0,
+                -0.24563099443912506
+            ]
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Landscape.001",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1
+                    },
+                    "indices" : 2
+                }
+            ]
+        },
+        {
+            "name" : "Plane.008",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 3,
+                        "NORMAL" : 4,
+                        "TANGENT" : 5,
+                        "TEXCOORD_0" : 6
+                    },
+                    "indices" : 7
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 312,
+            "max" : [
+                0.8133055567741394,
+                1.6649190187454224,
+                0.82473224401474
+            ],
+            "min" : [
+                -0.8690841794013977,
+                0.008457724936306477,
+                -0.8874913454055786
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 312,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5123,
+            "count" : 312,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5126,
+            "count" : 1961,
+            "max" : [
+                1.021902084350586,
+                0.40657296776771545,
+                1.3239189386367798
+            ],
+            "min" : [
+                -1.0009275674819946,
+                -0.0668477788567543,
+                -1.4356215000152588
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5126,
+            "count" : 1961,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5126,
+            "count" : 1961,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 6,
+            "componentType" : 5126,
+            "count" : 1961,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 7,
+            "componentType" : 5123,
+            "count" : 1995,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 3744,
+            "byteOffset" : 0,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 3744,
+            "byteOffset" : 3744,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 624,
+            "byteOffset" : 7488,
+            "target" : 34963
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 23532,
+            "byteOffset" : 8112,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 23532,
+            "byteOffset" : 31644,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 31376,
+            "byteOffset" : 55176,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 15688,
+            "byteOffset" : 86552,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 3990,
+            "byteOffset" : 102240,
+            "target" : 34963
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 106232,
+            "uri" : "Zigzag-2-e0db5498e339be997d71baffaf4178d5.bin"
+        }
+    ]
+}

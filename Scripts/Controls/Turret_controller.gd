@@ -31,11 +31,11 @@ var _mouse_input : bool = false
 var _rotation_input : float
 var _tilt_input : float
 var aim_DistancetoTarget : float = 1
-var autoGunner : bool = false
 var controller_strength
 var gravity_well_counter = 0
 var aimAssist_Point
 var current_item = null
+#hookshot variables
 enum Hookshot_States {ready, flying, anchored, retracting}
 var _hookshot_state = Hookshot_States.ready
 var hookshot_landing_point
@@ -43,8 +43,11 @@ var hookshot_length
 var hookshot_distance_flown : float = 0.0
 var time_hookshot_pressed : int = 0
 var time_shot_pressed : int = 0
-
-
+#AI variables
+var autoGunner : bool = false
+var autoGunnerHookTarget = null
+var shootingHookshot = false
+var acquiring_target = false
 
 func _ready():
 	controller_strength = controller_sensitivity
@@ -67,10 +70,10 @@ func _ready():
 func _unhandled_input(event):
 	_mouse_input = event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
 	if _mouse_input and Gunner == 2:
-		_rotation_input = -event.relative.normalized().x * controller_sensitivity * 1.25
-		_tilt_input =  -event.relative.normalized().y * controller_sensitivity * 1.25
+		_rotation_input = -event.relative.normalized().x * controller_sensitivity * 2
+		_tilt_input =  -event.relative.normalized().y * controller_sensitivity * 2
 
-func _aim_assist(delta):
+func _aim_assist(_delta):
 	if Gunner != null:
 		if aim_assist_ray.is_colliding():
 			controller_strength = controller_sensitivity/(aim_Assist_Strength/10)
@@ -144,7 +147,6 @@ func _shoot_hookshot():
 			
 			turret_body_x.rotate_x(deg_to_rad(x_angle))
 			turret_body_x.transform.basis = turret_body_x.transform.basis.orthonormalized()
-
 		
 		#handle hookshot shot
 		if ray.is_colliding():
@@ -155,7 +157,7 @@ func _shoot_hookshot():
 			hookshot_landing_point = ray.get_collision_point()
 			Ship_body.hookshot_landing_point = hookshot_landing_point
 			hookshot_length = Ship_body.global_position.distance_to(hookshot_landing_point)
-			Ship_body.hookshot_length = hookshot_length
+			#Ship_body.hookshot_length = hookshot_length
 			_hookshot_state = Hookshot_States.flying
 		else:
 			pass
@@ -165,7 +167,7 @@ func _handle_hookshot_flight():
 		if hookshot_distance_flown >= hookshot_length:
 			_hookshot_state = Hookshot_States.anchored
 		else:
-			hookshot_distance_flown += hookshot_length/30
+			hookshot_distance_flown += hookshot_length/10
 			grappling_hook.look_at(hookshot_landing_point)
 			grappling_hook.scale = Vector3 (1.0,1.0,hookshot_distance_flown)
 	
@@ -174,12 +176,14 @@ func _handle_hookshot_flight():
 		grappling_hook.look_at(hookshot_landing_point)
 func _retract_hookshot():
 	Ship_body.hooked = false
+	if _hookshot_state == Hookshot_States.flying:
+		_hookshot_state = Hookshot_States.retracting
 	if _hookshot_state == Hookshot_States.retracting:
 		if hookshot_distance_flown <= 1:
 			_hookshot_state = Hookshot_States.ready
 			grappling_hook.visible = false
 		else:
-			hookshot_distance_flown -= hookshot_length/50
+			hookshot_distance_flown -= hookshot_length/30
 			grappling_hook.scale = Vector3 (1.0,1.0,hookshot_distance_flown)
 			
 		
@@ -187,11 +191,37 @@ func _retract_hookshot():
 	if _hookshot_state == Hookshot_States.anchored:
 		Ship_body.forward_speed += (Ship_body.boost/3)
 		_hookshot_state = Hookshot_States.retracting
-	
-	if _hookshot_state == Hookshot_States.flying:
-		_hookshot_state = Hookshot_States.retracting
-	
+func _AIShooter(delta):
+	if autoGunnerHookTarget != null:
+		var targetPosition = autoGunnerHookTarget.global_position
+		if !aim_assist_ray.is_colliding() and acquiring_target:
+			print (str("we are searching for target",autoGunnerHookTarget))
+			var look_atMatrix = turret_body_x.global_transform.looking_at(targetPosition, turret_body_x.global_transform.basis.y)
+			controller_strength = 6
+			var y_angle = 1
+			var x_angle = 1
+			if(look_atMatrix.basis.tdotx(turret_body_x.global_transform.basis.z) > 0):
+				y_angle = -1
+			if(look_atMatrix.basis.tdoty(turret_body_x.global_transform.basis.z) < 0):
+				x_angle = -1
+			
+			turret_body_y.rotate_y(deg_to_rad(delta * controller_strength * y_angle * 100))
+			turret_body_y.transform.basis = turret_body_y.transform.basis.orthonormalized()
+			
+			turret_body_x.rotate_x(deg_to_rad(delta * controller_strength * x_angle * 100))
+			turret_body_x.transform.basis = turret_body_x.transform.basis.orthonormalized()
+		elif autoGunnerHookTarget != null:
+			shootingHookshot = true
+			acquiring_target = false
+			time_hookshot_pressed = 0
+			print (str("we are shooting",autoGunnerHookTarget))
+	else:
+		shootingHookshot = false
+	#print(str(shootingHookshot,_hookshot_state) )
 func _physics_process(delta):
+	time_hookshot_pressed += 1
+	time_shot_pressed += 1
+	gravity_well_counter -= 1
 	#Gunner is assigned in the global_variables during the character select screen and also is player 2 by default
 	if Gunner != null:
 		_aim_assist(delta)
@@ -199,11 +229,6 @@ func _physics_process(delta):
 		_tilt_input = 0
 		move_and_slide()
 		_gravity_well(delta)
-	
-	
-		time_hookshot_pressed += 1
-		time_shot_pressed += 1
-		gravity_well_counter -= 1
 		if Input.is_action_just_pressed("Brake_%s" % [Gunner]):
 			time_hookshot_pressed = 0
 		if Input.is_action_pressed("Brake_%s" % [Gunner]):
@@ -218,5 +243,15 @@ func _physics_process(delta):
 			time_shot_pressed = 0
 		if Input.is_action_pressed("Accelerate_%s" % [Gunner]):
 			_shoot()
-		
-
+		if _hookshot_state == Hookshot_States.anchored:
+			grappling_hook.look_at(hookshot_landing_point)	
+			grappling_hook.scale = Vector3 (1.0,1.0,position.distance_to(hookshot_landing_point))
+	else:
+		_AIShooter(delta)
+		if shootingHookshot:
+			if(_hookshot_state == Hookshot_States.ready):
+				_shoot_hookshot()
+			else:
+				_handle_hookshot_flight()
+		elif _hookshot_state != Hookshot_States.ready:
+			_retract_hookshot()

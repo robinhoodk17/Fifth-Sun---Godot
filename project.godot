@@ -11,13 +11,16 @@ config_version=5
 [application]
 
 config/name="Squash the Creeps (3D)"
-run/main_scene="res://Scenes/Scene1.tscn"
-config/features=PackedStringArray("4.1")
+config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
 
 [autoload]
 
 GlobalVariables="*res://Scripts/global_variables.gd"
+
+[dotnet]
+
+project/assembly_name="Squash the Creeps (3D)"
 
 [editor]
 
