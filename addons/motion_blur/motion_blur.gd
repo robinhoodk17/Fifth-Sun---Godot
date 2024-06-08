@@ -23,7 +23,7 @@ func _physics_process(_delta):
 	var ang_vel = (cam_rot_diff * 2.0) * cam_rot_conj; 
 	ang_vel = Vector3(ang_vel.x, ang_vel.y, ang_vel.z) # Convert Quat to Vector3
 	
-	cam.fov = clamp(GlobalVariables.FOV +  motionBlurTarget.forward_speed/35,GlobalVariables.FOV,GlobalVariables.FOV*1.2)
+	cam.fov = clamp(GlobalVariables.FOV +  motionBlurTarget.forward_speed/15,GlobalVariables.FOV,GlobalVariables.FOV*1.5)
 	if motionBlurTarget.boosting:
 		mat.set_shader_parameter("intensity",  (GlobalVariables.MotionBlurIntensity*2))
 	else:

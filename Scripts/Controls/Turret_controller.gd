@@ -70,8 +70,8 @@ func _ready():
 func _unhandled_input(event):
 	_mouse_input = event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
 	if _mouse_input and Gunner == 2:
-		_rotation_input = -event.relative.normalized().x * controller_sensitivity * 1.25
-		_tilt_input =  -event.relative.normalized().y * controller_sensitivity * 1.25
+		_rotation_input = -event.relative.normalized().x * controller_sensitivity * 2
+		_tilt_input =  -event.relative.normalized().y * controller_sensitivity * 2
 
 func _aim_assist(_delta):
 	if Gunner != null:

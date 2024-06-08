@@ -5,8 +5,10 @@ class_name Ship
 @export var Camera : Marker3D
 ##The 3D node labeled "Turret"
 @export var Turret : Node3D
-##The root node
-@export var BodyCollider : CollisionShape3D
+##The node with all the colliders
+@export var BodyCollider : Array[CollisionShape3D]
+##The node with all the Meshes
+@export var theMesh : Node3D
 @export_group ("VFX and audio")
 @export var motionBlur : Node3D
 
@@ -59,6 +61,7 @@ var hookshot_landing_point
 var held_Item = null
 var draft : bool = true
 
+
 func _ready():
 	if Pilot == 2:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -92,8 +95,8 @@ func move_turret_and_camera(delta):
 		lerpSpeed = .2
 		Camera.position = Camera.position.lerp(position,lerpSpeed)
 	else:
-		if lerpSpeed < .4:
-			lerpSpeed = lerp(lerpSpeed,.4,.5*delta)
+		if lerpSpeed < .6:
+			lerpSpeed = lerp(lerpSpeed,.6,.5*delta)
 		Camera.position = Camera.position.lerp(position,lerpSpeed)
 	var a = Quaternion(transform.basis.orthonormalized())
 	var b = Quaternion(Camera.transform.basis.orthonormalized())
@@ -102,7 +105,9 @@ func move_turret_and_camera(delta):
 
 func _normal_movement(delta):
 	if(collision_time > collision_suspension_time and !is_skidding):
-		transform.basis = transform.basis.rotated(transform.basis.z, roll_input * roll_speed * delta)
+		theMesh.transform.basis = theMesh.transform.basis.rotated(theMesh.transform.basis.z, roll_input * roll_speed * delta)
+		for i in BodyCollider:
+			i.transform.basis = i.transform.basis.rotated(i.transform.basis.z, roll_input * roll_speed * delta)
 		transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
 		transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
 		transform.basis = transform.basis.orthonormalized()

@@ -1,10 +1,11 @@
+Node3D
+Skeleton3D
+MeshInstance3D
 GPUParticles3D
 CPUParticles3D
 GPUParticlesCollisionBox3D
 NavigationAgent3D
 CharacterBody3D
-MeshInstance3D
-Node3D
 Node
 RigidBody3D
 Marker3D
@@ -29,4 +30,3 @@ ColorRect
 TextureRect
 ReflectionProbe
 MeshInstance2D
-CharacterBody2D
