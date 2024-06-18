@@ -5,7 +5,7 @@ var cam_rot_prev = Quaternion()
 @export var motionBlurTarget : Node3D
 @onready var cam : Camera3D = get_parent()
 
-func _physics_process(_delta):
+func _process(_delta):
 	
 	#OS.delay_msec(30)
 	

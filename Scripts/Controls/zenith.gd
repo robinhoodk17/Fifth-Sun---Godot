@@ -20,6 +20,7 @@ class_name Ship
 @export var roll_speed : float = 1.2
 @export var yaw_speed : float = 2.0
 @export var pitch_speed : float = 2.0
+@export var strafe_speed : float = 0.5
 @export var boostTime : float = 2.0
 @export_subgroup("Ship responsiveness")
 @export var pitch_response : float = 1.2
@@ -40,7 +41,7 @@ var is_accelerating : bool = false
 var is_braking : bool = false
 var forward_speed : float = 0.0
 """collision variables"""
-var collision_suspension_time = 40
+var collision_suspension_time = 1.6
 var collision_time = collision_suspension_time+1
 var is_skidding = false
 var minimum_speed_after_collision = .25
@@ -51,7 +52,6 @@ var yaw_input : float = 0.0
 var roll_input : float = 0.0
 var _mouse_input : bool = false
 var lerpSpeed = .2
-var look_at : Vector3
 var hooked : bool = false
 var boosting : bool = false
 var hasBeenBoostingFor : float = 0.0
@@ -60,6 +60,7 @@ var hookshot_length
 var hookshot_landing_point
 var held_Item = null
 var draft : bool = true
+var strafing : float = 0.0
 
 
 func _ready():
@@ -80,6 +81,7 @@ func get_input(delta):
 		pitch_input = lerp(pitch_input, Input.get_axis("Go_down_%s" % [Pilot],"Go_up_%s" % [Pilot]) * Controller_Sensitivity, pitch_response * delta)
 		roll_input = lerp(roll_input, Input.get_axis("Roll_right_%s" % [Pilot],"Roll_left_%s" % [Pilot]) * Controller_Sensitivity, roll_response * delta)
 		yaw_input = lerp(yaw_input, Input.get_axis("Go_right_%s" % [Pilot], "Go_left_%s" % [Pilot]) * Controller_Sensitivity, yaw_response * delta)
+		strafing = lerp(strafing, Input.get_axis("Strafe_right_%s" % [Pilot], "Strafe_left_%s" % [Pilot]) * Controller_Sensitivity, strafe_speed * delta)
 		if Input.is_action_pressed("Accelerate_%s" % [Pilot]):
 			is_accelerating = true
 		if Input.is_action_pressed("Brake_%s" % [Pilot]):
@@ -88,7 +90,14 @@ func get_input(delta):
 			if held_Item == "boost":
 				held_Item = null
 				forward_speed += 10
-
+func rotateShip(delta):
+	theMesh.transform.basis = theMesh.transform.basis.rotated(theMesh.transform.basis.z, roll_input * roll_speed * delta)
+	for i in BodyCollider:
+		i.transform.basis = i.transform.basis.rotated(i.transform.basis.z, roll_input * roll_speed * delta)
+	transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
+	transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
+	transform.basis = transform.basis.orthonormalized()
+	velocity = -transform.basis.z * forward_speed
 func move_turret_and_camera(delta):
 	Turret.position = position
 	if boosting:
@@ -105,19 +114,11 @@ func move_turret_and_camera(delta):
 
 func _normal_movement(delta):
 	if(collision_time > collision_suspension_time and !is_skidding):
-		theMesh.transform.basis = theMesh.transform.basis.rotated(theMesh.transform.basis.z, roll_input * roll_speed * delta)
-		for i in BodyCollider:
-			i.transform.basis = i.transform.basis.rotated(i.transform.basis.z, roll_input * roll_speed * delta)
-		transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
-		transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
-		transform.basis = transform.basis.orthonormalized()
+		rotateShip(delta)
 		velocity = -transform.basis.z * forward_speed
 	else:
 		if is_skidding:
-			transform.basis = transform.basis.rotated(transform.basis.z, roll_input * roll_speed * delta)
-			transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
-			transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
-			transform.basis = transform.basis.orthonormalized()
+			rotateShip(delta)
 			if(velocity.length() < max_speed):
 				velocity = velocity - transform.basis.z * acceleration*delta
 		if !is_skidding:
@@ -125,19 +126,12 @@ func _normal_movement(delta):
 			var look_atMatrix = global_transform.looking_at(aimingAt, global_transform.basis.y)
 			global_transform.basis.y=lerp(global_transform.basis.y, look_atMatrix.basis.y, delta*10)
 			global_transform.basis.x=lerp(global_transform.basis.x, look_atMatrix.basis.x, delta*10)
-			global_transform.basis.z=lerp(global_transform.basis.z, look_atMatrix.basis.z, delta*10)
 			transform.basis = transform.basis.orthonormalized()
-			transform.basis = transform.basis.rotated(transform.basis.z, roll_input * roll_speed * delta)
-			transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
-			transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
-			transform.basis = transform.basis.orthonormalized()
+			rotateShip(delta)
 			velocity = velocity.normalized() * forward_speed
 		
 func _hooked_movement(delta):
-	transform.basis = transform.basis.rotated(transform.basis.z, roll_input * roll_speed * delta)
-	transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
-	transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
-	transform.basis = transform.basis.orthonormalized()
+	rotateShip(delta)
 	velocity = -transform.basis.z * forward_speed
 	#this is only useful if we want to start adding force if we are too far apart from the landing point
 	#var distance_to_hook = position.distance_to(hookshot_landing_point)
@@ -166,7 +160,7 @@ func autoPilot(delta):
 		var frontorBack : float = dirToMovePosition.dot(global_transform.basis.z)
 		var leftorRight : float = dirToMovePosition.dot(global_transform.basis.x)
 		var upOrDown : float = dirToMovePosition.dot(global_transform.basis.y) * (-1.0)
-		var Roll : float = (AIPilotNode.basis.y.dot(global_transform.basis.y)-1)*(-1.0)
+		var Roll : float = (AIPilotNode.basis.y.dot(theMesh.global_transform.basis.y)-1)*(-1.0)
 		
 		yaw_input = lerp(yaw_input,clamp((leftorRight),-1.0,1.0),yaw_response)
 		pitch_input = lerp(pitch_input,clamp((upOrDown),-1.0,1.0),pitch_response)
@@ -178,13 +172,15 @@ func autoPilot(delta):
 		else: 
 			is_accelerating = true
 			is_braking = false
+		if is_skidding:
+			is_accelerating = false
 """
 forward speed also gets changed by the RouteNode script on entering if it is a booster node
 and by the TUrret_controller script when the hookshot gets unhooked
 """
 func _physics_process(delta):
 	#here we record the previous 5 speeds. We increase the speed_array_counter at the end of physiscs process
-	collision_time += 1
+	collision_time += 1 * delta
 	if draft:
 		forward_speed -= 2 * delta
 	is_accelerating = false
@@ -209,6 +205,7 @@ func _physics_process(delta):
 		_hooked_movement(delta)
 	
 	forward_speed = velocity.length()
+	global_position -= transform.basis.x*strafing
 	var collisions = move_and_collide(velocity*delta)
 	if collisions:
 		collide_and_slide(collisions, delta)
@@ -217,7 +214,8 @@ func _physics_process(delta):
 	if collision_time > collision_suspension_time/2:
 		if !is_accelerating:
 			is_skidding = false
-	
+	if collision_time > collision_suspension_time:
+		is_skidding = false
 	doVFX(delta)
 
 func doVFX(_delta):
@@ -235,13 +233,17 @@ func find_largest_dict_key(dict):
 			key = i
 	return key
 func collide_and_slide(currentcollision : KinematicCollision3D, _delta):
+	if collision_time > collision_suspension_time/4:
+		strafing = -strafing
 	collision_time = 0
 	var collision_normal = currentcollision.get_normal()
-	var velocity_loss = (1 - abs(collision_normal.normalized().dot(velocity.normalized())))*.95
-	velocity_loss = clamp(velocity_loss,minimum_speed_after_collision,.95)
-	if(velocity_loss <= minimum_speed_after_collision):
-		is_skidding = true 
-	velocity = velocity.bounce(collision_normal) * velocity_loss
+	velocity = velocity.bounce(collision_normal) * .95
+	is_skidding = true
+	#var velocity_loss = (1 - abs(collision_normal.normalized().dot(velocity.normalized())))*.95
+	#velocity_loss = clamp(velocity_loss,minimum_speed_after_collision,.95)
+	#if(velocity_loss <= minimum_speed_after_collision):
+	#	is_skidding = true 
+	#velocity = velocity.bounce(collision_normal) * velocity_loss
 	if hooked:
 		hooked = false
 	Turret.get_node("Turret_body_y")._retract_hookshot()

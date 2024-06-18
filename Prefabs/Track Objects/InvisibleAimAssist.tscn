@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://begn8j1et4l3v"]
 
-[ext_resource type="Script" path="res://Scripts/Non-player prefabs/InvisibleAimAssist.gd" id="1_12luv"]
+[ext_resource type="Script" path="res://Scripts/Non-player prefabs/Track/InvisibleAimAssist.gd" id="1_12luv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c6td3"]
 size = Vector3(20, 20, 20)

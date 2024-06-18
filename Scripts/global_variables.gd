@@ -3,9 +3,9 @@ enum Pilotbehaviors {normal, straight}
 enum Gunnerbehaviors {normal, doNothing}
 
 var Pilot = 1
-var Gunner = null
+var Gunner = 2
 
-var MotionBlurIntensity = .2
+var MotionBlurIntensity = .1
 var FOV = 100
 var pilotBehavior = Pilotbehaviors.normal
 var gunnerBehavior = Gunnerbehaviors.normal

@@ -195,7 +195,6 @@ func _AIShooter(delta):
 	if autoGunnerHookTarget != null:
 		var targetPosition = autoGunnerHookTarget.global_position
 		if !aim_assist_ray.is_colliding() and acquiring_target:
-			print (str("we are searching for target",autoGunnerHookTarget))
 			var look_atMatrix = turret_body_x.global_transform.looking_at(targetPosition, turret_body_x.global_transform.basis.y)
 			controller_strength = 6
 			var y_angle = 1
@@ -214,7 +213,6 @@ func _AIShooter(delta):
 			shootingHookshot = true
 			acquiring_target = false
 			time_hookshot_pressed = 0
-			print (str("we are shooting",autoGunnerHookTarget))
 	else:
 		shootingHookshot = false
 	#print(str(shootingHookshot,_hookshot_state) )
