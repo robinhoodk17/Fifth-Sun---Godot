@@ -1,15 +1,33 @@
-[gd_scene load_steps=15 format=3 uid="uid://bhu7nafouqcb0"]
+[gd_scene load_steps=22 format=3 uid="uid://bhu7nafouqcb0"]
 
 [ext_resource type="PackedScene" uid="uid://he7ivklp1ig8" path="res://Prefabs/Player_related/2playerCamera.tscn" id="1_f83m5"]
 [ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="2_ci54k"]
 [ext_resource type="PackedScene" uid="uid://bk7st5tijr6ni" path="res://Prefabs/Track Objects/boost_ring.tscn" id="3_w4duq"]
 [ext_resource type="Script" path="res://Scripts/Non-player prefabs/Make_invisible.gd" id="4_3ee8s"]
+[ext_resource type="Script" path="res://Scripts/Non-player prefabs/AI/RouteNode.gd" id="4_cai6f"]
 [ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="4_vdksf"]
+[ext_resource type="PackedScene" uid="uid://bb4dbf6hnngj0" path="res://art/3D/Track objects/boost_ring.glb" id="5_12qi4"]
 [ext_resource type="Material" uid="uid://c5a054dts7q12" path="res://Shaders/Day_clear_sky_material.tres" id="5_co2rx"]
 [ext_resource type="PackedScene" uid="uid://b2irm1yejya5r" path="res://art/3D/Track objects/U-turn.glb" id="5_dkepq"]
 [ext_resource type="PackedScene" uid="uid://begn8j1et4l3v" path="res://Prefabs/Track Objects/InvisibleAimAssist.tscn" id="6_ke5su"]
 [ext_resource type="PackedScene" uid="uid://glivbfkecfv4" path="res://Prefabs/Track Objects/EnemySpawner.tscn" id="8_oywqn"]
 [ext_resource type="PackedScene" uid="uid://dn8mk1cgcgcl" path="res://Prefabs/Enemies/Basic_enemy.tscn" id="9_b1ewu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hx20d"]
+size = Vector3(15, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_00nlv"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_krym8"]
+height = 1.0
+radius = 8.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_sxnqm"]
+size = Vector3(50, 50, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jofon"]
+size = Vector3(120, 40, 1)
 
 [sub_resource type="Sky" id="Sky_cli5s"]
 sky_material = ExtResource("5_co2rx")
@@ -31,34 +49,68 @@ size = Vector2(1000, 3000)
 
 [node name="GridContainer" parent="." instance=ExtResource("1_f83m5")]
 
-[node name="Ship" parent="." node_paths=PackedStringArray("BodyCollider") instance=ExtResource("2_ci54k")]
+[node name="Ship" parent="." instance=ExtResource("2_ci54k")]
 transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 30, 5, 400)
-BodyCollider = []
-hookshot_strength = 0.001
 
 [node name="Track_objects" type="Node3D" parent="."]
 
 [node name="Boosts" type="Node3D" parent="Track_objects"]
 
 [node name="boost_ring1" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
-transform = Transform3D(-2.18557e-07, -1, 0, 1, -2.18557e-07, 0, 0, 0, 1, 30, 10, 95)
+transform = Transform3D(-2.18557e-07, -1, 0, 1, -2.18557e-07, 0, 0, 0, 1, 12.5, 5, 95)
 NextNode = NodePath("../boost_ring2")
 
 [node name="boost_ring2" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 30, 30, 20)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 12.5, 30, 20)
 NextNode = NodePath("../3")
 
 [node name="3" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 30, 40, -45)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 12.5, 5, -45)
 NextNode = NodePath("../boost_ring4")
 
-[node name="boost_ring4" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode", "hookshotTarget") instance=ExtResource("3_w4duq")]
-transform = Transform3D(-1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 30, 50, -125)
+[node name="boost_ring4" type="Area3D" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode", "rotation_indicator", "child", "hookshotTarget")]
+transform = Transform3D(-1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 12.5, 30, -125)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_cai6f")
 NextNode = NodePath("../../Route_nodes/U-turn-1")
+rotation_indicator = NodePath("Rotation_indicator")
+Type = 0
+child = NodePath("Route_node")
 hookshotTarget = NodePath("../../AimAssists/U-turn-1")
 
+[node name="Rotation_indicator" type="Node3D" parent="Track_objects/Boosts/boost_ring4"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Track_objects/Boosts/boost_ring4/Rotation_indicator"]
+mesh = SubResource("BoxMesh_hx20d")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Track_objects/Boosts/boost_ring4/Rotation_indicator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57405, 0)
+mesh = SubResource("BoxMesh_00nlv")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Track_objects/Boosts/boost_ring4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_krym8")
+
+[node name="boost_ring" parent="Track_objects/Boosts/boost_ring4" instance=ExtResource("5_12qi4")]
+
+[node name="Route_node" type="Area3D" parent="Track_objects/Boosts/boost_ring4" node_paths=PackedStringArray("rotation_indicator")]
+visible = false
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_cai6f")
+rotation_indicator = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Track_objects/Boosts/boost_ring4/Route_node"]
+mesh = SubResource("BoxMesh_sxnqm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Track_objects/Boosts/boost_ring4/Route_node"]
+shape = SubResource("BoxShape3D_jofon")
+
 [node name="boost_ring5" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode", "hookshotTarget") instance=ExtResource("3_w4duq")]
-transform = Transform3D(3.0598e-07, 1, 0, -1, 3.0598e-07, 0, 0, 0, 1, -56, 50, 35)
+transform = Transform3D(1, -3.49691e-07, 0, 3.49691e-07, 1, 0, 0, 0, 1, -56, 30, 35)
 NextNode = NodePath("../../Route_nodes/U-turn-2")
 hookshotTarget = NodePath("../../AimAssists/U-turn-2")
 
@@ -74,15 +126,13 @@ transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 30, 5, 300
 NextNode = NodePath("../../Boosts/boost_ring1")
 
 [node name="U-turn-1" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("4_vdksf")]
-transform = Transform3D(-7.18085e-08, 0.642787, 0.766044, 1, 1.3811e-08, 8.21505e-08, 4.22254e-08, 0.766044, -0.642787, -36, 50, -160)
+transform = Transform3D(-7.18085e-08, 0.642787, 0.766044, 1, 1.3811e-08, 8.21505e-08, 4.22254e-08, 0.766044, -0.642787, -36, 30, -160)
 NextNode = NodePath("../../Boosts/boost_ring5")
-Type = 2
 
 [node name="U-turn-2" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode", "rotation_indicator") instance=ExtResource("4_vdksf")]
-transform = Transform3D(-8.20585e-08, -0.866025, 0.5, 1, -7.42519e-08, 7.40661e-08, -8.17893e-08, 0.5, 0.866025, -127, 50, 60)
+transform = Transform3D(-8.20585e-08, -0.866025, 0.5, 1, -7.42519e-08, 7.40661e-08, -8.17893e-08, 0.5, 0.866025, -127, 30, 60)
 NextNode = NodePath("../../Boosts/boost_ring6")
 rotation_indicator = NodePath("../U-turn-1/MeshInstance3D")
-Type = 2
 
 [node name="Track" type="Node3D" parent="Track_objects"]
 
@@ -93,10 +143,10 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 5
 script = ExtResource("4_3ee8s")
 
 [node name="U-turn-1" parent="Track_objects/AimAssists" instance=ExtResource("6_ke5su")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 50, -115)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 30, -115)
 
 [node name="U-turn-2" parent="Track_objects/AimAssists" node_paths=PackedStringArray("mesh") instance=ExtResource("6_ke5su")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80, 50, 35)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80, 30, 35)
 mesh = NodePath("../U-turn-1/MeshInstance3D")
 
 [node name="Enemies_Obstacles" type="Node3D" parent="Track_objects"]
@@ -135,3 +185,8 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5683, 0.5, 419.618)
 acceleration = 20.0
 target = NodePath("../Ship")
+
+[connection signal="body_entered" from="Track_objects/Boosts/boost_ring4" to="Track_objects/Boosts/boost_ring4" method="_on_body_entered"]
+[connection signal="body_entered" from="Track_objects/Boosts/boost_ring4/Route_node" to="Track_objects/Boosts/boost_ring4/Route_node" method="_on_body_entered"]
+
+[editable path="Track_objects/Boosts/boost_ring4/boost_ring"]

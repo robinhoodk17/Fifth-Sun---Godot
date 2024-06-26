@@ -2,9 +2,10 @@ extends MeshInstance3D
 
 var cam_pos_prev = Vector3()
 var cam_rot_prev = Quaternion()
-@export var motionBlurTarget : Node3D
+var motionBlurTarget : CharacterBody3D
 @onready var cam : Camera3D = get_parent()
-
+func _ready():
+	motionBlurTarget = $"../..".get_parent()
 func _process(_delta):
 	
 	#OS.delay_msec(30)
@@ -22,13 +23,13 @@ func _process(_delta):
 	var cam_rot_conj = conjugate(cam_rot)
 	var ang_vel = (cam_rot_diff * 2.0) * cam_rot_conj; 
 	ang_vel = Vector3(ang_vel.x, ang_vel.y, ang_vel.z) # Convert Quat to Vector3
-	
-	cam.fov = clamp(GlobalVariables.FOV +  motionBlurTarget.forward_speed/15,GlobalVariables.FOV,GlobalVariables.FOV*1.5)
+	var speed = motionBlurTarget.velocity.length()
+	cam.fov = clamp(GlobalVariables.FOV +  speed/15,GlobalVariables.FOV,GlobalVariables.FOV*1.5)
 	if motionBlurTarget.boosting:
 		mat.set_shader_parameter("intensity",  (GlobalVariables.MotionBlurIntensity*2))
 	else:
 		mat.set_shader_parameter("intensity",  (GlobalVariables.MotionBlurIntensity))
-	if motionBlurTarget.forward_speed > 60:
+	if speed > 60:
 		#mat.set_shader_parameter("intensity",  (motionBlurTarget.forward_speed-60/120))
 		mat.set_shader_parameter("linear_velocity", velocity)
 		mat.set_shader_parameter("angular_velocity", ang_vel)

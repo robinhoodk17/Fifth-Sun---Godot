@@ -11,7 +11,6 @@ func startup():
 	visible = true
 	acceleration = target.acceleration + 2
 	target = target.get_child(1)
-	print (target)
 	
 
 func rotateObject(delta):

@@ -3,7 +3,7 @@ extends Area3D
 @export var PreviousNode : Node3D = null
 @export var NextNode : Node3D
 @export var rotation_indicator : Node3D
-enum RouteTypes {boost, AI}
+enum RouteTypes {boost, AI, antiGrav}
 @export var Type : RouteTypes = RouteTypes.AI
 @export var child: Node3D
 @export var hookshotTarget : Node3D
@@ -20,9 +20,9 @@ func _ready():
 func _on_body_entered(body):
 	if body.is_in_group("Ship"):
 		body.AIPilotNode = NextNode
-		body.get_node("Turret/Turret_body_y").autoGunnerHookTarget = hookshotTarget
-		if hookshotTarget != null:
-			body.get_node("Turret/Turret_body_y").acquiring_target = true
+		body.get_node("Turret/Turret_body_y").StartSearchingForTarget(hookshotTarget)
+		if Type == RouteTypes.antiGrav:
+			body.antiGrav = !body.antiGrav
 		if Type == RouteTypes.boost:
 			body.boosting = true
 			body.hasBeenBoostingFor = 0.0

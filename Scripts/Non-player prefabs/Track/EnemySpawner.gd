@@ -36,7 +36,6 @@ func _ready():
 func _process(delta):
 	cooldownCount += delta
 	if waitingfordelay and cooldownCount >= delay:
-		print ("we gott here")
 		activateObject()
 		waitingfordelay = false
 

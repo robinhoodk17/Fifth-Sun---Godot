@@ -5,8 +5,6 @@ extends CharacterBody3D
 
 
 @export_group("Nodes for function")
-##the turrett's camera, labeled Camera2 below the Marker3D
-@export var Camera_controller : Camera3D
 ##The Camera_Pivot
 @export var turret_body_y : CharacterBody3D
 @export var turret_body_x : Marker3D
@@ -48,6 +46,7 @@ var autoGunner : bool = false
 var autoGunnerHookTarget = null
 var shootingHookshot = false
 var acquiring_target = false
+var AIhookshotFlying = false
 
 func _ready():
 	controller_strength = controller_sensitivity
@@ -127,6 +126,14 @@ func _shoot():
 
 		if ray.is_colliding():
 			pass
+func StartSearchingForTarget(hookshotTarget):
+	autoGunnerHookTarget = hookshotTarget
+	if hookshotTarget != null:
+		acquiring_target = true
+		print("we should be acquiring target")
+	else:
+		print("we should stop acquiring")
+		AIhookshotFlying = false
 
 func _shoot_hookshot():
 	if _hookshot_state == Hookshot_States.ready and time_hookshot_pressed < 15:
@@ -176,6 +183,9 @@ func _handle_hookshot_flight():
 		grappling_hook.look_at(hookshot_landing_point)
 func _retract_hookshot():
 	Ship_body.hooked = false
+	autoGunnerHookTarget = null
+	shootingHookshot = false
+	AIhookshotFlying = false
 	if _hookshot_state == Hookshot_States.flying:
 		_hookshot_state = Hookshot_States.retracting
 	if _hookshot_state == Hookshot_States.retracting:
@@ -185,16 +195,13 @@ func _retract_hookshot():
 		else:
 			hookshot_distance_flown -= hookshot_length/30
 			grappling_hook.scale = Vector3 (1.0,1.0,hookshot_distance_flown)
-			
-		
-		
 	if _hookshot_state == Hookshot_States.anchored:
 		Ship_body.forward_speed += (Ship_body.boost/3)
 		_hookshot_state = Hookshot_States.retracting
 func _AIShooter(delta):
-	if autoGunnerHookTarget != null:
+	if acquiring_target and GlobalVariables.gunnerBehavior != GlobalVariables.Gunnerbehaviors.doNothing and autoGunnerHookTarget != null:
 		var targetPosition = autoGunnerHookTarget.global_position
-		if !aim_assist_ray.is_colliding() and acquiring_target:
+		if !aim_assist_ray.is_colliding():
 			var look_atMatrix = turret_body_x.global_transform.looking_at(targetPosition, turret_body_x.global_transform.basis.y)
 			controller_strength = 6
 			var y_angle = 1
@@ -209,13 +216,15 @@ func _AIShooter(delta):
 			
 			turret_body_x.rotate_x(deg_to_rad(delta * controller_strength * x_angle * 100))
 			turret_body_x.transform.basis = turret_body_x.transform.basis.orthonormalized()
-		elif autoGunnerHookTarget != null:
+		else:
 			shootingHookshot = true
+			AIhookshotFlying = true
 			acquiring_target = false
 			time_hookshot_pressed = 0
-	else:
+	elif !AIhookshotFlying:
 		shootingHookshot = false
-	#print(str(shootingHookshot,_hookshot_state) )
+		autoGunnerHookTarget = null
+	
 func _physics_process(delta):
 	time_hookshot_pressed += 1
 	time_shot_pressed += 1
@@ -250,6 +259,13 @@ func _physics_process(delta):
 			if(_hookshot_state == Hookshot_States.ready):
 				_shoot_hookshot()
 			else:
+				if _hookshot_state == Hookshot_States.retracting:
+					_retract_hookshot()
 				_handle_hookshot_flight()
 		elif _hookshot_state != Hookshot_States.ready:
 			_retract_hookshot()
+
+
+func _on_ship_collision_signal():
+	_retract_hookshot()
+	Ship_body.hooked = false
