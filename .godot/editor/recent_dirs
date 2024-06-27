@@ -1,3 +1,4 @@
+res://Scenes
 res://Prefabs/Enemies
 res://Prefabs/Track Objects
 res://Scripts/Non-player prefabs
@@ -6,7 +7,6 @@ res://art/Textures
 res://Scripts/Non-player prefabs/AI
 res://art/Materials
 res://Shaders
-res://Scenes
 res://Prefabs/Player_related
 res://Prefabs
 res://Prefabs/Targets

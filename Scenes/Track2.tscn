@@ -48,6 +48,7 @@ size = Vector2(1000, 3000)
 [node name="Node3D" type="Node3D"]
 
 [node name="GridContainer" parent="." instance=ExtResource("1_f83m5")]
+metadata/_edit_use_anchors_ = true
 
 [node name="Ship" parent="." instance=ExtResource("2_ci54k")]
 transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 30, 5, 400)
@@ -171,7 +172,7 @@ shadow_opacity = 0.5
 shadow_blur = 5.0
 
 [node name="Ground" type="RigidBody3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 305.804)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1294.62)
 freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Ground"]

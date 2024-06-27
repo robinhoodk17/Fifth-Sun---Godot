@@ -1,4 +1,4 @@
-res://Prefabs/Ship1/ship.tscn
+res://Scenes/Trials.tscn
 res://addons/motion_blur/motion_blur.gd
 res://Scripts/Cameras/2P_SplitScreen.gd
 res://Scripts/Non-player prefabs/Track/EnemySpawner.gd
@@ -7,6 +7,10 @@ res://art/Materials/Toon_shader_thin_outlines.tres
 res://addons/motion_blur/moblur_shader.gdshader
 res://Shaders/Day_clear_sky_material.tres
 res://Scripts/Controls/zenith.gd
+res://Prefabs/Ship1/ship.tscn
 res://Scenes/Track2.tscn
 res://Prefabs/Enemies/Basic_enemy.tscn
 res://Prefabs/Player_related/ship_camera.tscn
+res://Scripts/global_variables.gd
+res://Scripts/Controls/Turret_controller.gd
+res://Scripts/Cameras/ShipCamera.gd

@@ -6,13 +6,15 @@ class_name Basic_enemy
 @export var target : Node3D
 @export var maxSpeed : int = 0
 @export var initialVelocity : Vector3
+signal onDamageTaken()
 var speed = 0
 func startup():
 	visible = true
 	acceleration = target.acceleration + 2
 	target = target.get_child(1)
 	
-
+func takeDamage():
+	pass
 func rotateObject(delta):
 	var heading = target.global_position
 	var look_atMatrix = transform.looking_at(heading)

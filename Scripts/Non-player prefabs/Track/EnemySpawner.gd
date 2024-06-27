@@ -44,3 +44,4 @@ func _on_body_entered(body):
 		cooldownCount = 0
 		objectList[activeObject].target = body
 		waitingfordelay = true
+		body.transitioning = true

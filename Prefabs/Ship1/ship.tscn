@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Controls/Turret_controller.gd" id="4_urwk6"]
 [ext_resource type="PackedScene" uid="uid://mq4w6wswvcsu" path="res://Prefabs/Player_related/ship_camera.tscn" id="5_x1t6o"]
 
-[sub_resource type="Image" id="Image_luah6"]
+[sub_resource type="Image" id="Image_2o7km"]
 data = {
 "data": PackedByteArray(255, 255, 255, 195, 195, 195, 88, 88, 88, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 242, 0, 179, 170, 0, 91, 86, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 208, 0, 0, 164, 0, 0, 119, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 0, 0, 182, 0, 0, 118, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 255, 0, 0, 153, 0, 0, 94, 0, 0, 61, 0, 168, 243, 0, 133, 193, 0, 90, 131, 255, 255, 255, 226, 123, 39, 168, 92, 29, 121, 66, 20, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 193, 0, 193, 130, 0, 130, 81, 0, 81, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 240, 227, 255, 200, 150, 234, 201, 148, 219, 179, 115, 193, 148, 75, 167, 122, 48, 147, 102, 28, 92, 58, 2),
 "format": "RGB8",
@@ -19,7 +19,7 @@ data = {
 
 [sub_resource type="ImageTexture" id="ImageTexture_48b1p"]
 resource_name = "Low_poly_textures"
-image = SubResource("Image_luah6")
+image = SubResource("Image_2o7km")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhnbg"]
 resource_name = "Material.001"
@@ -541,17 +541,21 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_c11js")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a3wgr"]
+radius = 0.25
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5fnh7"]
 size = Vector3(1.5, 0.1, 0.75)
 
-[node name="Ship" type="CharacterBody3D" node_paths=PackedStringArray("Turret", "BodyCollider", "GravSkirt", "theMesh", "pitch_marker") groups=["Ship"]]
+[node name="Ship" type="CharacterBody3D" node_paths=PackedStringArray("Turret", "BodyCollider", "RaycastFront", "RaycastBack", "RaycastLeft", "RaycastRight", "theMesh", "pitch_marker") groups=["Ship"]]
 collision_layer = 6
 collision_mask = 11
 script = ExtResource("1_08faa")
 Turret = NodePath("Turret")
 BodyCollider = [NodePath("CollisionShape3D"), NodePath("CollisionShape3D2"), NodePath("CollisionShape3D3")]
-GravSkirt = [NodePath("GravSkirtA"), NodePath("GravSkirtB"), NodePath("GravSkirtC")]
+RaycastFront = NodePath("Front")
+RaycastBack = NodePath("Back")
+RaycastLeft = NodePath("Left")
+RaycastRight = NodePath("Right")
 theMesh = NodePath("theMesh")
 pitch_marker = NodePath("pitch_marker")
 max_speed = 60.0
@@ -661,6 +665,7 @@ process_material = SubResource("ParticleProcessMaterial_6ei0v")
 draw_pass_1 = SubResource("QuadMesh_4nrk0")
 
 [node name="Marker3D" parent="." instance=ExtResource("5_x1t6o")]
+visible = false
 
 [node name="Turret" type="Node3D" parent="."]
 top_level = true
@@ -757,7 +762,7 @@ surface_material_override/0 = ExtResource("4_n8agw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.509377, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.372674, 0)
 shape = SubResource("CapsuleShape3D_a3wgr")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
@@ -768,18 +773,23 @@ shape = SubResource("BoxShape3D_5fnh7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.109, -0.371, 0.216)
 shape = SubResource("BoxShape3D_5fnh7")
 
-[node name="GravSkirtA" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.614, -0.866)
+[node name="Front" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.63, -1.5)
 target_position = Vector3(0, 0, -30)
 debug_shape_custom_color = Color(0, 1, 0, 1)
 
-[node name="GravSkirtB" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1, -0.614, 0.866)
+[node name="Back" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.63, 1.5)
 target_position = Vector3(0, 0, -30)
 debug_shape_custom_color = Color(0, 1, 0, 1)
 
-[node name="GravSkirtC" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1, -0.614, 0.866)
+[node name="Left" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.5, -0.63, 0)
+target_position = Vector3(0, 0, -30)
+debug_shape_custom_color = Color(0, 1, 0, 1)
+
+[node name="Right" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.5, -0.63, 0)
 target_position = Vector3(0, 0, -30)
 debug_shape_custom_color = Color(0, 1, 0, 1)
 

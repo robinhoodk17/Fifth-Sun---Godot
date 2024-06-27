@@ -130,9 +130,7 @@ func StartSearchingForTarget(hookshotTarget):
 	autoGunnerHookTarget = hookshotTarget
 	if hookshotTarget != null:
 		acquiring_target = true
-		print("we should be acquiring target")
 	else:
-		print("we should stop acquiring")
 		AIhookshotFlying = false
 
 func _shoot_hookshot():

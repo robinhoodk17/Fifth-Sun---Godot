@@ -8,7 +8,10 @@ enum CollisionType {Recent, Skidding, Normal}
 @export var Turret : Node3D
 ##The node with all the colliders
 @export var BodyCollider : Array[CollisionShape3D]
-@export var GravSkirt : Array[RayCast3D]
+@export var RaycastFront: RayCast3D
+@export var RaycastBack: RayCast3D
+@export var RaycastLeft: RayCast3D
+@export var RaycastRight: RayCast3D
 ##The node with all the Meshes
 @export var theMesh : Node3D
 @export var pitch_marker : Node3D
@@ -23,7 +26,7 @@ enum CollisionType {Recent, Skidding, Normal}
 @export var roll_speed : float = 1.2
 @export var yaw_speed : float = 2.0
 @export var pitch_speed : float = 35.0
-@export var strafe_speed : float = 0.5
+@export var strafe_speed : float = 30
 @export var boostTime : float = 2.0
 @export_subgroup("Ship responsiveness")
 @export var pitch_response : float = 1.2
@@ -49,8 +52,11 @@ var direction
 var velocityX_Z
 var velocityY
 var climb = Vector3 (0,0,0)
-var levitationSpeed : float = 0.0
+
 @export var antiGrav : bool = false
+var transition_between_Gravities = 0.25
+var transitioning : bool = false
+var transition_time_elapsed : float = 0.0
 var Ydamping : Array[float]
 var YdampingCounter : int = 0
 var dampingFrames : int = 7
@@ -81,8 +87,6 @@ var draft : bool = true
 
 func _ready():
 	Pilot = GlobalVariables.Pilot
-	for i in GravSkirt:
-		i.add_exception(self)
 	for i in dampingFrames:
 		Ydamping.append(position.y)
 	if Pilot == 2:
@@ -168,7 +172,7 @@ func _normal_movement(delta):
 		if is_skidding == CollisionType.Normal:
 			rotateShip(delta)
 			velocityY = velocity.dot(basis.y)
-			velocity = -basis.z * forward_speed + (-basis.x) * roll_input * strafe_speed + (velocityY * basis.y)
+			velocity = -basis.z * forward_speed + (-basis.x * roll_input * strafe_speed) + (velocityY * basis.y)
 func _hooked_movement(delta):
 	rotateShip(delta)
 	climbResponsiveness = 1
@@ -211,18 +215,91 @@ func autoPilot(delta):
 			is_braking = false
 		if is_skidding == CollisionType.Skidding:
 			is_accelerating = false
+func enterAntiGrav(delta):
+	if transitioning:
+		if !antiGrav:
+			if transition_time_elapsed < transition_between_Gravities:
+				theMesh.global_transform.basis = theMesh.global_transform.basis.slerp(basis,.3)
+				transition_time_elapsed += delta
+			else:
+				theMesh.global_transform.basis = basis
+				antiGrav = true
+				transitioning = false
+	if antiGrav:
+		pass
 func handleGravity(delta):
+	enterAntiGrav(delta)
 	if !antiGrav:
 		var check : bool = false
-		for i in GravSkirt:
-			if i.is_colliding():
-				check = true
+		if RaycastFront.is_colliding():
+			check = true
+		if RaycastBack.is_colliding():
+			check = true
+		if RaycastLeft.is_colliding():
+			check = true
+		if RaycastRight.is_colliding():
+			check = true
 		if !check:
 			if velocity.y > 0:
 				velocity.y = 0
 				climb = Vector3 (0,0,0)
 	else:
-		pass
+		var distanceFront = RaycastFront.get_collision_point().distance_to(RaycastFront.global_position)
+		var distanceBack = RaycastBack.get_collision_point().distance_to(RaycastBack.global_position)
+		var distanceRight = RaycastRight.get_collision_point().distance_to(RaycastRight.global_position)
+		var distanceLeft = RaycastLeft.get_collision_point().distance_to(RaycastLeft.global_position)
+		
+		var upwardsForce = -16
+		var alldistancesAccomplished : bool = true
+		if distanceFront < 2:
+			upwardsForce += 7 / distanceFront
+			if distanceFront < 1.5:
+				alldistancesAccomplished = false
+		else:
+			alldistancesAccomplished = false
+			upwardsForce -= 32
+		if distanceBack < 2:
+			upwardsForce += 7 /distanceBack
+			if distanceBack < 1.5:
+				alldistancesAccomplished = false
+		else:
+			alldistancesAccomplished = false
+			upwardsForce -= 8
+		if distanceRight < 2:
+			upwardsForce += 7 /distanceRight
+			if distanceRight < 1.5:
+				alldistancesAccomplished = false
+		else:
+			alldistancesAccomplished = false
+			upwardsForce -= 8
+		if distanceLeft < 2:
+			upwardsForce += 7 /distanceLeft
+			if distanceLeft < 1.5:
+				alldistancesAccomplished = false
+		else:
+			alldistancesAccomplished = false
+			upwardsForce -= 8
+		if upwardsForce > 0 and alldistancesAccomplished:
+			upwardsForce = -velocity.dot(basis.y)/delta
+		velocity += (upwardsForce * delta * basis.y)
+		
+		var angleAcrossX : float = 0
+		var rotation_stength = 3 * PI
+		if distanceFront < 2:
+			angleAcrossX += (1-distanceFront/2) * rotation_stength * (1-distanceFront/2) 
+		if distanceBack < 2:
+			angleAcrossX += (1-distanceBack/2) * (-rotation_stength) * (1-distanceBack/2)
+		angleAcrossX = angleAcrossX * delta * 5
+		transform.basis = transform.basis.rotated(basis.x,angleAcrossX)
+		
+		
+		var angleAcrossZ : float = 0
+		if distanceLeft < 2:
+			angleAcrossZ += (1-distanceLeft/2) * rotation_stength * (1-distanceLeft/2)
+		if distanceRight < 2:
+			angleAcrossZ += (1-distanceRight/2) * (-rotation_stength) * (1-distanceRight/2)
+		angleAcrossZ = angleAcrossZ * delta * 5
+		transform.basis = transform.basis.rotated(-basis.z,angleAcrossZ)
 		#transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
 		#var distanceA = GravSkirt[0].get_collision_point().distance_to(GravSkirt[0].global_position)
 		#var distanceB = GravSkirt[1].get_collision_point().distance_to(GravSkirt[1].global_position)
@@ -269,24 +346,18 @@ func _physics_process(delta):
 		forward_speed += boost * delta
 		if hasBeenBoostingFor >= boostTime:
 			boosting = false
+			hasBeenBoostingFor = 0.0
 	if not hooked:
 		_normal_movement(delta)
 	else:
 		_hooked_movement(delta)
-	
-	handleGravity(delta)
-	
-		
+	if !antiGrav:
+		handleGravity(delta)
 	var collisions = move_and_collide(velocity*delta)
-	if collisions:
-		collide_and_slide(collisions, delta)
-	collision_time += delta
-	collision_cooldown += delta
-	if collision_time >= collision_suspension_time:
-		is_skidding = CollisionType.Normal
-	elif collision_time >= collision_suspension_time/2:
-		if !is_accelerating:
-			is_skidding = CollisionType.Normal
+	timeBetweenCollisions(collisions, delta)
+	if antiGrav:
+		handleGravity(delta)
+
 	if !antiGrav:
 		if is_skidding != CollisionType.Recent:
 			velocity -= climb * climbResponsiveness
@@ -313,7 +384,17 @@ func find_largest_dict_key(dict):
 			max_val = val
 			key = i
 	return key
-
+func timeBetweenCollisions(collisions, delta):
+	if collisions:
+		collide_and_slide(collisions, delta)
+	collision_time += delta
+	collision_cooldown += delta
+	if collision_time >= collision_suspension_time:
+		is_skidding = CollisionType.Normal
+	elif collision_time >= collision_suspension_time/2:
+		if !is_accelerating:
+			is_skidding = CollisionType.Normal
+	
 func getVelocityX_Z():
 	velocityX_Z = Vector3(velocity.x, 0, velocity.z)
 func collide_and_slide(currentcollision : KinematicCollision3D, _delta):
@@ -321,16 +402,17 @@ func collide_and_slide(currentcollision : KinematicCollision3D, _delta):
 	print("collision")
 	collision_time = 0
 	shipResponsiveness = 0.0
+	if hooked:
+		hooked = false
+	Turret.get_node("Turret_body_y")._retract_hookshot()
+
 	if !antiGrav:
 		var collision_normal = currentcollision.get_normal()
 		getVelocityX_Z()
-		var velocityY = Vector3(0, velocity.y, 0)
+		velocityY = Vector3(0, velocity.y, 0)
 		stored_velocity = velocity
 		velocity = velocityX_Z.bounce(currentcollision.get_normal()) + velocityY.bounce(currentcollision.get_normal()) * pinballCollision
 		is_skidding = CollisionType.Recent
 	else:
 		if collision_cooldown > .1:
 			velocity = (velocity.bounce(currentcollision.get_normal()) * 0.25)
-	if hooked:
-		hooked = false
-	Turret.get_node("Turret_body_y")._retract_hookshot()
