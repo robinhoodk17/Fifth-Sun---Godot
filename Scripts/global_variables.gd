@@ -1,9 +1,9 @@
 extends Node
-enum Pilotbehaviors {normal, straight}
+enum Pilotbehaviors {normal, straight, doNothing}
 enum Gunnerbehaviors {normal, doNothing}
 
-var Pilot = 1
-var Gunner = null
+var Pilot = null
+var Gunner = 1
 
 var MotionBlurIntensity = .1
 var FOV = 90

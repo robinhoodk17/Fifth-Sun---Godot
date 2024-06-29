@@ -18,12 +18,19 @@ config/icon="res://icon.png"
 
 GlobalVariables="*res://Scripts/global_variables.gd"
 
+[display]
+
+window/size/always_on_top=true
+
 [dotnet]
 
 project/assembly_name="Squash the Creeps (3D)"
 
 [editor]
 
+movie_writer/mjpeg_quality=0.5
+movie_writer/movie_file="C:/Users/Diego/Documents/Videojuego/Videos/Janko's movie.avi"
+movie_writer/fps=30
 run/main_run_args="--rendering-driver opengl3"
 
 [filesystem]

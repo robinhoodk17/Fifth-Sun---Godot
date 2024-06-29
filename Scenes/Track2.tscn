@@ -117,7 +117,7 @@ hookshotTarget = NodePath("../../AimAssists/U-turn-2")
 
 [node name="boost_ring6" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
 transform = Transform3D(1, -3.49691e-07, 0, 3.49691e-07, 1, 0, 0, 0, 1, -130, 50, -220)
-NextNode = NodePath(".")
+NextNode = NodePath("../../Route_nodes/2")
 
 [node name="Route_nodes" type="Node3D" parent="Track_objects"]
 script = ExtResource("4_3ee8s")
@@ -134,6 +134,13 @@ NextNode = NodePath("../../Boosts/boost_ring5")
 transform = Transform3D(-8.20585e-08, -0.866025, 0.5, 1, -7.42519e-08, 7.40661e-08, -8.17893e-08, 0.5, 0.866025, -127, 30, 60)
 NextNode = NodePath("../../Boosts/boost_ring6")
 rotation_indicator = NodePath("../U-turn-1/MeshInstance3D")
+
+[node name="2" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("4_vdksf")]
+transform = Transform3D(0.255361, 0.966846, 0, -0.966846, 0.255361, 0, 0, 0, 1, -100.556, -0.9095, -440.027)
+NextNode = NodePath("../3")
+
+[node name="3" parent="Track_objects/Route_nodes" instance=ExtResource("4_vdksf")]
+transform = Transform3D(0.230049, 0.870699, -0.434697, -0.966823, 0.255446, 0, 0.111041, 0.420275, 0.900577, -16.183, -9.12582, -620.92)
 
 [node name="Track" type="Node3D" parent="Track_objects"]
 
@@ -158,13 +165,12 @@ collision_layer = 0
 collision_mask = 2
 cooldown = 15
 spawnedObject = ExtResource("9_b1ewu")
-objectCount = 5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jnruu")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(0.868441, 0.132494, 0.477761, -0.495792, 0.23208, 0.836857, 0, -0.963631, 0.267237, 0, 0, 0)
+transform = Transform3D(0.993261, -0.106014, 0.0468433, -0.086471, -0.408704, 0.908562, -0.0771751, -0.906489, -0.415116, 0, 0, 0)
 light_energy = 1.681
 shadow_enabled = true
 shadow_bias = 0.5
@@ -181,11 +187,6 @@ shape = SubResource("BoxShape3D_23t2g")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/Ground"]
 mesh = SubResource("PlaneMesh_ueipm")
 skeleton = NodePath("../../..")
-
-[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("9_b1ewu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5683, 0.5, 419.618)
-acceleration = 20.0
-target = NodePath("../Ship")
 
 [connection signal="body_entered" from="Track_objects/Boosts/boost_ring4" to="Track_objects/Boosts/boost_ring4" method="_on_body_entered"]
 [connection signal="body_entered" from="Track_objects/Boosts/boost_ring4/Route_node" to="Track_objects/Boosts/boost_ring4/Route_node" method="_on_body_entered"]

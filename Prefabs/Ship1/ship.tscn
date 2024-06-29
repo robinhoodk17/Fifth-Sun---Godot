@@ -1,14 +1,13 @@
-[gd_scene load_steps=53 format=3 uid="uid://bo8ptladpikfl"]
+[gd_scene load_steps=42 format=3 uid="uid://bo8ptladpikfl"]
 
 [ext_resource type="Script" path="res://Scripts/Controls/zenith.gd" id="1_08faa"]
 [ext_resource type="Material" uid="uid://bgwx5kw24feoq" path="res://art/Materials/Toon_shader.tres" id="2_lhrga"]
-[ext_resource type="Texture2D" uid="uid://4mu3hv000w8e" path="res://art/Textures/Smoke1.png" id="3_cboss"]
-[ext_resource type="Texture2D" uid="uid://l6y4c38pc4t7" path="res://art/Textures/Smoke2.png" id="3_el1jh"]
 [ext_resource type="Material" uid="uid://ey3gnh2bhlrb" path="res://art/Materials/Toon_shader_thin_outlines.tres" id="4_n8agw"]
 [ext_resource type="Script" path="res://Scripts/Controls/Turret_controller.gd" id="4_urwk6"]
+[ext_resource type="PackedScene" uid="uid://b2mtl2nolaf06" path="res://Prefabs/Enemies/Bullet.tscn" id="5_go1ug"]
 [ext_resource type="PackedScene" uid="uid://mq4w6wswvcsu" path="res://Prefabs/Player_related/ship_camera.tscn" id="5_x1t6o"]
 
-[sub_resource type="Image" id="Image_2o7km"]
+[sub_resource type="Image" id="Image_mxjip"]
 data = {
 "data": PackedByteArray(255, 255, 255, 195, 195, 195, 88, 88, 88, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 242, 0, 179, 170, 0, 91, 86, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 208, 0, 0, 164, 0, 0, 119, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 0, 0, 182, 0, 0, 118, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 255, 0, 0, 153, 0, 0, 94, 0, 0, 61, 0, 168, 243, 0, 133, 193, 0, 90, 131, 255, 255, 255, 226, 123, 39, 168, 92, 29, 121, 66, 20, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 193, 0, 193, 130, 0, 130, 81, 0, 81, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 240, 227, 255, 200, 150, 234, 201, 148, 219, 179, 115, 193, 148, 75, 167, 122, 48, 147, 102, 28, 92, 58, 2),
 "format": "RGB8",
@@ -19,7 +18,7 @@ data = {
 
 [sub_resource type="ImageTexture" id="ImageTexture_48b1p"]
 resource_name = "Low_poly_textures"
-image = SubResource("Image_2o7km")
+image = SubResource("Image_mxjip")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhnbg"]
 resource_name = "Material.001"
@@ -355,78 +354,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1jh2o")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_55ju1"]
-lifetime_randomness = 0.5
-emission_shape = 1
-emission_sphere_radius = 0.25
-direction = Vector3(0, 0, 0)
-gravity = Vector3(0, 0, 0)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3mrxc"]
-transparency = 4
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.541176, 0.541176, 0.541176, 0.811765)
-albedo_texture = ExtResource("3_cboss")
-disable_receive_shadows = true
-billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="QuadMesh" id="QuadMesh_322ne"]
-material = SubResource("StandardMaterial3D_3mrxc")
-size = Vector2(0.25, 0.25)
-
-[sub_resource type="Curve" id="Curve_w5c7a"]
-_data = [Vector2(0, 0.501779), 0.0, 0.0, 0, 0, Vector2(0.79386, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_n2s0y"]
-width = 32
-curve = SubResource("Curve_w5c7a")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6ei0v"]
-lifetime_randomness = 0.5
-emission_shape = 1
-emission_sphere_radius = 0.15
-direction = Vector3(0, 1, 0)
-gravity = Vector3(0, 0, 0)
-radial_accel_min = 1.0
-radial_accel_max = 2.0
-scale_min = 0.25
-scale_max = 0.5
-scale_curve = SubResource("CurveTexture_n2s0y")
-color = Color(1, 1, 1, 0.545098)
-turbulence_noise_strength = 2.0
-collision_mode = 1
-collision_friction = 0.0
-collision_bounce = 0.0
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_whjx6"]
-load_path = "res://.godot/imported/Smoke2.png-e87f439d7d7e9a7adddf8bf70378da62.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cbp4o"]
-load_path = "res://.godot/imported/Smoke2.png-e87f439d7d7e9a7adddf8bf70378da62.ctex"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2yg6h"]
-transparency = 4
-cull_mode = 2
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("3_el1jh")
-detail_mask = SubResource("CompressedTexture2D_cbp4o")
-detail_albedo = SubResource("CompressedTexture2D_whjx6")
-disable_receive_shadows = true
-billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="QuadMesh" id="QuadMesh_4nrk0"]
-material = SubResource("StandardMaterial3D_2yg6h")
-size = Vector2(0.25, 0.25)
-
 [sub_resource type="BoxMesh" id="BoxMesh_vyobk"]
 size = Vector3(0.03, 0.03, 1)
 
@@ -629,41 +556,6 @@ mesh = SubResource("ArrayMesh_sf5p5")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_lhrga")
 
-[node name="GPUParticles3D2" type="GPUParticles3D" parent="theMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.243897, -0.127009, 1.75)
-gi_mode = 0
-amount = 25
-preprocess = 3.0
-process_material = SubResource("ParticleProcessMaterial_55ju1")
-draw_pass_1 = SubResource("QuadMesh_322ne")
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="theMesh"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.22996, -0.12004, 1.75)
-gi_mode = 0
-amount = 25
-preprocess = 3.0
-fixed_fps = 60
-fract_delta = false
-process_material = SubResource("ParticleProcessMaterial_6ei0v")
-draw_pass_1 = SubResource("QuadMesh_4nrk0")
-
-[node name="GPUParticles3D3" type="GPUParticles3D" parent="theMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.222991, -0.593897, 1.75)
-amount = 25
-preprocess = 3.0
-process_material = SubResource("ParticleProcessMaterial_55ju1")
-draw_pass_1 = SubResource("QuadMesh_322ne")
-
-[node name="GPUParticles3D4" type="GPUParticles3D" parent="theMesh"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.250865, -0.607834, 1.75)
-gi_mode = 0
-amount = 25
-preprocess = 3.0
-fixed_fps = 60
-fract_delta = false
-process_material = SubResource("ParticleProcessMaterial_6ei0v")
-draw_pass_1 = SubResource("QuadMesh_4nrk0")
-
 [node name="Marker3D" parent="." instance=ExtResource("5_x1t6o")]
 visible = false
 
@@ -684,6 +576,7 @@ AimAssist_Small = NodePath("Turret_body_x/AimAssist_Small")
 AimAssist_Center = NodePath("Turret_body_x/AimAssist_center")
 ray = NodePath("Turret_body_x/RayCast3D")
 aim_assist_ray = NodePath("Turret_body_x/AimAssistRay")
+bulletScene = ExtResource("5_go1ug")
 grappling_hook = NodePath("Turret_body_x/Grapple")
 
 [node name="Turret_body_x" type="Marker3D" parent="Turret/Turret_body_y"]
@@ -758,6 +651,12 @@ mesh = SubResource("ArrayMesh_nvkav")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_n8agw")
 
+[node name="Bullet_spawn1" type="Marker3D" parent="Turret/Turret_body_y/Turret_body_x/TurretMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.244, -0.013, -0.397)
+
+[node name="Bullet_spawn2" type="Marker3D" parent="Turret/Turret_body_y/Turret_body_x/TurretMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.243687, -0.0133179, -0.397119)
+
 [node name="pitch_marker" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
 
@@ -774,22 +673,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.109, -0.371, 0.216)
 shape = SubResource("BoxShape3D_5fnh7")
 
 [node name="Front" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.63, -1.5)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.8, -1.5)
 target_position = Vector3(0, 0, -30)
 debug_shape_custom_color = Color(0, 1, 0, 1)
 
 [node name="Back" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.63, 1.5)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.8, 1.5)
 target_position = Vector3(0, 0, -30)
 debug_shape_custom_color = Color(0, 1, 0, 1)
 
 [node name="Left" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.5, -0.63, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.5, -0.8, 0)
 target_position = Vector3(0, 0, -30)
 debug_shape_custom_color = Color(0, 1, 0, 1)
 
 [node name="Right" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.5, -0.63, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.5, -0.8, 0)
 target_position = Vector3(0, 0, -30)
 debug_shape_custom_color = Color(0, 1, 0, 1)
 

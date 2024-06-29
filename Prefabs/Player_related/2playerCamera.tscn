@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://he7ivklp1ig8"]
+[gd_scene load_steps=8 format=3 uid="uid://he7ivklp1ig8"]
 
 [ext_resource type="Script" path="res://Scripts/Cameras/2P_SplitScreen.gd" id="1_i86uw"]
 [ext_resource type="Script" path="res://Scripts/Controls/speedometer.gd" id="2_ciwyk"]
 [ext_resource type="Texture2D" uid="uid://mboqxscd4faw" path="res://art/Sprites/speedometer.png" id="3_j4bl7"]
 [ext_resource type="Texture2D" uid="uid://bosbcn4jsochj" path="res://art/Sprites/Speedom-hand.png" id="4_0omqy"]
+[ext_resource type="PackedScene" uid="uid://dcb3t1qo4wb5e" path="res://Prefabs/Enemies/2DHealth_Bar.tscn" id="5_82far"]
 [ext_resource type="Texture2D" uid="uid://dvvoftavsla7y" path="res://art/Sprites/Red dot.png" id="5_pjndb"]
 [ext_resource type="Texture2D" uid="uid://dbaa33ud0yxvr" path="res://art/Sprites/Outer aim.png" id="6_x1knn"]
 
@@ -67,6 +68,8 @@ position = Vector2(-14.435, 16.39)
 offset_right = 40.0
 offset_bottom = 40.0
 text = "000"
+
+[node name="Health" parent="SubViewportContainer/SubViewport" instance=ExtResource("5_82far")]
 
 [node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
 clip_contents = true

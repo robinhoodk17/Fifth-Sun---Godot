@@ -1,15 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://dn8mk1cgcgcl"]
+[gd_scene load_steps=5 format=3 uid="uid://dn8mk1cgcgcl"]
 
 [ext_resource type="Script" path="res://Scripts/Non-player prefabs/AI/Enemy.gd" id="1_5m7kd"]
+[ext_resource type="PackedScene" uid="uid://d3kyu1d2ycsa3" path="res://Prefabs/Enemies/3DHealth_Bar.tscn" id="2_xtto0"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_34mxv"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yjhll"]
+
 [node name="Enemy" type="CharacterBody3D"]
+collision_layer = 30
+collision_mask = 3
 script = ExtResource("1_5m7kd")
-turn_speed = 10.0
+maxHealth = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_34mxv")
 
 [node name="Node3D" type="Node3D" parent="."]
+
+[node name="Health" parent="." instance=ExtResource("2_xtto0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_yjhll")

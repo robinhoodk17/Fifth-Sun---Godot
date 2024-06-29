@@ -14,6 +14,7 @@ extends CharacterBody3D
 @export var AimAssist_Center : ShapeCast3D
 @export var ray : RayCast3D
 @export var aim_assist_ray : RayCast3D
+@export var bulletScene : PackedScene
 ##The node 3D called Grapple, which includes a mesh
 @export var grappling_hook : Node3D
 
@@ -21,9 +22,11 @@ extends CharacterBody3D
 @export var controller_sensitivity : float = 1.25
 @export var aim_Assist_Strength : float = 15
 @export var gravity_well_strength : float = 240
+@export var rotatingSteps : int = 30
 @export_group("ship Stats")
 ##shots per minute
-@export var fire_rate : float = 65
+@export var fire_rate : float = 0.25
+@export var damage : int = 1
 
 var _mouse_input : bool = false
 var _rotation_input : float
@@ -33,6 +36,10 @@ var controller_strength
 var gravity_well_counter = 0
 var aimAssist_Point
 var current_item = null
+var is_rotating : bool = false
+var takenSteps : int = 0
+
+var targetRotation : Basis
 #hookshot variables
 enum Hookshot_States {ready, flying, anchored, retracting}
 var _hookshot_state = Hookshot_States.ready
@@ -40,13 +47,14 @@ var hookshot_landing_point
 var hookshot_length
 var hookshot_distance_flown : float = 0.0
 var time_hookshot_pressed : int = 0
-var time_shot_pressed : int = 0
+var time_shot_pressed : float = 0
 #AI variables
 var autoGunner : bool = false
 var autoGunnerHookTarget = null
 var shootingHookshot = false
 var acquiring_target = false
 var AIhookshotFlying = false
+
 
 func _ready():
 	controller_strength = controller_sensitivity
@@ -60,6 +68,7 @@ func _ready():
 	aim_assist_ray.add_exception(Ship_body)
 	ray.add_exception(Ship_body)
 	ray.add_exception(turret_body_y)
+	
 	
 	if Gunner == null:
 		autoGunner = true
@@ -106,8 +115,17 @@ func _gravity_well(delta):
 		
 		turret_body_x.rotate_x(deg_to_rad(delta * aimStrength*200*x_angle))
 		turret_body_x.transform.basis = turret_body_x.transform.basis.orthonormalized()
+func doShotVFX(target):
+	var newInstance : Node3D = bulletScene.instantiate()
+	add_child(newInstance)
+	newInstance.global_position = target
+	newInstance.set_process(true)
+	newInstance.visible = true
+	newInstance.get_child(0).emitting = true
+	time_shot_pressed = 0
 func _shoot():
 	if(time_shot_pressed >= fire_rate):
+		var collision_point = (-basis.z) * 100 + global_position 
 		if AimAssist_Small.is_colliding():
 			var aimingAt = AimAssist_Small.get_collision_point(0)
 			var look_atMatrix = turret_body_x.global_transform.looking_at(aimingAt, turret_body_x.global_transform.basis.y)
@@ -123,9 +141,14 @@ func _shoot():
 			
 			turret_body_x.rotate_x(deg_to_rad(x_angle))
 			turret_body_x.transform.basis = turret_body_x.transform.basis.orthonormalized()
-
+		
 		if ray.is_colliding():
-			pass
+			collision_point = ray.get_collision_point()
+			var thingWeShot = ray.get_collider()
+			if thingWeShot != null:
+				if thingWeShot.has_method("takeDamage"):
+					ray.get_collider().takeDamage(damage)
+		doShotVFX(collision_point)
 func StartSearchingForTarget(hookshotTarget):
 	autoGunnerHookTarget = hookshotTarget
 	if hookshotTarget != null:
@@ -222,14 +245,32 @@ func _AIShooter(delta):
 	elif !AIhookshotFlying:
 		shootingHookshot = false
 		autoGunnerHookTarget = null
-	
+func autoRotate():
+	if is_rotating:
+		if takenSteps < rotatingSteps:
+			transform.basis = transform.basis.slerp(targetRotation, 0.1)	
+			takenSteps += 1
+		else:
+			transform.basis = targetRotation
+			is_rotating = false
+			takenSteps = 0
 func _physics_process(delta):
 	time_hookshot_pressed += 1
-	time_shot_pressed += 1
+	time_shot_pressed += delta
 	gravity_well_counter -= 1
 	#Gunner is assigned in the global_variables during the character select screen and also is player 2 by default
 	if Gunner != null:
 		_aim_assist(delta)
+		if Input.is_action_just_pressed("Action_1_%s" % [Gunner]) and !is_rotating:
+			if _rotation_input > .1:
+				targetRotation = basis.rotated(basis.y, PI / 2)
+				is_rotating = true
+			if _rotation_input < -.1:
+				targetRotation = basis.rotated(basis.y, 3 * PI/2)
+				is_rotating = true
+			if _tilt_input < -.1 or (_rotation_input <.1 and _rotation_input > -.1 and _tilt_input > -.1):
+				targetRotation = basis.rotated(basis.y, PI)
+				is_rotating = true
 		_rotation_input = 0
 		_tilt_input = 0
 		move_and_slide()
@@ -243,14 +284,14 @@ func _physics_process(delta):
 				_handle_hookshot_flight()
 		if Input.is_action_just_released("Brake_%s" % [Gunner]) or _hookshot_state == Hookshot_States.retracting:
 			_retract_hookshot()
-		
-		if Input.is_action_just_pressed("Accelerate_%s" % [Gunner]):
-			time_shot_pressed = 0
+
 		if Input.is_action_pressed("Accelerate_%s" % [Gunner]):
 			_shoot()
+		
 		if _hookshot_state == Hookshot_States.anchored:
 			grappling_hook.look_at(hookshot_landing_point)	
 			grappling_hook.scale = Vector3 (1.0,1.0,position.distance_to(hookshot_landing_point))
+		autoRotate()
 	else:
 		_AIShooter(delta)
 		if shootingHookshot:

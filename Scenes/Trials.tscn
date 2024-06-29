@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bhax33ekjuln6"]
+[gd_scene load_steps=15 format=3 uid="uid://bhax33ekjuln6"]
 
 [ext_resource type="PackedScene" uid="uid://he7ivklp1ig8" path="res://Prefabs/Player_related/2playerCamera.tscn" id="1_cfudx"]
 [ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="2_0g8dw"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dn8mk1cgcgcl" path="res://Prefabs/Enemies/Basic_enemy.tscn" id="4_x7ejj"]
 [ext_resource type="Script" path="res://Scripts/Non-player prefabs/Make_invisible.gd" id="5_j0rmg"]
 [ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="6_ik488"]
+[ext_resource type="PackedScene" uid="uid://glivbfkecfv4" path="res://Prefabs/Track Objects/EnemySpawner.tscn" id="7_8imoh"]
 [ext_resource type="PackedScene" uid="uid://b1sqewdwht81m" path="res://art/3D/Track objects/cylinder.glb" id="7_kat24"]
 
 [sub_resource type="Sky" id="Sky_cli5s"]
@@ -39,8 +40,7 @@ radius = 20.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Ship" parent="." instance=ExtResource("2_0g8dw")]
-transform = Transform3D(0.888625, -0.458633, 0, 0.458634, 0.888624, 0, 0, 0, 1, -586.073, 26.733, -176.867)
-antiGrav = true
+transform = Transform3D(1, 0, 0, 0, 0.999998, 0, 0, 0, 1, -582.581, 26.733, -176.867)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jnruu")
@@ -64,17 +64,17 @@ shape = SubResource("BoxShape3D_23t2g")
 mesh = SubResource("PlaneMesh_ueipm")
 skeleton = NodePath("../../..")
 
-[node name="Enemy" parent="." instance=ExtResource("4_x7ejj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5683, 0.5, 419.618)
-acceleration = 20.0
-
 [node name="Track_objects" type="Node3D" parent="."]
 
 [node name="Route_nodes" type="Node3D" parent="Track_objects"]
 script = ExtResource("5_j0rmg")
 
 [node name="1" parent="Track_objects/Route_nodes" instance=ExtResource("6_ik488")]
-transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 30, 5, 300)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -570.885, 30.1255, -420.469)
+
+[node name="Area3D" parent="Track_objects" instance=ExtResource("7_8imoh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -583.163, 27.3747, -191.07)
+spawnedObject = ExtResource("4_x7ejj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 collision_mask = 0

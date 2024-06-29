@@ -21,6 +21,8 @@ enum CollisionType {Recent, Skidding, Normal}
 @export_group("Ship stats")
 @export var max_speed : float = 100.0
 @export var acceleration : float = 16.0
+@export var maxHealth : int = 100
+var currentHealth : int = maxHealth
 @export var boost : float = 30.0
 @export var braking : float = 1.2
 @export var roll_speed : float = 1.2
@@ -132,7 +134,7 @@ func rotateShip(delta):
 		#direction = -theMesh.global_transform.basis.z
 		climb = pitch_speed * Vector3(0,1,0) * pitch_input
 	
-func move_turret(delta):
+func move_turret():
 	Turret.position = position
 
 func _normal_movement(delta):
@@ -186,7 +188,7 @@ func _hooked_movement(delta):
 		vectorHookonZ = Vector3(0,0,0)
 	else:
 		vectorHookonZ = transform.basis.z * transform.basis.z.dot(newvectorHook)
-	velocity = (direction + vectorHookonZ * delta*1.25) * forward_speed + climb
+	velocity = (direction + vectorHookonZ * delta * .25) * forward_speed + climb
 	
 	transform.basis = transform.basis.rotated(transform.basis.y, -rightorLeft * delta).orthonormalized()
 
@@ -200,13 +202,19 @@ func autoPilot(delta):
 		var dirToMovePosition = (position - targetPosition).normalized()
 		var frontorBack : float = dirToMovePosition.dot(global_transform.basis.z)
 		var leftorRight : float = dirToMovePosition.dot(global_transform.basis.x)
-		var upOrDown : float = dirToMovePosition.dot(global_transform.basis.y) * (-1.0) * 2.5
-		var Roll : float = (AIPilotNode.basis.y.dot(theMesh.global_transform.basis.y)-1)*(-1.0)
+		if !antiGrav:
+			var upOrDown : float = dirToMovePosition.dot(global_transform.basis.y) * (-1.0) * 2.5
+			var Roll : float = (AIPilotNode.basis.y.dot(theMesh.global_transform.basis.y)-1)*(-1.0)
 		
-		yaw_input = lerp(yaw_input,clamp((leftorRight),-1.0,1.0),yaw_response * delta * 2)
-		pitch_input = lerp(pitch_input,clamp((upOrDown),-1.0,1.0),pitch_response * delta * 2)
-		roll_input = lerp(roll_input,Roll,roll_response*delta * 2)
-		
+			yaw_input = lerp(yaw_input,clamp((leftorRight),-1.0,1.0),yaw_response * delta * 2)
+			pitch_input = lerp(pitch_input,clamp((upOrDown),-1.0,1.0),pitch_response * delta * 2)
+			roll_input = lerp(roll_input,Roll,roll_response*delta * 2)
+		else:
+			var Roll : float = (AIPilotNode.basis.y.dot(theMesh.global_transform.basis.y)-1)*(-1.0)
+			yaw_input = lerp(yaw_input,clamp((leftorRight),-1.0,1.0),yaw_response * delta * 2)
+			roll_input = lerp(roll_input,leftorRight/4,roll_response*delta)
+
+
 		if frontorBack <= 0 and !hooked:
 			is_braking = true
 			is_accelerating = false
@@ -215,6 +223,7 @@ func autoPilot(delta):
 			is_braking = false
 		if is_skidding == CollisionType.Skidding:
 			is_accelerating = false
+
 func enterAntiGrav(delta):
 	if transitioning:
 		if !antiGrav:
@@ -249,47 +258,49 @@ func handleGravity(delta):
 		var distanceRight = RaycastRight.get_collision_point().distance_to(RaycastRight.global_position)
 		var distanceLeft = RaycastLeft.get_collision_point().distance_to(RaycastLeft.global_position)
 		
-		var upwardsForce = -16
+		var upwardsForce = -10 - forward_speed
+		var thrusterForce = -upwardsForce/2
+		
 		var alldistancesAccomplished : bool = true
 		if distanceFront < 2:
-			upwardsForce += 7 / distanceFront
+			upwardsForce += thrusterForce/ distanceFront
 			if distanceFront < 1.5:
 				alldistancesAccomplished = false
 		else:
 			alldistancesAccomplished = false
-			upwardsForce -= 32
+			upwardsForce -= thrusterForce * 4
 		if distanceBack < 2:
-			upwardsForce += 7 /distanceBack
+			upwardsForce += thrusterForce /distanceBack
 			if distanceBack < 1.5:
 				alldistancesAccomplished = false
 		else:
 			alldistancesAccomplished = false
-			upwardsForce -= 8
+			upwardsForce -= thrusterForce
 		if distanceRight < 2:
-			upwardsForce += 7 /distanceRight
+			upwardsForce += thrusterForce /distanceRight
 			if distanceRight < 1.5:
 				alldistancesAccomplished = false
 		else:
 			alldistancesAccomplished = false
-			upwardsForce -= 8
+			upwardsForce -= thrusterForce
 		if distanceLeft < 2:
-			upwardsForce += 7 /distanceLeft
+			upwardsForce += thrusterForce /distanceLeft
 			if distanceLeft < 1.5:
 				alldistancesAccomplished = false
 		else:
 			alldistancesAccomplished = false
-			upwardsForce -= 8
+			upwardsForce -= thrusterForce
 		if upwardsForce > 0 and alldistancesAccomplished:
 			upwardsForce = -velocity.dot(basis.y)/delta
 		velocity += (upwardsForce * delta * basis.y)
 		
 		var angleAcrossX : float = 0
-		var rotation_stength = 3 * PI
+		var rotation_stength = 15 * PI
 		if distanceFront < 2:
 			angleAcrossX += (1-distanceFront/2) * rotation_stength * (1-distanceFront/2) 
 		if distanceBack < 2:
 			angleAcrossX += (1-distanceBack/2) * (-rotation_stength) * (1-distanceBack/2)
-		angleAcrossX = angleAcrossX * delta * 5
+		angleAcrossX = angleAcrossX * delta
 		transform.basis = transform.basis.rotated(basis.x,angleAcrossX)
 		
 		
@@ -298,7 +309,7 @@ func handleGravity(delta):
 			angleAcrossZ += (1-distanceLeft/2) * rotation_stength * (1-distanceLeft/2)
 		if distanceRight < 2:
 			angleAcrossZ += (1-distanceRight/2) * (-rotation_stength) * (1-distanceRight/2)
-		angleAcrossZ = angleAcrossZ * delta * 5
+		angleAcrossZ = angleAcrossZ * delta
 		transform.basis = transform.basis.rotated(-basis.z,angleAcrossZ)
 		#transform.basis = transform.basis.rotated(transform.basis.y, yaw_input * yaw_speed * delta)
 		#var distanceA = GravSkirt[0].get_collision_point().distance_to(GravSkirt[0].global_position)
@@ -367,7 +378,7 @@ func _physics_process(delta):
 		forward_speed = velocity.dot(-basis.z)
 		if forward_speed < 0:
 			forward_speed = 0
-	move_turret(delta)
+	move_turret()
 
 	doVFX(delta)
 func doVFX(_delta):
@@ -411,7 +422,7 @@ func collide_and_slide(currentcollision : KinematicCollision3D, _delta):
 		getVelocityX_Z()
 		velocityY = Vector3(0, velocity.y, 0)
 		stored_velocity = velocity
-		velocity = velocityX_Z.bounce(currentcollision.get_normal()) + velocityY.bounce(currentcollision.get_normal()) * pinballCollision
+		velocity = velocityX_Z.bounce(collision_normal) + velocityY.bounce(collision_normal) * pinballCollision
 		is_skidding = CollisionType.Recent
 	else:
 		if collision_cooldown > .1:

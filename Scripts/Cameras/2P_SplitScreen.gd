@@ -13,3 +13,7 @@ func _ready():
 	var viewport_rid2 = viewport2.get_viewport_rid()
 	RenderingServer.viewport_attach_camera(viewport_rid1, Camera_rid1)
 	RenderingServer.viewport_attach_camera(viewport_rid2, Camera_rid2)
+	var ship_body : Ship = get_node("../Ship")
+	var ship_Health_Bar = $SubViewportContainer/SubViewport/Health
+	ship_Health_Bar.init_health(ship_body.maxHealth)
+	
