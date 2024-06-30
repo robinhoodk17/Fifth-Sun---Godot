@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bo8ptladpikfl"]
+[gd_scene load_steps=49 format=3 uid="uid://bo8ptladpikfl"]
 
 [ext_resource type="Script" path="res://Scripts/Controls/zenith.gd" id="1_08faa"]
 [ext_resource type="Material" uid="uid://bgwx5kw24feoq" path="res://art/Materials/Toon_shader.tres" id="2_lhrga"]
@@ -6,9 +6,8 @@
 [ext_resource type="Material" uid="uid://ey3gnh2bhlrb" path="res://art/Materials/Toon_shader_thin_outlines.tres" id="4_n8agw"]
 [ext_resource type="Script" path="res://Scripts/Controls/Turret_controller.gd" id="4_urwk6"]
 [ext_resource type="PackedScene" uid="uid://b2mtl2nolaf06" path="res://Prefabs/Enemies/Bullet.tscn" id="5_go1ug"]
-[ext_resource type="PackedScene" uid="uid://mq4w6wswvcsu" path="res://Prefabs/Player_related/ship_camera.tscn" id="5_x1t6o"]
 
-[sub_resource type="Image" id="Image_mxjip"]
+[sub_resource type="Image" id="Image_gg38l"]
 data = {
 "data": PackedByteArray(255, 255, 255, 195, 195, 195, 88, 88, 88, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 242, 0, 179, 170, 0, 91, 86, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 208, 0, 0, 164, 0, 0, 119, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 0, 0, 182, 0, 0, 118, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 255, 0, 0, 153, 0, 0, 94, 0, 0, 61, 0, 168, 243, 0, 133, 193, 0, 90, 131, 255, 255, 255, 226, 123, 39, 168, 92, 29, 121, 66, 20, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 193, 0, 193, 130, 0, 130, 81, 0, 81, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 240, 227, 255, 200, 150, 234, 201, 148, 219, 179, 115, 193, 148, 75, 167, 122, 48, 147, 102, 28, 92, 58, 2),
 "format": "RGB8",
@@ -19,7 +18,7 @@ data = {
 
 [sub_resource type="ImageTexture" id="ImageTexture_48b1p"]
 resource_name = "Low_poly_textures"
-image = SubResource("Image_mxjip")
+image = SubResource("Image_gg38l")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhnbg"]
 resource_name = "Material.001"
@@ -607,8 +606,6 @@ fract_delta = false
 process_material = SubResource("ParticleProcessMaterial_uwasl")
 draw_pass_1 = SubResource("QuadMesh_glnm8")
 
-[node name="Marker3D" parent="." instance=ExtResource("5_x1t6o")]
-
 [node name="Turret" type="Node3D" parent="."]
 top_level = true
 
@@ -631,12 +628,6 @@ grappling_hook = NodePath("Turret_body_x/Grapple")
 
 [node name="Turret_body_x" type="Marker3D" parent="Turret/Turret_body_y"]
 transform = Transform3D(1, 0, -1.77636e-15, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="Camera2" type="Camera3D" parent="Turret/Turret_body_y/Turret_body_x"]
-transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, 0, 0, 1, 0, 0, 0.14)
-cull_mask = 1048573
-fov = 65.0
-near = 2.0
 
 [node name="Grapple" type="Node3D" parent="Turret/Turret_body_y/Turret_body_x"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.77636e-15, -0.743913, -0.938747)

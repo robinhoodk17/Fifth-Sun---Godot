@@ -1,7 +1,10 @@
+MeshInstance3D
+Marker3D
+Camera3D
+Node3D
+Node
 TextureProgressBar
 GPUParticles3D
-Node3D
-Marker3D
 CollisionShape3D
 Sprite3D
 SubViewport
@@ -10,5 +13,3 @@ SubViewportContainer
 Container
 Timer
 ProgressBar
-StaticBody3D
-MeshInstance3D

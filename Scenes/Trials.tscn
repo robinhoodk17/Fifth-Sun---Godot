@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://bhax33ekjuln6"]
+[gd_scene load_steps=14 format=3 uid="uid://bhax33ekjuln6"]
 
-[ext_resource type="PackedScene" uid="uid://he7ivklp1ig8" path="res://Prefabs/Player_related/2playerCamera.tscn" id="1_cfudx"]
-[ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="2_0g8dw"]
 [ext_resource type="Material" uid="uid://c5a054dts7q12" path="res://Shaders/Day_clear_sky_material.tres" id="3_pqnjw"]
 [ext_resource type="PackedScene" uid="uid://dn8mk1cgcgcl" path="res://Prefabs/Enemies/Basic_enemy.tscn" id="4_x7ejj"]
 [ext_resource type="Script" path="res://Scripts/Non-player prefabs/Modules/Make_invisible.gd" id="5_j0rmg"]
 [ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="6_ik488"]
+[ext_resource type="PackedScene" uid="uid://blpqn0ovplx0r" path="res://Prefabs/ship_Manager.tscn" id="7_1j25i"]
 [ext_resource type="PackedScene" uid="uid://glivbfkecfv4" path="res://Prefabs/Track Objects/EnemySpawner.tscn" id="7_8imoh"]
 [ext_resource type="PackedScene" uid="uid://b1sqewdwht81m" path="res://art/3D/Track objects/cylinder.glb" id="7_kat24"]
 
@@ -35,12 +34,6 @@ height = 200.0
 radius = 20.0
 
 [node name="Node3D" type="Node3D"]
-
-[node name="GridContainer" parent="." instance=ExtResource("1_cfudx")]
-metadata/_edit_use_anchors_ = true
-
-[node name="Ship" parent="." instance=ExtResource("2_0g8dw")]
-transform = Transform3D(1, 0, 0, 0, 0.999998, 0, 0, 0, 1, -582.581, 26.733, -176.867)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jnruu")
@@ -90,3 +83,9 @@ shape = SubResource("CylinderShape3D_8rk7d")
 
 [node name="cylinder" parent="." instance=ExtResource("7_kat24")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -581.648, 0.5, -215.834)
+
+[node name="Node" parent="." node_paths=PackedStringArray("shipPositions") instance=ExtResource("7_1j25i")]
+shipPositions = [null]
+
+[node name="P1" type="Marker3D" parent="."]
+transform = Transform3D(-0.147663, 0.249941, -0.956935, 0.0381167, 0.968261, 0.247017, 0.988303, 0, -0.152503, -577.477, 28.2394, -276.677)

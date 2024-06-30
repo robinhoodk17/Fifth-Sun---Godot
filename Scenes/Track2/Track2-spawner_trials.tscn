@@ -1,16 +1,18 @@
-[gd_scene load_steps=22 format=3 uid="uid://bhu7nafouqcb0"]
+[gd_scene load_steps=23 format=3 uid="uid://nuc0xijyx4hg"]
 
-[ext_resource type="PackedScene" uid="uid://bk7st5tijr6ni" path="res://Prefabs/Track Objects/boost_ring.tscn" id="3_w4duq"]
-[ext_resource type="Script" path="res://Scripts/Non-player prefabs/Modules/Make_invisible.gd" id="4_3ee8s"]
-[ext_resource type="Script" path="res://Scripts/Non-player prefabs/AI/RouteNode.gd" id="4_cai6f"]
-[ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="4_vdksf"]
-[ext_resource type="PackedScene" uid="uid://bb4dbf6hnngj0" path="res://art/3D/Track objects/boost_ring.glb" id="5_12qi4"]
-[ext_resource type="Material" uid="uid://c5a054dts7q12" path="res://Shaders/Day_clear_sky_material.tres" id="5_co2rx"]
-[ext_resource type="PackedScene" uid="uid://b2irm1yejya5r" path="res://art/3D/Track objects/U-turn.glb" id="5_dkepq"]
-[ext_resource type="PackedScene" uid="uid://begn8j1et4l3v" path="res://Prefabs/Track Objects/InvisibleAimAssist.tscn" id="6_ke5su"]
-[ext_resource type="PackedScene" uid="uid://glivbfkecfv4" path="res://Prefabs/Track Objects/EnemySpawner.tscn" id="8_oywqn"]
-[ext_resource type="PackedScene" uid="uid://dn8mk1cgcgcl" path="res://Prefabs/Enemies/Basic_enemy.tscn" id="9_b1ewu"]
-[ext_resource type="PackedScene" uid="uid://blpqn0ovplx0r" path="res://Prefabs/ship_Manager.tscn" id="11_b3mv8"]
+[ext_resource type="PackedScene" uid="uid://he7ivklp1ig8" path="res://Prefabs/Player_related/2playerCamera.tscn" id="1_jy7dj"]
+[ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="2_qn4cn"]
+[ext_resource type="PackedScene" uid="uid://bk7st5tijr6ni" path="res://Prefabs/Track Objects/boost_ring.tscn" id="3_f0ius"]
+[ext_resource type="Script" path="res://Scripts/Non-player prefabs/AI/RouteNode.gd" id="4_v620b"]
+[ext_resource type="PackedScene" uid="uid://bb4dbf6hnngj0" path="res://art/3D/Track objects/boost_ring.glb" id="5_gyfo0"]
+[ext_resource type="Script" path="res://Scripts/Non-player prefabs/Modules/Make_invisible.gd" id="6_whc8d"]
+[ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="7_x0teh"]
+[ext_resource type="PackedScene" uid="uid://b2irm1yejya5r" path="res://art/3D/Track objects/U-turn.glb" id="8_uc31c"]
+[ext_resource type="PackedScene" uid="uid://begn8j1et4l3v" path="res://Prefabs/Track Objects/InvisibleAimAssist.tscn" id="9_mpnaq"]
+[ext_resource type="PackedScene" uid="uid://glivbfkecfv4" path="res://Prefabs/Track Objects/EnemySpawner.tscn" id="10_43ryb"]
+[ext_resource type="PackedScene" uid="uid://dn8mk1cgcgcl" path="res://Prefabs/Enemies/Basic_enemy.tscn" id="11_qmq1t"]
+[ext_resource type="Material" uid="uid://c5a054dts7q12" path="res://Shaders/Day_clear_sky_material.tres" id="12_hn2ei"]
+[ext_resource type="Script" path="res://Scripts/shipManager.gd" id="13_2uuf1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_hx20d"]
 size = Vector3(15, 1, 1)
@@ -29,7 +31,7 @@ size = Vector3(50, 50, 5)
 size = Vector3(120, 40, 1)
 
 [sub_resource type="Sky" id="Sky_cli5s"]
-sky_material = ExtResource("5_co2rx")
+sky_material = ExtResource("12_hn2ei")
 radiance_size = 1
 
 [sub_resource type="Environment" id="Environment_jnruu"]
@@ -44,23 +46,25 @@ size = Vector3(1000, 1, 3000)
 [sub_resource type="PlaneMesh" id="PlaneMesh_ueipm"]
 size = Vector2(1000, 3000)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_i0lwo"]
-
 [node name="Node3D" type="Node3D"]
+
+[node name="Ship" parent="." instance=ExtResource("2_qn4cn")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 30, 5, 400)
 
 [node name="Track_objects" type="Node3D" parent="."]
 
 [node name="Boosts" type="Node3D" parent="Track_objects"]
 
-[node name="boost_ring1" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
+[node name="boost_ring1" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_f0ius")]
 transform = Transform3D(-2.18557e-07, -1, 0, 1, -2.18557e-07, 0, 0, 0, 1, 12.5, 8, 95)
 NextNode = NodePath("../boost_ring2")
 
-[node name="boost_ring2" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
+[node name="boost_ring2" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_f0ius")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 12.5, 22, 20)
 NextNode = NodePath("../3")
 
-[node name="3" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
+[node name="3" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_f0ius")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 12.5, 8, -45)
 NextNode = NodePath("../boost_ring4")
 
@@ -68,7 +72,7 @@ NextNode = NodePath("../boost_ring4")
 transform = Transform3D(-1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 12.5, 22, -125)
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("4_cai6f")
+script = ExtResource("4_v620b")
 NextNode = NodePath("../../Route_nodes/U-turn-1")
 rotation_indicator = NodePath("Rotation_indicator")
 Type = 0
@@ -90,13 +94,13 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_krym8")
 
-[node name="boost_ring" parent="Track_objects/Boosts/boost_ring4" instance=ExtResource("5_12qi4")]
+[node name="boost_ring" parent="Track_objects/Boosts/boost_ring4" instance=ExtResource("5_gyfo0")]
 
 [node name="Route_node" type="Area3D" parent="Track_objects/Boosts/boost_ring4" node_paths=PackedStringArray("rotation_indicator")]
 visible = false
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("4_cai6f")
+script = ExtResource("4_v620b")
 rotation_indicator = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Track_objects/Boosts/boost_ring4/Route_node"]
@@ -105,67 +109,67 @@ mesh = SubResource("BoxMesh_sxnqm")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Track_objects/Boosts/boost_ring4/Route_node"]
 shape = SubResource("BoxShape3D_jofon")
 
-[node name="boost_ring5" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode", "hookshotTarget") instance=ExtResource("3_w4duq")]
+[node name="boost_ring5" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode", "hookshotTarget") instance=ExtResource("3_f0ius")]
 transform = Transform3D(1, -3.49691e-07, 0, 3.49691e-07, 1, 0, 0, 0, 1, -56, 30, 35)
 NextNode = NodePath("../../Route_nodes/U-turn-2")
 hookshotTarget = NodePath("../../AimAssists/U-turn-2")
 
-[node name="boost_ring6" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
+[node name="boost_ring6" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_f0ius")]
 transform = Transform3D(1, -3.49691e-07, 0, 3.49691e-07, 1, 0, 0, 0, 1, -130, 50, -220)
 NextNode = NodePath("../../Route_nodes/2")
 
 [node name="Route_nodes" type="Node3D" parent="Track_objects"]
-script = ExtResource("4_3ee8s")
+script = ExtResource("6_whc8d")
 
-[node name="1" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("4_vdksf")]
+[node name="1" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("7_x0teh")]
 transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 30, 5, 300)
 NextNode = NodePath("../../Boosts/boost_ring1")
 
-[node name="U-turn-1" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("4_vdksf")]
+[node name="U-turn-1" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("7_x0teh")]
 transform = Transform3D(-7.18085e-08, 0.642787, 0.766044, 1, 1.3811e-08, 8.21505e-08, 4.22254e-08, 0.766044, -0.642787, -36, 30, -160)
 NextNode = NodePath("../../Boosts/boost_ring5")
 
-[node name="U-turn-2" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode", "rotation_indicator") instance=ExtResource("4_vdksf")]
+[node name="U-turn-2" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode", "rotation_indicator") instance=ExtResource("7_x0teh")]
 transform = Transform3D(-8.20585e-08, -0.866025, 0.5, 1, -7.42519e-08, 7.40661e-08, -8.17893e-08, 0.5, 0.866025, -127, 30, 60)
 NextNode = NodePath("../../Boosts/boost_ring6")
 rotation_indicator = NodePath("../U-turn-1/MeshInstance3D")
 
-[node name="Anti-Grav" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("4_vdksf")]
+[node name="Anti-Grav" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("7_x0teh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130, 50, -227.592)
 NextNode = NodePath("../2")
 Type = 2
 
-[node name="2" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("4_vdksf")]
+[node name="2" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("7_x0teh")]
 transform = Transform3D(0.255361, 0.966846, 0, -0.966846, 0.255361, 0, 0, 0, 1, -100.556, -0.9095, -440.027)
 NextNode = NodePath("../3")
 
-[node name="3" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("4_vdksf")]
+[node name="3" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("7_x0teh")]
 transform = Transform3D(0.230049, 0.870699, -0.434697, -0.966823, 0.255446, 0, 0.111041, 0.420275, 0.900577, -16.183, -9.12582, -620.92)
 NextNode = NodePath("../2")
 
 [node name="Track" type="Node3D" parent="Track_objects"]
 
-[node name="U-turn" parent="Track_objects/Track" instance=ExtResource("5_dkepq")]
+[node name="U-turn" parent="Track_objects/Track" instance=ExtResource("8_uc31c")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 50, -115.482)
 
 [node name="AimAssists" type="Node3D" parent="Track_objects"]
-script = ExtResource("4_3ee8s")
+script = ExtResource("6_whc8d")
 
-[node name="U-turn-1" parent="Track_objects/AimAssists" instance=ExtResource("6_ke5su")]
+[node name="U-turn-1" parent="Track_objects/AimAssists" instance=ExtResource("9_mpnaq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 30, -115)
 
-[node name="U-turn-2" parent="Track_objects/AimAssists" node_paths=PackedStringArray("mesh") instance=ExtResource("6_ke5su")]
+[node name="U-turn-2" parent="Track_objects/AimAssists" node_paths=PackedStringArray("mesh") instance=ExtResource("9_mpnaq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80, 30, 35)
 mesh = NodePath("../U-turn-1/MeshInstance3D")
 
 [node name="Enemies_Obstacles" type="Node3D" parent="Track_objects"]
 
-[node name="Area3D" parent="Track_objects/Enemies_Obstacles" instance=ExtResource("8_oywqn")]
+[node name="Area3D" parent="Track_objects/Enemies_Obstacles" instance=ExtResource("10_43ryb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130, 50, -220)
 collision_layer = 0
 collision_mask = 2
 cooldown = 15
-spawnedObject = ExtResource("9_b1ewu")
+spawnedObject = ExtResource("11_qmq1t")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jnruu")
@@ -189,23 +193,9 @@ shape = SubResource("BoxShape3D_23t2g")
 mesh = SubResource("PlaneMesh_ueipm")
 skeleton = NodePath("../../..")
 
-[node name="ShipManager" parent="." node_paths=PackedStringArray("shipPositions") instance=ExtResource("11_b3mv8")]
-shipPositions = [NodePath("../Marker3D"), NodePath("../Marker3D2")]
-whichShipGoesWhere = Array[int]([0, 0])
-
-[node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.736, 3, 475.273)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Marker3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_i0lwo")
-
-[node name="Marker3D2" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.736, 3, 504.541)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Marker3D2"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_i0lwo")
+[node name="Node" type="Node" parent="."]
+script = ExtResource("13_2uuf1")
+GridContainerPrefab_2P = ExtResource("1_jy7dj")
 
 [connection signal="body_entered" from="Track_objects/Boosts/boost_ring4" to="Track_objects/Boosts/boost_ring4" method="_on_body_entered"]
 [connection signal="body_entered" from="Track_objects/Boosts/boost_ring4/Route_node" to="Track_objects/Boosts/boost_ring4/Route_node" method="_on_body_entered"]

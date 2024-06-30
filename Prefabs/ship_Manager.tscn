@@ -1,0 +1,18 @@
+[gd_scene load_steps=7 format=3 uid="uid://blpqn0ovplx0r"]
+
+[ext_resource type="Script" path="res://Scripts/shipManager.gd" id="1_bdhrx"]
+[ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="2_sgkpq"]
+[ext_resource type="PackedScene" uid="uid://mq4w6wswvcsu" path="res://Prefabs/Player_related/ship_camera.tscn" id="3_3fdqf"]
+[ext_resource type="PackedScene" uid="uid://07mm1p7se0yo" path="res://Prefabs/Player_related/turret_camera.tscn" id="4_fa4xh"]
+[ext_resource type="PackedScene" uid="uid://he7ivklp1ig8" path="res://Prefabs/Player_related/2playerCamera.tscn" id="5_y4ux2"]
+[ext_resource type="PackedScene" uid="uid://b5e54kp35q745" path="res://Prefabs/Player_related/4playerCamera.tscn" id="6_i4gt3"]
+
+[node name="Node" type="Node" node_paths=PackedStringArray("shipPositions")]
+script = ExtResource("1_bdhrx")
+shipPositions = [NodePath("")]
+whichShipGoesWhere = Array[int]([0])
+shipPrefabs = Array[PackedScene]([ExtResource("2_sgkpq")])
+shipCameraPrefab = ExtResource("3_3fdqf")
+turretCameraPrefab = ExtResource("4_fa4xh")
+GridContainerPrefab_2P = ExtResource("5_y4ux2")
+GridContainerPrefab_4P = ExtResource("6_i4gt3")

@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@onready var Gunner = GlobalVariables.Gunner 
+var Gunner = null
 @onready var screen_ratio = GlobalVariables.Screen_ratio 
 
 
@@ -220,7 +220,7 @@ func _retract_hookshot():
 	if _hookshot_state == Hookshot_States.anchored:
 		Ship_body.forward_speed += (Ship_body.boost/3)
 		_hookshot_state = Hookshot_States.retracting
-func _AIShooter(delta):
+func _AIShooter(_delta):
 	if acquiring_target and GlobalVariables.gunnerBehavior != GlobalVariables.Gunnerbehaviors.doNothing and autoGunnerHookTarget != null:
 		var targetPosition = autoGunnerHookTarget.global_position
 		if !aim_assist_ray.is_colliding():

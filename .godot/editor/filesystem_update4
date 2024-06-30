@@ -1,27 +1,15 @@
-res://Prefabs/Enemies/Bullet.tscn
+res://Scenes/Track2.tscn
 res://addons/motion_blur/motion_blur.gd
 res://Scripts/Cameras/2P_SplitScreen.gd
 res://Scripts/Non-player prefabs/Track/EnemySpawner.gd
 res://art/Materials/Toon_shader.tres
 res://art/Materials/Toon_shader_thin_outlines.tres
-res://addons/motion_blur/moblur_shader.gdshader
 res://Shaders/Day_clear_sky_material.tres
-res://Scripts/Controls/Turret_controller.gd
-res://Prefabs/Ship1/ship.tscn
-res://Scenes/Track2.tscn
-res://Prefabs/Enemies/Missile.tscn
-res://Prefabs/Player_related/ship_camera.tscn
-res://Scenes/Trials.tscn
-res://Prefabs/Enemies/3DHealth_Bar.tscn
-res://Prefabs/Player_related/2playerCamera.tscn
+res://addons/motion_blur/moblur_shader.gdshader
+res://Scripts/shipManager.gd
 res://Scripts/global_variables.gd
-res://Scripts/Non-player prefabs/Bullet.gd
-res://Scripts/Controls/zenith.gd
-res://Prefabs/Enemies/2DHealth_Bar.tscn
-res://Scripts/Non-player prefabs/3DHealthBar.gd
-res://Scripts/Non-player prefabs/AI/RouteNode.gd
-res://Scripts/Cameras/ShipCamera.gd
-res://Scripts/Controls/speedometer.gd
+res://Prefabs/Ship1/ship.tscn
+res://Scenes/Trials.tscn
 res://Prefabs/Enemies/Basic_enemy.tscn
-res://Prefabs/Track Objects/EnemySpawner.tscn
-res://Scripts/Non-player prefabs/AI/Enemy.gd
+res://Prefabs/Player_related/turret_camera.tscn
+res://Prefabs/Player_related/2playerCamera.tscn

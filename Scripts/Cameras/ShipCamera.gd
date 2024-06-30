@@ -1,15 +1,16 @@
 extends Marker3D
 
-var Ship_body : CharacterBody3D
+var Ship_body : Ship
 var Ydamping : Array[float]
 var YdampingCounter : int = 0
 var dampingFrames : int = 7
 var lerpSpeed = .2
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func initialize(ship):
 	for i in dampingFrames:
 		Ydamping.append(position.y)
-	Ship_body = get_parent()
+	Ship_body = ship
+	$Camera3D/motion_blur.initialize(ship)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

@@ -2,10 +2,10 @@ extends MeshInstance3D
 
 var cam_pos_prev = Vector3()
 var cam_rot_prev = Quaternion()
-var motionBlurTarget : CharacterBody3D
+var motionBlurTarget : Ship
 @onready var cam : Camera3D = get_parent()
-func _ready():
-	motionBlurTarget = $"../..".get_parent()
+func initialize(target):
+	motionBlurTarget = target
 func _process(_delta):
 	
 	#OS.delay_msec(30)

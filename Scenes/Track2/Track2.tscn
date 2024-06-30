@@ -1,5 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://bhu7nafouqcb0"]
 
+[ext_resource type="PackedScene" uid="uid://he7ivklp1ig8" path="res://Prefabs/Player_related/2playerCamera.tscn" id="1_f83m5"]
+[ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="2_ci54k"]
 [ext_resource type="PackedScene" uid="uid://bk7st5tijr6ni" path="res://Prefabs/Track Objects/boost_ring.tscn" id="3_w4duq"]
 [ext_resource type="Script" path="res://Scripts/Non-player prefabs/Modules/Make_invisible.gd" id="4_3ee8s"]
 [ext_resource type="Script" path="res://Scripts/Non-player prefabs/AI/RouteNode.gd" id="4_cai6f"]
@@ -10,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://begn8j1et4l3v" path="res://Prefabs/Track Objects/InvisibleAimAssist.tscn" id="6_ke5su"]
 [ext_resource type="PackedScene" uid="uid://glivbfkecfv4" path="res://Prefabs/Track Objects/EnemySpawner.tscn" id="8_oywqn"]
 [ext_resource type="PackedScene" uid="uid://dn8mk1cgcgcl" path="res://Prefabs/Enemies/Basic_enemy.tscn" id="9_b1ewu"]
-[ext_resource type="PackedScene" uid="uid://blpqn0ovplx0r" path="res://Prefabs/ship_Manager.tscn" id="11_b3mv8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_hx20d"]
 size = Vector3(15, 1, 1)
@@ -44,9 +45,13 @@ size = Vector3(1000, 1, 3000)
 [sub_resource type="PlaneMesh" id="PlaneMesh_ueipm"]
 size = Vector2(1000, 3000)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_i0lwo"]
-
 [node name="Node3D" type="Node3D"]
+
+[node name="GridContainer" parent="." instance=ExtResource("1_f83m5")]
+metadata/_edit_use_anchors_ = true
+
+[node name="Ship" parent="." instance=ExtResource("2_ci54k")]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 30, 5, 400)
 
 [node name="Track_objects" type="Node3D" parent="."]
 
@@ -189,23 +194,8 @@ shape = SubResource("BoxShape3D_23t2g")
 mesh = SubResource("PlaneMesh_ueipm")
 skeleton = NodePath("../../..")
 
-[node name="ShipManager" parent="." node_paths=PackedStringArray("shipPositions") instance=ExtResource("11_b3mv8")]
-shipPositions = [NodePath("../Marker3D"), NodePath("../Marker3D2")]
-whichShipGoesWhere = Array[int]([0, 0])
-
-[node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.736, 3, 475.273)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Marker3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_i0lwo")
-
-[node name="Marker3D2" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.736, 3, 504.541)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Marker3D2"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_i0lwo")
+[node name="Enemy" parent="." instance=ExtResource("9_b1ewu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.525, 0.5, 443.257)
 
 [connection signal="body_entered" from="Track_objects/Boosts/boost_ring4" to="Track_objects/Boosts/boost_ring4" method="_on_body_entered"]
 [connection signal="body_entered" from="Track_objects/Boosts/boost_ring4/Route_node" to="Track_objects/Boosts/boost_ring4/Route_node" method="_on_body_entered"]

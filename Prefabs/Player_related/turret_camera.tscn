@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://07mm1p7se0yo"]
+
+[ext_resource type="Script" path="res://Scripts/Cameras/turret_camera.gd" id="1_0mlaa"]
+
+[node name="Turret_Cam" type="Marker3D"]
+script = ExtResource("1_0mlaa")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.16)
+fov = 70.0
+near = 0.85

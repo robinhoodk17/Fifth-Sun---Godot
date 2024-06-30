@@ -48,7 +48,7 @@ var climbResponsiveness : float = 2 * grip
 @export var Controller_Sensitivity : float = 1
 
 @onready var AIPilotNode : Node = $"../Track_objects/Route_nodes/1"
-@onready var Pilot = GlobalVariables.Pilot 
+var Pilot = null
 @onready var pilotBehavior = GlobalVariables.pilotBehavior 
 
 var is_accelerating : bool = false
@@ -64,9 +64,6 @@ var transition_between_Gravities = 0.15
 var transitioning : bool = false
 var invulnerability : bool = false
 var transition_time_elapsed : float = 0.0
-var Ydamping : Array[float]
-var YdampingCounter : int = 0
-var dampingFrames : int = 7
 
 """collision variables"""
 var collision_suspension_time = 2
@@ -94,10 +91,7 @@ var held_Item = null
 var draft : bool = true
 
 
-func _ready():
-	Pilot = GlobalVariables.Pilot
-	for i in dampingFrames:
-		Ydamping.append(position.y)
+func initialize():
 	if Pilot == 2:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -228,7 +222,7 @@ func autoPilot(delta):
 			else: 
 				is_accelerating = true
 				is_braking = false
-			var Roll : float = (AIPilotNode.basis.y.dot(theMesh.global_transform.basis.y)-1)*(-1.0)
+			var _Roll : float = (AIPilotNode.basis.y.dot(theMesh.global_transform.basis.y)-1)*(-1.0)
 			yaw_input = lerp(yaw_input,clamp((leftorRight),-1.0,1.0),yaw_response * delta * 2)
 			roll_input = lerp(roll_input,leftorRight/4,roll_response*delta)
 			pitch_input = 0

@@ -2,8 +2,12 @@ extends Node
 enum Pilotbehaviors {normal, straight, doNothing}
 enum Gunnerbehaviors {normal, doNothing}
 
-var Pilot = null
-var Gunner = 1
+var Pilot = 1
+var Gunner = null
+var Pilot2 = null
+var Gunner2 = null
+var Player1Position = 1
+var Player2Position = 0
 
 var MotionBlurIntensity = .1
 var FOV = 90

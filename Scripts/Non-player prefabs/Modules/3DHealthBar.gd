@@ -5,5 +5,5 @@ var health = 0 : set = _set_health
 func _set_health(new_health):
 	healthBar.health = new_health
 
-func init_health(health):
+func init_health(new_health):
 	healthBar.init_health(health)
