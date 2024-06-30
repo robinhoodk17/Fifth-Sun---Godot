@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1719598907
+::res://::1719666349
 CharacterBody3d.gd::GDScript::-1::1717432711::0::1::::<>CharacterBody3D<>::
 CharacterBodyGravityTrial.gd::GDScript::-1::1719381285::0::1::::<>CharacterBody3D<>::
 default_bus_layout.tres::AudioBusLayout::-1::1697554147::0::1::::<><>::
@@ -43,9 +43,9 @@ texture_10.png::CompressedTexture2D::5659726287949727815::1717432712::1717432716
 texture_11.png::CompressedTexture2D::1809144790467937400::1717432712::1717432716::1::::<><>::
 texture_12.png::CompressedTexture2D::8112446283286680367::1717432712::1717432716::1::::<><>::
 texture_13.png::CompressedTexture2D::7601093695156940194::1717432712::1717432716::1::::<><>::
-::res://addons/motion_blur/::1719598807
-moblur_shader.gdshader::Shader::-1::1719598807::0::1::::<><>::
-motion_blur.gd::GDScript::-1::1719507576::0::1::::<>MeshInstance3D<>::
+::res://addons/motion_blur/::1719741190
+moblur_shader.gdshader::Shader::-1::1719741267::0::1::::<><>::
+motion_blur.gd::GDScript::-1::1719600012::0::1::::<>MeshInstance3D<>::
 motion_blur.tscn::PackedScene::379577891003110585::1719344467::0::1::::<><>::res://addons/motion_blur/moblur_shader.gdshader<>res://addons/motion_blur/motion_blur.gd
 ::res://art/::1717847225
 body.material::StandardMaterial3D::-1::1605912108::0::1::::<><>::
@@ -63,19 +63,19 @@ Zenith_Zenith_Orange.png::CompressedTexture2D::9092763812345692954::1697630749::
 Ship1-structure.glb::PackedScene::3742478954498534478::1717828687::1717847216::1::::<><>::
 Ship1.glb::PackedScene::5021487672106048065::1715252909::1717847216::1::::<><>::
 turret.glb::PackedScene::7947237798809612379::1717828711::1717847217::1::::<><>::
-::res://art/3D/Track objects/::1719467736
+::res://art/3D/Track objects/::1719732590
 boost_ring.glb::PackedScene::2516660729812697403::1716735873::1717847217::1::::<><>::uid://dh6e4f0uuonm1::::res://art/3D/Track objects/boost_ring_Ship1-new_Low_poly_textures.png
 boost_ring_Ship1-new_Low_poly_textures.png::CompressedTexture2D::7714874625088552790::1712046890::1712046890::1::::<><>::
 Curve_1.glb::PackedScene::2779831359399669042::1713459501::1717847217::1::::<><>::
 cylinder.glb::PackedScene::4249469194072737932::1719429863::1719429877::1::::<><>::
-U-turn.glb::PackedScene::4299089505233465053::1719467731::1719467736::1::::<><>::
+U-turn.glb::PackedScene::4299089505233465053::1719732588::1719732590::1::::<><>::
 Zigzag-1.glb::PackedScene::969669851280398547::1714976449::1717847222::1::::<><>::
 Zigzag-2.glb::PackedScene::6030065391946447787::1715630122::1717847222::1::::<><>::
 Zigzag_1.glb::PackedScene::5248368841312571912::1714976801::1717847223::1::::<><>::
-::res://art/Materials/::1719507577
-Toon_shader.tres::StandardMaterial3D::2854420681246296404::1719507577::0::1::::<><>::uid://uho6f4hro42d::::res://art/Textures/Ship1-new_Low_poly_textures.png<>uid://b3xemsho03uid::::res://art/Sprites/Low_poly_textures_2.png
+::res://art/Materials/::1719600012
+Toon_shader.tres::StandardMaterial3D::2854420681246296404::1719600012::0::1::::<><>::uid://uho6f4hro42d::::res://art/Textures/Ship1-new_Low_poly_textures.png<>uid://b3xemsho03uid::::res://art/Sprites/Low_poly_textures_2.png
 Toon_shader_thick_outlines.tres::StandardMaterial3D::4642498067759247712::1716915331::0::1::::<><>::uid://uho6f4hro42d
-Toon_shader_thin_outlines.tres::StandardMaterial3D::332011926056018519::1719507577::0::1::::<><>::uid://uho6f4hro42d::::res://art/Textures/Ship1-new_Low_poly_textures.png<>uid://b3xemsho03uid::::res://art/Sprites/Low_poly_textures_2.png
+Toon_shader_thin_outlines.tres::StandardMaterial3D::332011926056018519::1719600012::0::1::::<><>::uid://uho6f4hro42d::::res://art/Textures/Ship1-new_Low_poly_textures.png<>uid://b3xemsho03uid::::res://art/Sprites/Low_poly_textures_2.png
 ::res://art/Sprites/::1717846962
 Low_poly_textures.png::CompressedTexture2D::3943294327389080537::1708792086::1708861177::1::::<><>::
 Low_poly_textures_2.png::CompressedTexture2D::4399454248303869011::1715255757::1715255759::1::::<><>::
@@ -83,27 +83,28 @@ Outer aim.png::CompressedTexture2D::7229502398667250279::1700555346::1700555349:
 Red dot.png::CompressedTexture2D::8677439666103777648::1698171158::1698171198::1::::<><>::
 Speedom-hand.png::CompressedTexture2D::3406288310815612271::1707585758::1707585763::1::::<><>::
 speedometer.png::CompressedTexture2D::845210347951215490::1707585475::1707585493::1::::<><>::
-::res://art/Textures/::1719549817
+::res://art/Textures/::1719641188
 Blank.png::CompressedTexture2D::5182393701378612249::1719549815::1719549817::1::::<><>::
 boost_ring_Ship1-new_Low_poly_textures.png::CompressedTexture2D::3115548015713959100::1712046824::1716915333::1::::<><>::
 Ship1-new_Low_poly_textures.png::CompressedTexture2D::1419133222306277549::1709385446::1716915333::1::::<><>::
+Sin título.png::CompressedTexture2D::8366138948644405974::1719641184::1719641188::1::::<><>::
 Smoke1.png::CompressedTexture2D::2061513741910969718::1717611356::1717611360::1::::<><>::
 Smoke2.png::CompressedTexture2D::837582136064597178::1568928684::1717610698::1::::<><>::
 ::res://fonts/::1717846962
 LICENSE.txt::TextFile::-1::1605992052::0::1::::<><>::
 Montserrat-Medium.ttf::FontFile::5293367909236287338::1323705600::1697554195::1::::<><>::
 ::res://Prefabs/::1717846964
-::res://Prefabs/Enemies/::1719598627
-2DHealth_Bar.tscn::PackedScene::7303439512990772676::1719555863::0::1::::<><>::res://Scripts/Non-player prefabs/2DHealthBar.gd
-3DHealth_Bar.tscn::PackedScene::9146687745689745684::1719598626::0::1::::<><>::uid://dcb3t1qo4wb5e::::res://Prefabs/Enemies/2DHealth_Bar.tscn<>res://Scripts/Non-player prefabs/3DHealthBar.gd
-Basic_enemy.tscn::PackedScene::239429097502417047::1719555861::0::1::::<><>::res://Scripts/Non-player prefabs/AI/Enemy.gd<>uid://d3kyu1d2ycsa3::::res://Prefabs/Enemies/3DHealth_Bar.tscn
-Bullet.tscn::PackedScene::4307466700427922997::1719598627::0::1::::<><>::res://Scripts/Non-player prefabs/AI/Enemy.gd<>uid://d3kyu1d2ycsa3::::res://Prefabs/Enemies/3DHealth_Bar.tscn
-Missile.tscn::PackedScene::4207298116113144650::1719598625::0::1::::<><>::res://Scripts/Non-player prefabs/AI/Enemy.gd<>uid://d3kyu1d2ycsa3::::res://Prefabs/Enemies/3DHealth_Bar.tscn<>uid://l6y4c38pc4t7::::res://art/Textures/Smoke2.png
-::res://Prefabs/Player_related/::1719598627
-2playerCamera.tscn::PackedScene::501537765561495085::1719598627::0::1::::<><>::res://Scripts/Cameras/2P_SplitScreen.gd<>res://Scripts/Controls/speedometer.gd<>uid://mboqxscd4faw::::res://art/Sprites/speedometer.png<>uid://bosbcn4jsochj::::res://art/Sprites/Speedom-hand.png<>uid://dcb3t1qo4wb5e::::res://Prefabs/Enemies/2DHealth_Bar.tscn<>uid://dvvoftavsla7y::::res://art/Sprites/Red dot.png<>uid://dbaa33ud0yxvr::::res://art/Sprites/Outer aim.png
-ship_camera.tscn::PackedScene::877097911035097160::1719598626::0::1::::<><>::res://Scripts/Cameras/ShipCamera.gd<>uid://fn4ue284pmgv::::res://addons/motion_blur/motion_blur.tscn
-::res://Prefabs/Ship1/::1719598624
-ship.tscn::PackedScene::3438134223398746093::1719598624::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://bgwx5kw24feoq::::res://art/Materials/Toon_shader.tres<>uid://ey3gnh2bhlrb::::res://art/Materials/Toon_shader_thin_outlines.tres<>res://Scripts/Controls/Turret_controller.gd<>uid://b2mtl2nolaf06::::res://Prefabs/Enemies/Bullet.tscn<>uid://mq4w6wswvcsu::::res://Prefabs/Player_related/ship_camera.tscn
+::res://Prefabs/Enemies/::1719741190
+2DHealth_Bar.tscn::PackedScene::7303439512990772676::1719741267::0::1::::<><>::res://Scripts/Non-player prefabs/2DHealthBar.gd
+3DHealth_Bar.tscn::PackedScene::9146687745689745684::1719741267::0::1::::<><>::uid://dcb3t1qo4wb5e::::res://Prefabs/Enemies/2DHealth_Bar.tscn<>res://Scripts/Non-player prefabs/3DHealthBar.gd
+Basic_enemy.tscn::PackedScene::239429097502417047::1719741190::0::1::::<><>::res://Scripts/Non-player prefabs/AI/Enemy.gd<>uid://d3kyu1d2ycsa3::::res://Prefabs/Enemies/3DHealth_Bar.tscn
+Bullet.tscn::PackedScene::4307466700427922997::1719741189::0::1::::<><>::res://Scripts/Non-player prefabs/Bullet.gd<>uid://drgvc6vcb86ys::::res://art/Textures/Sin título.png
+Missile.tscn::PackedScene::4207298116113144650::1719741188::0::1::::<><>::res://Scripts/Non-player prefabs/AI/Enemy.gd<>uid://d3kyu1d2ycsa3::::res://Prefabs/Enemies/3DHealth_Bar.tscn<>uid://l6y4c38pc4t7::::res://art/Textures/Smoke2.png
+::res://Prefabs/Player_related/::1719741189
+2playerCamera.tscn::PackedScene::501537765561495085::1719741189::0::1::::<><>::res://Scripts/Cameras/2P_SplitScreen.gd<>res://Scripts/Controls/speedometer.gd<>uid://mboqxscd4faw::::res://art/Sprites/speedometer.png<>uid://bosbcn4jsochj::::res://art/Sprites/Speedom-hand.png<>uid://dcb3t1qo4wb5e::::res://Prefabs/Enemies/2DHealth_Bar.tscn<>uid://dvvoftavsla7y::::res://art/Sprites/Red dot.png<>uid://dbaa33ud0yxvr::::res://art/Sprites/Outer aim.png
+ship_camera.tscn::PackedScene::877097911035097160::1719741188::0::1::::<><>::res://Scripts/Cameras/ShipCamera.gd<>uid://fn4ue284pmgv::::res://addons/motion_blur/motion_blur.tscn
+::res://Prefabs/Ship1/::1719741187
+ship.tscn::PackedScene::3438134223398746093::1719741187::0::1::::<><>::res://Scripts/Controls/zenith.gd<>uid://bgwx5kw24feoq::::res://art/Materials/Toon_shader.tres<>uid://l6y4c38pc4t7::::res://art/Textures/Smoke2.png<>uid://ey3gnh2bhlrb::::res://art/Materials/Toon_shader_thin_outlines.tres<>res://Scripts/Controls/Turret_controller.gd<>uid://b2mtl2nolaf06::::res://Prefabs/Enemies/Bullet.tscn<>uid://mq4w6wswvcsu::::res://Prefabs/Player_related/ship_camera.tscn
 ship_1_structure.tscn::PackedScene::8794457141614261718::1719344467::0::1::::<><>::uid://btk5c1ld1krsw::::res://art/3D/Ships/Ship1-structure.glb
 ::res://Prefabs/Targets/::1718047987
 Items.tscn::PackedScene::7383958048921772521::1718047987::0::1::::<><>::res://Scripts/Non-player prefabs/Track/Items.gd
@@ -112,46 +113,47 @@ boost_ring.tscn::PackedScene::3155497649585330198::1719381258::0::1::::<><>::res
 EnemySpawner.tscn::PackedScene::444364515444143307::1719344468::0::1::::<><>::res://Scripts/Non-player prefabs/Track/EnemySpawner.gd<>res://Scripts/Non-player prefabs/Make_invisible.gd
 InvisibleAimAssist.tscn::PackedScene::2680411089957766545::1718047987::0::1::::<><>::res://Scripts/Non-player prefabs/Track/InvisibleAimAssist.gd
 RouteNode.tscn::PackedScene::2302122874349452920::1719381258::0::1::::<><>::res://Scripts/Non-player prefabs/AI/RouteNode.gd
-::res://Scenes/::1719598806
+::res://Scenes/::1719741189
 character_select.tscn::PackedScene::6027499136100608689::1719344467::0::1::::<><>::res://Scripts/Menus/character_select.gd<>res://Scripts/Controls/Cursor.gd
 main_menu.tscn::PackedScene::3622791666755024439::1717847201::0::1::::<><>::res://Scripts/Menus/main_menu.gd
-Track2.tscn::PackedScene::2920996311717289731::1719598806::0::1::::<><>::uid://he7ivklp1ig8::::res://Prefabs/Player_related/2playerCamera.tscn<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn<>uid://bk7st5tijr6ni::::res://Prefabs/Track Objects/boost_ring.tscn<>res://Scripts/Non-player prefabs/Make_invisible.gd<>res://Scripts/Non-player prefabs/AI/RouteNode.gd<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://bb4dbf6hnngj0::::res://art/3D/Track objects/boost_ring.glb<>uid://c5a054dts7q12::::res://Shaders/Day_clear_sky_material.tres<>uid://b2irm1yejya5r::::res://art/3D/Track objects/U-turn.glb<>uid://begn8j1et4l3v::::res://Prefabs/Track Objects/InvisibleAimAssist.tscn<>uid://glivbfkecfv4::::res://Prefabs/Track Objects/EnemySpawner.tscn<>uid://dn8mk1cgcgcl::::res://Prefabs/Enemies/Basic_enemy.tscn
-Trials.tscn::PackedScene::2879190559522495733::1719598626::0::1::::<><>::uid://he7ivklp1ig8::::res://Prefabs/Player_related/2playerCamera.tscn<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn<>uid://c5a054dts7q12::::res://Shaders/Day_clear_sky_material.tres<>uid://dn8mk1cgcgcl::::res://Prefabs/Enemies/Basic_enemy.tscn<>res://Scripts/Non-player prefabs/Make_invisible.gd<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://glivbfkecfv4::::res://Prefabs/Track Objects/EnemySpawner.tscn<>uid://b1sqewdwht81m::::res://art/3D/Track objects/cylinder.glb
+Track2.tscn::PackedScene::2920996311717289731::1719741266::0::1::::<><>::uid://he7ivklp1ig8::::res://Prefabs/Player_related/2playerCamera.tscn<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn<>uid://bk7st5tijr6ni::::res://Prefabs/Track Objects/boost_ring.tscn<>res://Scripts/Non-player prefabs/Make_invisible.gd<>res://Scripts/Non-player prefabs/AI/RouteNode.gd<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://bb4dbf6hnngj0::::res://art/3D/Track objects/boost_ring.glb<>uid://c5a054dts7q12::::res://Shaders/Day_clear_sky_material.tres<>uid://b2irm1yejya5r::::res://art/3D/Track objects/U-turn.glb<>uid://begn8j1et4l3v::::res://Prefabs/Track Objects/InvisibleAimAssist.tscn<>uid://glivbfkecfv4::::res://Prefabs/Track Objects/EnemySpawner.tscn<>uid://dn8mk1cgcgcl::::res://Prefabs/Enemies/Basic_enemy.tscn
+Trials.tscn::PackedScene::2879190559522495733::1719741266::0::1::::<><>::uid://he7ivklp1ig8::::res://Prefabs/Player_related/2playerCamera.tscn<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn<>uid://c5a054dts7q12::::res://Shaders/Day_clear_sky_material.tres<>uid://dn8mk1cgcgcl::::res://Prefabs/Enemies/Basic_enemy.tscn<>res://Scripts/Non-player prefabs/Make_invisible.gd<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://glivbfkecfv4::::res://Prefabs/Track Objects/EnemySpawner.tscn<>uid://b1sqewdwht81m::::res://art/3D/Track objects/cylinder.glb
 ::res://Scenes/Track2/::1716915110
-::res://Scripts/::1719597473
+::res://Scripts/::1719741185
 AINavigator.gd::GDScript::-1::1717336033::0::1::::AINavigator<>Node3D<>::
-global_variables.gd::GDScript::-1::1719597473::0::1::::<>Node<>::
+global_variables.gd::GDScript::-1::1719741185::0::1::::<>Node<>::
 Reparent_colliders.gd::GDScript::-1::1719381288::0::1::::<>Node3D<>::
 Ship_builder.gd::GDScript::-1::1708874842::0::1::::<>Node3D<>::
-::res://Scripts/Cameras/::1719507576
-2P_SplitScreen.gd::GDScript::-1::1719507576::0::1::::<>GridContainer<>::
-ShipCamera.gd::GDScript::-1::1719464479::0::1::::<>Marker3D<>::
+::res://Scripts/Cameras/::1719731533
+2P_SplitScreen.gd::GDScript::-1::1719676031::0::1::::<>GridContainer<>::
+ShipCamera.gd::GDScript::-1::1719731533::0::1::::<>Marker3D<>::
 SpaceShip_camera.gd::GDScript::-1::1719381258::0::1::::<>Camera3D<>::
-::res://Scripts/Controls/::1719598807
+::res://Scripts/Controls/::1719740731
 Cursor.gd::GDScript::-1::1719381286::0::1::::<>CharacterBody2D<>::
-speedometer.gd::GDScript::-1::1719381289::0::1::::<>Node<>::
-Turret_controller.gd::GDScript::-1::1719598806::0::1::::<>CharacterBody3D<>::
-zenith.gd::GDScript::-1::1719513932::0::1::::Ship<>CharacterBody3D<>::
+speedometer.gd::GDScript::-1::1719733568::0::1::::<>Node<>::
+Turret_controller.gd::GDScript::-1::1719740731::0::1::::<>CharacterBody3D<>::
+zenith.gd::GDScript::-1::1719740704::0::1::::Ship<>CharacterBody3D<>::
 ::res://Scripts/Menus/::1719381288
 character_select.gd::GDScript::-1::1719381286::0::1::::<>Control<>::
 main_menu.gd::GDScript::-1::1719381288::0::1::::<>Control<>::
-::res://Scripts/Non-player prefabs/::1719555351
+::res://Scripts/Non-player prefabs/::1719665250
 2DHealthBar.gd::GDScript::-1::1719555351::0::1::::<>ProgressBar<>::
-3DHealthBar.gd::GDScript::-1::1719555283::0::1::::<>Node3D<>::
+3DHealthBar.gd::GDScript::-1::1719665250::0::1::::<>Node3D<>::
 Make_invisible.gd::GDScript::-1::1719381288::0::1::::<>Node3D<>::
+Bullet.gd::GDScript::-1::1719636096::0::1::::<>GPUParticles3D<>::
 TurretPosition.gd::GDScript::-1::1717332230::0::1::::<>Node3D<>::
-::res://Scripts/Non-player prefabs/AI/::1719598167
+::res://Scripts/Non-player prefabs/AI/::1719731165
 Enemy.gd::GDScript::-1::1719598167::0::1::::Basic_enemy<>CharacterBody3D<>::
-RouteNode.gd::GDScript::-1::1719381289::0::1::::<>Area3D<>::
+RouteNode.gd::GDScript::-1::1719731165::0::1::::<>Area3D<>::
 ::res://Scripts/Non-player prefabs/Modules/::1719381289
 Spawner_module.gd::GDScript::-1::1719381289::0::1::::<>Node3D<>::
-::res://Scripts/Non-player prefabs/Track/::1719597897
+::res://Scripts/Non-player prefabs/Track/::1719741175
 boost_ring.gd::GDScript::-1::1719381285::0::1::::<>Node3D<>::
-EnemySpawner.gd::GDScript::-1::1719597897::0::1::::<>Area3D<>::
+EnemySpawner.gd::GDScript::-1::1719741175::0::1::::<>Area3D<>::
 InvisibleAimAssist.gd::GDScript::-1::1719381287::0::1::::<>StaticBody3D<>::
 Items.gd::GDScript::-1::1719381287::0::1::::<>RigidBody3D<>::
-::res://Shaders/::1719507577
-Day_clear_sky_material.tres::ProceduralSkyMaterial::6880079703863653775::1719507577::0::1::::<><>::
+::res://Shaders/::1719600013
+Day_clear_sky_material.tres::ProceduralSkyMaterial::6880079703863653775::1719600013::0::1::::<><>::
 new_shader.tres::VisualShader::7644381285183150484::1709193652::0::1::::<><>::
 Outline_Shader.gdshader::Shader::-1::1709194088::0::1::::<><>::
 ::res://Shapes/::1717846964

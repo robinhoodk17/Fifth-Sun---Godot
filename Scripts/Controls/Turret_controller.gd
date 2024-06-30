@@ -122,6 +122,7 @@ func doShotVFX(target):
 	newInstance.set_process(true)
 	newInstance.visible = true
 	newInstance.get_child(0).emitting = true
+	newInstance.look_at(global_position)
 	time_shot_pressed = 0
 func _shoot():
 	if(time_shot_pressed >= fire_rate):
@@ -223,20 +224,20 @@ func _AIShooter(delta):
 	if acquiring_target and GlobalVariables.gunnerBehavior != GlobalVariables.Gunnerbehaviors.doNothing and autoGunnerHookTarget != null:
 		var targetPosition = autoGunnerHookTarget.global_position
 		if !aim_assist_ray.is_colliding():
-			var look_atMatrix = turret_body_x.global_transform.looking_at(targetPosition, turret_body_x.global_transform.basis.y)
-			controller_strength = 6
-			var y_angle = 1
-			var x_angle = 1
-			if(look_atMatrix.basis.tdotx(turret_body_x.global_transform.basis.z) > 0):
-				y_angle = -1
-			if(look_atMatrix.basis.tdoty(turret_body_x.global_transform.basis.z) < 0):
-				x_angle = -1
-			
-			turret_body_y.rotate_y(deg_to_rad(delta * controller_strength * y_angle * 100))
-			turret_body_y.transform.basis = turret_body_y.transform.basis.orthonormalized()
-			
-			turret_body_x.rotate_x(deg_to_rad(delta * controller_strength * x_angle * 100))
-			turret_body_x.transform.basis = turret_body_x.transform.basis.orthonormalized()
+			look_at(targetPosition)
+			#var look_atMatrix = turret_body_x.global_transform.looking_at(targetPosition, turret_body_x.global_transform.basis.y)
+			#controller_strength = 6
+			#var y_angle = 1
+			#var x_angle = 1
+			#if(look_atMatrix.basis.tdotx(turret_body_x.global_transform.basis.z) > 0):
+				#y_angle = -1
+			#if(look_atMatrix.basis.tdoty(turret_body_x.global_transform.basis.z) < 0):
+				#x_angle = -1
+			#turret_body_y.rotate_y(deg_to_rad(delta * controller_strength * y_angle * 100))
+			#turret_body_y.transform.basis = turret_body_y.transform.basis.orthonormalized()
+			#
+			#turret_body_x.rotate_x(deg_to_rad(delta * controller_strength * x_angle * 100))
+			#turret_body_x.transform.basis = turret_body_x.transform.basis.orthonormalized()
 		else:
 			shootingHookshot = true
 			AIhookshotFlying = true

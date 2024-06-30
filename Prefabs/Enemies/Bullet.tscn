@@ -1,35 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2mtl2nolaf06"]
+[gd_scene load_steps=6 format=3 uid="uid://b2mtl2nolaf06"]
 
 [ext_resource type="Script" path="res://Scripts/Non-player prefabs/Bullet.gd" id="1_ee1gb"]
+[ext_resource type="Texture2D" uid="uid://drgvc6vcb86ys" path="res://art/Textures/Sin título.png" id="1_n2bm5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x6wx0"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_n2bm5")
+emission_enabled = true
+emission = Color(0.945098, 0.945098, 0, 1)
+billboard_mode = 1
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dqieg"]
 emission_shape = 1
 emission_sphere_radius = 0.2
-direction = Vector3(0, 2, -1)
-initial_velocity_min = 3.0
-initial_velocity_max = 7.0
-scale_min = 0.5
-scale_max = 1.5
+direction = Vector3(0, 0.75, -0.25)
+initial_velocity_min = 0.5
+initial_velocity_max = 12.0
+scale_min = 0.25
+hue_variation_max = 0.2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5stg3"]
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ah2u1"]
-material = SubResource("StandardMaterial3D_5stg3")
-size = Vector3(0.1, 0.1, 0.1)
+[sub_resource type="QuadMesh" id="QuadMesh_48v72"]
 
 [node name="Bullet" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_x6wx0")
 cast_shadow = 0
 gi_mode = 0
 emitting = false
-amount = 15
-lifetime = 0.2
+amount = 30
+lifetime = 1.5
 one_shot = true
-explosiveness = 0.85
+explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_dqieg")
-draw_pass_1 = SubResource("BoxMesh_ah2u1")
+draw_pass_1 = SubResource("QuadMesh_48v72")
 script = ExtResource("1_ee1gb")

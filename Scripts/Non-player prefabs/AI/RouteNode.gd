@@ -22,7 +22,7 @@ func _on_body_entered(body):
 		body.AIPilotNode = NextNode
 		body.get_node("Turret/Turret_body_y").StartSearchingForTarget(hookshotTarget)
 		if Type == RouteTypes.antiGrav:
-			body.antiGrav = !body.antiGrav
+			body.transitioning = !body.antiGrav
 		if Type == RouteTypes.boost:
-			body.boosting = true
+			body.boostingFromRings = true
 			body.hasBeenBoostingFor = 0.0

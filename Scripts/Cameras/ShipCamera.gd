@@ -22,7 +22,7 @@ func _physics_process(delta):
 	for i in Ydamping:
 		yMean += i
 	yMean /= Ydamping.size()
-	if Ship_body.boosting:
+	if Ship_body.boosting or Ship_body.boostingFromRings:
 		lerpSpeed = .2
 		position = position.lerp(Ship_body.position,lerpSpeed)
 	else:

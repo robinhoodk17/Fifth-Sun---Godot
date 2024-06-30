@@ -12,6 +12,9 @@ var health : int = maxHealth
 var speed = 0
 var started : bool = false
 
+func _ready():
+	startup()
+	
 func startup():
 	healthbar.init_health(maxHealth)
 	health = maxHealth
@@ -34,7 +37,7 @@ func rotateObject(delta):
 		heading = Vector3(target)
 	else:
 		heading = target.global_position
-	var look_atMatrix = transform.looking_at(heading)
+	var look_atMatrix = global_transform.looking_at(heading)
 	global_transform.basis.y=lerp(global_transform.basis.y, look_atMatrix.basis.y, delta*turn_speed)
 	global_transform.basis.x=lerp(global_transform.basis.x, look_atMatrix.basis.x, delta*turn_speed)
 	global_transform.basis.z=lerp(global_transform.basis.z, look_atMatrix.basis.z, delta*turn_speed)

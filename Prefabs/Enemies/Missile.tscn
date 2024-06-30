@@ -12,7 +12,7 @@
 _data = [Vector2(0, 0.501779), 0.0, 0.0, 0, 0, Vector2(0.79386, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_n2s0y"]
+[sub_resource type="CurveTexture" id="CurveTexture_so5rg"]
 width = 32
 curve = SubResource("Curve_ryqoc")
 
@@ -26,7 +26,7 @@ radial_accel_min = 1.0
 radial_accel_max = 2.0
 scale_min = 0.25
 scale_max = 0.5
-scale_curve = SubResource("CurveTexture_n2s0y")
+scale_curve = SubResource("CurveTexture_so5rg")
 turbulence_noise_strength = 2.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yp5dj"]
@@ -35,7 +35,7 @@ load_path = "res://.godot/imported/Smoke2.png-e87f439d7d7e9a7adddf8bf70378da62.c
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h3wpe"]
 load_path = "res://.godot/imported/Smoke2.png-e87f439d7d7e9a7adddf8bf70378da62.ctex"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2yg6h"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_515so"]
 transparency = 4
 cull_mode = 2
 shading_mode = 0
@@ -50,13 +50,14 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_lfkc1"]
-material = SubResource("StandardMaterial3D_2yg6h")
+material = SubResource("StandardMaterial3D_515so")
 size = Vector2(0.25, 0.25)
 
 [node name="Missile" type="CharacterBody3D"]
 collision_layer = 30
 collision_mask = 3
 script = ExtResource("1_543lu")
+turn_speed = 3.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -66,7 +67,6 @@ mesh = SubResource("CapsuleMesh_34mxv")
 
 [node name="Health" parent="." instance=ExtResource("2_5k81d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)

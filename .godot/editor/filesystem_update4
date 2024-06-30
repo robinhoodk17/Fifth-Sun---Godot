@@ -17,3 +17,11 @@ res://Prefabs/Player_related/2playerCamera.tscn
 res://Scripts/global_variables.gd
 res://Scripts/Non-player prefabs/Bullet.gd
 res://Scripts/Controls/zenith.gd
+res://Prefabs/Enemies/2DHealth_Bar.tscn
+res://Scripts/Non-player prefabs/3DHealthBar.gd
+res://Scripts/Non-player prefabs/AI/RouteNode.gd
+res://Scripts/Cameras/ShipCamera.gd
+res://Scripts/Controls/speedometer.gd
+res://Prefabs/Enemies/Basic_enemy.tscn
+res://Prefabs/Track Objects/EnemySpawner.tscn
+res://Scripts/Non-player prefabs/AI/Enemy.gd

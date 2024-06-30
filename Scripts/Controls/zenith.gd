@@ -2,10 +2,12 @@ extends CharacterBody3D
 class_name Ship
 
 signal collisionSignal
+signal damageSignal
 enum CollisionType {Recent, Skidding, Normal}
 @export_group("Nodes for function")
 ##The 3D node labeled "Turret"
 @export var Turret : Node3D
+@export var damageSmoke : Node3D
 ##The node with all the colliders
 @export var BodyCollider : Array[CollisionShape3D]
 @export var RaycastFront: RayCast3D
@@ -19,17 +21,19 @@ enum CollisionType {Recent, Skidding, Normal}
 @export var motionBlur : Node3D
 
 @export_group("Ship stats")
-@export var max_speed : float = 100.0
+@export var boostCost = 1
+@export var max_speed : float = 80.0
 @export var acceleration : float = 16.0
 @export var maxHealth : int = 100
 var currentHealth : int = maxHealth
-@export var boost : float = 30.0
-@export var braking : float = 1.2
-@export var roll_speed : float = 1.2
+@export var boost : float = 9.0
+@export var braking : float = 30.0
+@export var roll_speed : float = 3.0
 @export var yaw_speed : float = 2.0
 @export var pitch_speed : float = 35.0
 @export var strafe_speed : float = 30
-@export var boostTime : float = 2.0
+@export var boostTime : float = 0.5
+@export var boostTimeFromRings : float = 3
 @export_subgroup("Ship responsiveness")
 @export var pitch_response : float = 1.2
 @export var yaw_response : float = 1.2
@@ -39,7 +43,7 @@ var currentHealth : int = maxHealth
 var shipResponsiveness : float = grip
 var climbResponsiveness : float = 2 * grip
 @export_group("Hookshot stats")
-@export var hookshot_strength : float = .05
+@export var hookshot_strength : float = 1.5
 @export_group("Controller")
 @export var Controller_Sensitivity : float = 1
 
@@ -56,8 +60,9 @@ var velocityY
 var climb = Vector3 (0,0,0)
 
 @export var antiGrav : bool = false
-var transition_between_Gravities = 0.25
+var transition_between_Gravities = 0.15
 var transitioning : bool = false
+var invulnerability : bool = false
 var transition_time_elapsed : float = 0.0
 var Ydamping : Array[float]
 var YdampingCounter : int = 0
@@ -79,6 +84,8 @@ var _mouse_input : bool = false
 var lerpSpeed = .2
 var hooked : bool = false
 var boosting : bool = false
+var boostingFromRings : bool = false
+var boostqueued : bool = false
 var hasBeenBoostingFor : float = 0.0
 #we set the hookshot length from the turret, right now it is disconnected because we don't use the length here
 var hookshot_length
@@ -159,7 +166,7 @@ func _normal_movement(delta):
 			velocity = (weighedVelocity  +  weighedDirection).normalized() * forward_speed + (climb * climbResponsiveness)
 		if is_skidding == CollisionType.Recent:
 			rotateShip(delta)
-			if collision_time > .35 and collision_cooldown > .5:
+			if collision_time > .35 and collision_cooldown > .35:
 				is_skidding = CollisionType.Skidding
 				getVelocityX_Z()
 				if velocityX_Z.dot(stored_velocity) < 0:
@@ -203,6 +210,12 @@ func autoPilot(delta):
 		var frontorBack : float = dirToMovePosition.dot(global_transform.basis.z)
 		var leftorRight : float = dirToMovePosition.dot(global_transform.basis.x)
 		if !antiGrav:
+			if frontorBack <= 0 and !hooked:
+				is_braking = true
+				is_accelerating = false
+			else: 
+				is_accelerating = true
+				is_braking = false
 			var upOrDown : float = dirToMovePosition.dot(global_transform.basis.y) * (-1.0) * 2.5
 			var Roll : float = (AIPilotNode.basis.y.dot(theMesh.global_transform.basis.y)-1)*(-1.0)
 		
@@ -210,32 +223,38 @@ func autoPilot(delta):
 			pitch_input = lerp(pitch_input,clamp((upOrDown),-1.0,1.0),pitch_response * delta * 2)
 			roll_input = lerp(roll_input,Roll,roll_response*delta * 2)
 		else:
+			if frontorBack <= 0 and !hooked:
+				is_accelerating = false
+			else: 
+				is_accelerating = true
+				is_braking = false
 			var Roll : float = (AIPilotNode.basis.y.dot(theMesh.global_transform.basis.y)-1)*(-1.0)
 			yaw_input = lerp(yaw_input,clamp((leftorRight),-1.0,1.0),yaw_response * delta * 2)
 			roll_input = lerp(roll_input,leftorRight/4,roll_response*delta)
+			pitch_input = 0
 
 
-		if frontorBack <= 0 and !hooked:
-			is_braking = true
-			is_accelerating = false
-		else: 
-			is_accelerating = true
-			is_braking = false
+
 		if is_skidding == CollisionType.Skidding:
 			is_accelerating = false
 
 func enterAntiGrav(delta):
-	if transitioning:
+	if transitioning and !invulnerability:
 		if !antiGrav:
 			if transition_time_elapsed < transition_between_Gravities:
-				theMesh.global_transform.basis = theMesh.global_transform.basis.slerp(basis,.3)
+				theMesh.global_transform.basis = theMesh.global_transform.basis.slerp(basis,.1)
 				transition_time_elapsed += delta
 			else:
 				theMesh.global_transform.basis = basis
 				antiGrav = true
 				transitioning = false
-	if antiGrav:
-		pass
+				transition_time_elapsed = 0
+				invulnerability = true
+		else:
+			pass
+	if invulnerability and !transitioning:
+		if transition_time_elapsed < (transition_between_Gravities * 100):
+			transition_time_elapsed += delta
 func handleGravity(delta):
 	enterAntiGrav(delta)
 	if !antiGrav:
@@ -328,17 +347,13 @@ func handleGravity(delta):
 			#var q : Quaternion = Quaternion(-basis.z, targetArc)
 			#transform.basis = transform.basis.slerp(Basis(q), .01)
 			#transform.basis = Basis(Quaternion(transform.basis).slerp(q,.01))
-		
-		
-		
+
 """
 forward speed also gets changed by the RouteNode script on entering if it is a booster node
 and by the TUrret_controller script when the hookshot gets unhooked
 """
 
 func _physics_process(delta):
-
-	
 	if draft:
 		forward_speed -= 2 * delta
 	is_accelerating = false
@@ -352,12 +367,7 @@ func _physics_process(delta):
 	elif is_accelerating:
 		if forward_speed < max_speed:
 			forward_speed += acceleration * delta
-	if boosting:
-		hasBeenBoostingFor+=delta
-		forward_speed += boost * delta
-		if hasBeenBoostingFor >= boostTime:
-			boosting = false
-			hasBeenBoostingFor = 0.0
+	checkBoost(delta)
 	if not hooked:
 		_normal_movement(delta)
 	else:
@@ -379,13 +389,39 @@ func _physics_process(delta):
 		if forward_speed < 0:
 			forward_speed = 0
 	move_turret()
-
 	doVFX(delta)
+func checkBoost(delta):
+	if boostingFromRings:
+		boosting = false
+		hasBeenBoostingFor += delta
+		forward_speed += boost * delta
+	if hasBeenBoostingFor >= boostTimeFromRings:
+		hasBeenBoostingFor = 0.0
+		boostingFromRings = false
+		if boostqueued:
+			startboost(boostCost)
+	if boosting:
+		hasBeenBoostingFor += delta
+		forward_speed += boost * delta
+		if hasBeenBoostingFor >= boostTime:
+			hasBeenBoostingFor = 0.0
+			boosting = false
+			if boostqueued:
+				startboost(boostCost)
+func startboost(cost):
+	if boostingFromRings or boosting:
+		boostqueued = true
+	else:
+		boosting = true
+		hasBeenBoostingFor = 0
+		takeDamage(cost)
+		boostqueued = false
+		
+
 func doVFX(_delta):
 	pass
 	#motionBlur._forwardSpeed = forward_speed
 	#motionBlur.material.getshader_param
-
 func find_largest_dict_key(dict):
 	var max_val = -999999
 	var key
@@ -408,9 +444,22 @@ func timeBetweenCollisions(collisions, delta):
 	
 func getVelocityX_Z():
 	velocityX_Z = Vector3(velocity.x, 0, velocity.z)
+
+func takeDamage(damageTaken):
+	currentHealth -= damageTaken
+	if currentHealth > maxHealth:
+		currentHealth = maxHealth
+	if currentHealth <= 0:
+		visible = false
+		set_process(false)
+		set_physics_process(false)
+	damageSignal.emit()
 func collide_and_slide(currentcollision : KinematicCollision3D, _delta):
-	collisionSignal.emit()
 	print("collision")
+	collisionSignal.emit()
+	if collision_cooldown > .1:
+		if !invulnerability:
+			takeDamage(1)
 	collision_time = 0
 	shipResponsiveness = 0.0
 	if hooked:
@@ -427,3 +476,4 @@ func collide_and_slide(currentcollision : KinematicCollision3D, _delta):
 	else:
 		if collision_cooldown > .1:
 			velocity = (velocity.bounce(currentcollision.get_normal()) * 0.25)
+	collision_cooldown = 0

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://he7ivklp1ig8" path="res://Prefabs/Player_related/2playerCamera.tscn" id="1_f83m5"]
 [ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="2_ci54k"]
 [ext_resource type="PackedScene" uid="uid://bk7st5tijr6ni" path="res://Prefabs/Track Objects/boost_ring.tscn" id="3_w4duq"]
-[ext_resource type="Script" path="res://Scripts/Non-player prefabs/Make_invisible.gd" id="4_3ee8s"]
+[ext_resource type="Script" path="res://Scripts/Non-player prefabs/Modules/Make_invisible.gd" id="4_3ee8s"]
 [ext_resource type="Script" path="res://Scripts/Non-player prefabs/AI/RouteNode.gd" id="4_cai6f"]
 [ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="4_vdksf"]
 [ext_resource type="PackedScene" uid="uid://bb4dbf6hnngj0" path="res://art/3D/Track objects/boost_ring.glb" id="5_12qi4"]
@@ -58,19 +58,19 @@ transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 30, 5, 400)
 [node name="Boosts" type="Node3D" parent="Track_objects"]
 
 [node name="boost_ring1" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
-transform = Transform3D(-2.18557e-07, -1, 0, 1, -2.18557e-07, 0, 0, 0, 1, 12.5, 5, 95)
+transform = Transform3D(-2.18557e-07, -1, 0, 1, -2.18557e-07, 0, 0, 0, 1, 12.5, 8, 95)
 NextNode = NodePath("../boost_ring2")
 
 [node name="boost_ring2" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 12.5, 30, 20)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 12.5, 22, 20)
 NextNode = NodePath("../3")
 
 [node name="3" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode") instance=ExtResource("3_w4duq")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 12.5, 5, -45)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 12.5, 8, -45)
 NextNode = NodePath("../boost_ring4")
 
 [node name="boost_ring4" type="Area3D" parent="Track_objects/Boosts" node_paths=PackedStringArray("NextNode", "rotation_indicator", "child", "hookshotTarget")]
-transform = Transform3D(-1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 12.5, 30, -125)
+transform = Transform3D(-1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 12.5, 22, -125)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_cai6f")
@@ -135,12 +135,18 @@ transform = Transform3D(-8.20585e-08, -0.866025, 0.5, 1, -7.42519e-08, 7.40661e-
 NextNode = NodePath("../../Boosts/boost_ring6")
 rotation_indicator = NodePath("../U-turn-1/MeshInstance3D")
 
+[node name="Anti-Grav" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("4_vdksf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130, 50, -227.592)
+NextNode = NodePath("../2")
+Type = 2
+
 [node name="2" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("4_vdksf")]
 transform = Transform3D(0.255361, 0.966846, 0, -0.966846, 0.255361, 0, 0, 0, 1, -100.556, -0.9095, -440.027)
 NextNode = NodePath("../3")
 
-[node name="3" parent="Track_objects/Route_nodes" instance=ExtResource("4_vdksf")]
+[node name="3" parent="Track_objects/Route_nodes" node_paths=PackedStringArray("NextNode") instance=ExtResource("4_vdksf")]
 transform = Transform3D(0.230049, 0.870699, -0.434697, -0.966823, 0.255446, 0, 0.111041, 0.420275, 0.900577, -16.183, -9.12582, -620.92)
+NextNode = NodePath("../2")
 
 [node name="Track" type="Node3D" parent="Track_objects"]
 
@@ -178,7 +184,7 @@ shadow_opacity = 0.5
 shadow_blur = 5.0
 
 [node name="Ground" type="RigidBody3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1294.62)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1264.17)
 freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Ground"]
@@ -187,6 +193,9 @@ shape = SubResource("BoxShape3D_23t2g")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/Ground"]
 mesh = SubResource("PlaneMesh_ueipm")
 skeleton = NodePath("../../..")
+
+[node name="Enemy" parent="." instance=ExtResource("9_b1ewu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.525, 0.5, 443.257)
 
 [connection signal="body_entered" from="Track_objects/Boosts/boost_ring4" to="Track_objects/Boosts/boost_ring4" method="_on_body_entered"]
 [connection signal="body_entered" from="Track_objects/Boosts/boost_ring4/Route_node" to="Track_objects/Boosts/boost_ring4/Route_node" method="_on_body_entered"]

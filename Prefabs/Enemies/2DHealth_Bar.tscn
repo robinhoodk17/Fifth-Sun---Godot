@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dcb3t1qo4wb5e"]
 
-[ext_resource type="Script" path="res://Scripts/Non-player prefabs/2DHealthBar.gd" id="1_crsml"]
+[ext_resource type="Script" path="res://Scripts/Non-player prefabs/Modules/2DHealthBar.gd" id="1_dr362"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pbkqn"]
 
@@ -9,10 +9,10 @@ bg_color = Color(0, 0.866667, 0.305882, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4071"]
 bg_color = Color(0.196078, 0.196078, 0.196078, 1)
-expand_margin_left = 1.0
-expand_margin_top = 1.0
-expand_margin_right = 1.0
-expand_margin_bottom = 1.0
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
 shadow_color = Color(0, 0, 0, 0.27451)
 shadow_offset = Vector2(0, 1)
 
@@ -22,16 +22,23 @@ bg_color = Color(1, 1, 1, 1)
 [node name="Health" type="ProgressBar"]
 z_index = 1
 anchors_preset = -1
-anchor_right = 0.208
-anchor_bottom = 0.014
-offset_right = 0.384003
-offset_bottom = -3.072
+anchor_left = 0.007
+anchor_top = 0.989
+anchor_right = 0.007
+anchor_bottom = 0.989
+offset_left = 35.936
+offset_top = -290.872
+offset_right = 326.936
+offset_bottom = -266.872
+grow_vertical = 0
+rotation = 1.5708
 scale = Vector2(1, 1.48)
 theme_override_styles/background = SubResource("StyleBoxEmpty_pbkqn")
 theme_override_styles/fill = SubResource("StyleBoxFlat_23345")
-value = 50.0
+value = 10.0
+fill_mode = 1
 show_percentage = false
-script = ExtResource("1_crsml")
+script = ExtResource("1_dr362")
 
 [node name="Damage" type="ProgressBar" parent="."]
 z_index = -1
@@ -44,6 +51,7 @@ grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_d4071")
 theme_override_styles/fill = SubResource("StyleBoxFlat_k4ht8")
 value = 80.0
+fill_mode = 1
 show_percentage = false
 
 [node name="Timer" type="Timer" parent="."]

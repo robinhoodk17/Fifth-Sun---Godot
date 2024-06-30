@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://glivbfkecfv4"]
 
 [ext_resource type="Script" path="res://Scripts/Non-player prefabs/Track/EnemySpawner.gd" id="1_gshab"]
-[ext_resource type="Script" path="res://Scripts/Non-player prefabs/Make_invisible.gd" id="2_6pgx7"]
+[ext_resource type="Script" path="res://Scripts/Non-player prefabs/Modules/Make_invisible.gd" id="2_34tw8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qcifr"]
 size = Vector3(100, 20, 1)
@@ -16,7 +16,7 @@ script = ExtResource("1_gshab")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_qcifr")
-script = ExtResource("2_6pgx7")
+script = ExtResource("2_34tw8")
 
 [node name="Spawner2" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_8t5to")

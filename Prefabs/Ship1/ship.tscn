@@ -1,7 +1,8 @@
-[gd_scene load_steps=42 format=3 uid="uid://bo8ptladpikfl"]
+[gd_scene load_steps=50 format=3 uid="uid://bo8ptladpikfl"]
 
 [ext_resource type="Script" path="res://Scripts/Controls/zenith.gd" id="1_08faa"]
 [ext_resource type="Material" uid="uid://bgwx5kw24feoq" path="res://art/Materials/Toon_shader.tres" id="2_lhrga"]
+[ext_resource type="Texture2D" uid="uid://l6y4c38pc4t7" path="res://art/Textures/Smoke2.png" id="3_diasc"]
 [ext_resource type="Material" uid="uid://ey3gnh2bhlrb" path="res://art/Materials/Toon_shader_thin_outlines.tres" id="4_n8agw"]
 [ext_resource type="Script" path="res://Scripts/Controls/Turret_controller.gd" id="4_urwk6"]
 [ext_resource type="PackedScene" uid="uid://b2mtl2nolaf06" path="res://Prefabs/Enemies/Bullet.tscn" id="5_go1ug"]
@@ -354,6 +355,51 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1jh2o")
 
+[sub_resource type="Curve" id="Curve_tvhh1"]
+_data = [Vector2(0, 0.501779), 0.0, 0.0, 0, 0, Vector2(0.79386, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_n2s0y"]
+width = 32
+curve = SubResource("Curve_tvhh1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uwasl"]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 0.15
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 1.0
+radial_accel_max = 2.0
+scale_min = 0.25
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_n2s0y")
+turbulence_noise_strength = 2.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sueif"]
+load_path = "res://.godot/imported/Smoke2.png-e87f439d7d7e9a7adddf8bf70378da62.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8e5u1"]
+load_path = "res://.godot/imported/Smoke2.png-e87f439d7d7e9a7adddf8bf70378da62.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2yg6h"]
+transparency = 4
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_diasc")
+detail_mask = SubResource("CompressedTexture2D_8e5u1")
+detail_albedo = SubResource("CompressedTexture2D_sueif")
+disable_receive_shadows = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_glnm8"]
+material = SubResource("StandardMaterial3D_2yg6h")
+size = Vector2(0.25, 0.25)
+
 [sub_resource type="BoxMesh" id="BoxMesh_vyobk"]
 size = Vector3(0.03, 0.03, 1)
 
@@ -473,23 +519,17 @@ radius = 0.25
 [sub_resource type="BoxShape3D" id="BoxShape3D_5fnh7"]
 size = Vector3(1.5, 0.1, 0.75)
 
-[node name="Ship" type="CharacterBody3D" node_paths=PackedStringArray("Turret", "BodyCollider", "RaycastFront", "RaycastBack", "RaycastLeft", "RaycastRight", "theMesh", "pitch_marker") groups=["Ship"]]
+[node name="Ship" type="CharacterBody3D" node_paths=PackedStringArray("Turret", "RaycastFront", "RaycastBack", "RaycastLeft", "RaycastRight", "theMesh", "pitch_marker") groups=["Ship"]]
 collision_layer = 6
 collision_mask = 11
 script = ExtResource("1_08faa")
 Turret = NodePath("Turret")
-BodyCollider = [NodePath("CollisionShape3D"), NodePath("CollisionShape3D2"), NodePath("CollisionShape3D3")]
 RaycastFront = NodePath("Front")
 RaycastBack = NodePath("Back")
 RaycastLeft = NodePath("Left")
 RaycastRight = NodePath("Right")
 theMesh = NodePath("theMesh")
 pitch_marker = NodePath("pitch_marker")
-max_speed = 60.0
-boost = 7.0
-braking = 30.0
-roll_speed = 3.0
-boostTime = 1.0
 pitch_response = 3.0
 yaw_response = 2.0
 hookshot_strength = 0.001
@@ -556,8 +596,18 @@ mesh = SubResource("ArrayMesh_sf5p5")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_lhrga")
 
+[node name="GPUParticles3D" type="GPUParticles3D" parent="theMesh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.34983, 1.4761)
+gi_mode = 0
+emitting = false
+amount = 50
+preprocess = 3.0
+fixed_fps = 60
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_uwasl")
+draw_pass_1 = SubResource("QuadMesh_glnm8")
+
 [node name="Marker3D" parent="." instance=ExtResource("5_x1t6o")]
-visible = false
 
 [node name="Turret" type="Node3D" parent="."]
 top_level = true

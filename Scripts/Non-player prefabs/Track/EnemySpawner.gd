@@ -10,20 +10,11 @@ var objectList : Array[Node3D] = []
 var waitingfordelay = false
 
 func activateObject():
-	if activeObject < objectCount-1:
-		objectCount += 1
-		objectList[activeObject].set_process(true)
-		objectList[activeObject].set_physics_process(true)
-		objectList[activeObject].startup()
-		objectList[activeObject].visible = true
-		objectList[activeObject].global_position = position
-	else:
-		objectCount = 0
-		objectList[activeObject].set_process(true)
-		objectList[activeObject].set_physics_process(true)
-		objectList[activeObject].startup()
-		objectList[activeObject].visible = true
-		objectList[activeObject].global_position = position
+	objectList[activeObject].set_process(true)
+	objectList[activeObject].set_physics_process(true)
+	objectList[activeObject].startup()
+	objectList[activeObject].visible = true
+	objectList[activeObject].global_position = position
 func spawnObjects(objectAmount = objectCount):
 	for i in objectAmount:
 		var newInstance : Node3D = spawnedObject.instantiate()
@@ -48,5 +39,10 @@ func _process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("Ship") and cooldownCount >= cooldown:
 		cooldownCount = 0
+		if activeObject < objectCount - 1:
+			objectCount += 1
+		else: 
+			objectCount = 0
 		objectList[activeObject].target = body
+		objectList[activeObject].speed = body.velocity.length()/4
 		waitingfordelay = true

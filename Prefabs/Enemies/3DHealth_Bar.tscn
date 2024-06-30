@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://d3kyu1d2ycsa3"]
 
+[ext_resource type="Script" path="res://Scripts/Non-player prefabs/Modules/3DHealthBar.gd" id="1_6ukkp"]
 [ext_resource type="PackedScene" uid="uid://dcb3t1qo4wb5e" path="res://Prefabs/Enemies/2DHealth_Bar.tscn" id="1_cebuh"]
-[ext_resource type="Script" path="res://Scripts/Non-player prefabs/3DHealthBar.gd" id="1_crsml"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ipsnl"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_crsml")
+script = ExtResource("1_6ukkp")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
@@ -19,12 +19,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -3.0
-offset_right = 120.0
-offset_bottom = 3.0
+offset_left = -150.0
+offset_top = -12.0
+offset_right = 150.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+value = 50.0
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 cast_shadow = 0

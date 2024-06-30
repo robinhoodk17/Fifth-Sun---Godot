@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bo8ptladpikfl" path="res://Prefabs/Ship1/ship.tscn" id="2_0g8dw"]
 [ext_resource type="Material" uid="uid://c5a054dts7q12" path="res://Shaders/Day_clear_sky_material.tres" id="3_pqnjw"]
 [ext_resource type="PackedScene" uid="uid://dn8mk1cgcgcl" path="res://Prefabs/Enemies/Basic_enemy.tscn" id="4_x7ejj"]
-[ext_resource type="Script" path="res://Scripts/Non-player prefabs/Make_invisible.gd" id="5_j0rmg"]
+[ext_resource type="Script" path="res://Scripts/Non-player prefabs/Modules/Make_invisible.gd" id="5_j0rmg"]
 [ext_resource type="PackedScene" uid="uid://72fvljgdgqke" path="res://Prefabs/Track Objects/RouteNode.tscn" id="6_ik488"]
 [ext_resource type="PackedScene" uid="uid://glivbfkecfv4" path="res://Prefabs/Track Objects/EnemySpawner.tscn" id="7_8imoh"]
 [ext_resource type="PackedScene" uid="uid://b1sqewdwht81m" path="res://art/3D/Track objects/cylinder.glb" id="7_kat24"]
