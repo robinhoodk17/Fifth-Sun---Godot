@@ -2,7 +2,7 @@ extends Node
 enum Pilotbehaviors {normal, straight, doNothing}
 enum Gunnerbehaviors {normal, doNothing}
 
-var Pilot = 1
+var Pilot = 2
 var Gunner = null
 var Pilot2 = null
 var Gunner2 = null

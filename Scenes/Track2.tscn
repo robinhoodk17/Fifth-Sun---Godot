@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://bhu7nafouqcb0"]
+[gd_scene load_steps=23 format=3 uid="uid://bhu7nafouqcb0"]
 
+[ext_resource type="Script" path="res://Scripts/Menus/Pause_Manager.gd" id="1_d0utm"]
 [ext_resource type="PackedScene" uid="uid://bk7st5tijr6ni" path="res://Prefabs/Track Objects/boost_ring.tscn" id="3_w4duq"]
 [ext_resource type="Script" path="res://Scripts/Non-player prefabs/Modules/Make_invisible.gd" id="4_3ee8s"]
 [ext_resource type="Script" path="res://Scripts/Non-player prefabs/AI/RouteNode.gd" id="4_cai6f"]
@@ -47,6 +48,8 @@ size = Vector2(1000, 3000)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_i0lwo"]
 
 [node name="Node3D" type="Node3D"]
+process_mode = 1
+script = ExtResource("1_d0utm")
 
 [node name="Track_objects" type="Node3D" parent="."]
 

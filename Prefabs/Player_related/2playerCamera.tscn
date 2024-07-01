@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://he7ivklp1ig8"]
+[gd_scene load_steps=10 format=3 uid="uid://he7ivklp1ig8"]
 
 [ext_resource type="Script" path="res://Scripts/Cameras/2P_SplitScreen.gd" id="1_i86uw"]
 [ext_resource type="Script" path="res://Scripts/Controls/speedometer.gd" id="2_ciwyk"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://bosbcn4jsochj" path="res://art/Sprites/Speedom-hand.png" id="4_0omqy"]
 [ext_resource type="PackedScene" uid="uid://dcb3t1qo4wb5e" path="res://Prefabs/Enemies/2DHealth_Bar.tscn" id="5_82far"]
 [ext_resource type="Texture2D" uid="uid://dvvoftavsla7y" path="res://art/Sprites/Red dot.png" id="5_pjndb"]
+[ext_resource type="Theme" uid="uid://cdk6l4g50xiub" path="res://Resources/Debug_resource.tres" id="6_dwkcd"]
 [ext_resource type="Texture2D" uid="uid://dbaa33ud0yxvr" path="res://art/Sprites/Outer aim.png" id="6_x1knn"]
+[ext_resource type="Script" path="res://Scripts/Debug_Panel.gd" id="7_e02hc"]
 
 [node name="GridContainer" type="GridContainer"]
 anchors_preset = 15
@@ -26,7 +28,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(574, 648)
 render_target_update_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="SubViewportContainer/SubViewport"]
@@ -71,6 +73,24 @@ text = "000"
 
 [node name="Health" parent="SubViewportContainer/SubViewport" instance=ExtResource("5_82far")]
 
+[node name="Debug_Panel" type="PanelContainer" parent="SubViewportContainer/SubViewport"]
+custom_minimum_size = Vector2(200, 0)
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 50.0
+theme = ExtResource("6_dwkcd")
+script = ExtResource("7_e02hc")
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewportContainer/SubViewport/Debug_Panel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/Debug_Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/Debug_Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
 clip_contents = true
 layout_mode = 2
@@ -80,7 +100,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(574, 648)
 render_target_update_mode = 4
 
 [node name="UI_turret" type="Control" parent="SubViewportContainer2/SubViewport"]

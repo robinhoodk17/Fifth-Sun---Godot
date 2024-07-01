@@ -3,6 +3,7 @@ extends GridContainer
 @onready var viewport1: SubViewport = $SubViewportContainer/SubViewport
 @onready var viewport2: SubViewport = $SubViewportContainer2/SubViewport
 @onready var ship_Health_Bar = $SubViewportContainer/SubViewport/Health
+@onready var speedoMeter = $"SubViewportContainer/SubViewport/MarginContainer/UI pilot"
 var Camera1 : Marker3D
 var Camera2: Marker3D
 var ship_body
@@ -20,6 +21,6 @@ func initialize():
 	
 	ship_Health_Bar.init_health(ship_body.maxHealth)
 	ship_body.damageSignal.connect(takeDamage)
-
+	speedoMeter.ship = ship_body
 func takeDamage():
 	ship_Health_Bar.health = ship_body.currentHealth

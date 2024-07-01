@@ -1,3 +1,9 @@
+GridContainer
+Button
+VBoxContainer
+PanelContainer
+Label
+MarginContainer
 MeshInstance3D
 Marker3D
 Camera3D
@@ -7,9 +13,3 @@ TextureProgressBar
 GPUParticles3D
 CollisionShape3D
 Sprite3D
-SubViewport
-Control
-SubViewportContainer
-Container
-Timer
-ProgressBar
