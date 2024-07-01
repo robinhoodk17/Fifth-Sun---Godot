@@ -58,6 +58,7 @@ var direction
 var velocityX_Z
 var velocityY
 var climb = Vector3 (0,0,0)
+var race_started: bool = false 
 
 @export var antiGrav : bool = false
 var transition_between_Gravities = 0.15
@@ -90,7 +91,9 @@ var hookshot_landing_point
 var held_Item = null
 var draft : bool = true
 
-
+func go():
+	race_started = true
+	print("received signal")
 func initialize():
 	if Pilot == 2:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -346,42 +349,46 @@ and by the TUrret_controller script when the hookshot gets unhooked
 """
 
 func _physics_process(delta):
-	if draft:
-		forward_speed -= 2 * delta
-	is_accelerating = false
-	is_braking = false
-	get_input(delta)
-	if Pilot == null:
-		autoPilot(delta)
-	if is_braking:
-		if forward_speed > 0:
-			forward_speed -= braking * delta
-	elif is_accelerating:
-		if forward_speed < max_speed:
-			forward_speed += acceleration * delta
-	checkBoost(delta)
-	if not hooked:
-		_normal_movement(delta)
-	else:
-		_hooked_movement(delta)
-	if !antiGrav:
-		handleGravity(delta)
-	var collisions = move_and_collide(velocity*delta)
-	timeBetweenCollisions(collisions, delta)
-	if antiGrav:
-		handleGravity(delta)
+	if race_started:
+		if draft:
+			forward_speed -= 2 * delta
+		is_accelerating = false
+		is_braking = false
+		get_input(delta)
+		if Pilot == null:
+			autoPilot(delta)
+		if is_braking:
+			if forward_speed > 0:
+				forward_speed -= braking * delta
+		elif is_accelerating:
+			if forward_speed < max_speed:
+				forward_speed += acceleration * delta
+		checkBoost(delta)
+		if not hooked:
+			_normal_movement(delta)
+		else:
+			_hooked_movement(delta)
+		if !antiGrav:
+			handleGravity(delta)
+		var collisions = move_and_collide(velocity*delta)
+		timeBetweenCollisions(collisions, delta)
+		if antiGrav:
+			handleGravity(delta)
 
-	if !antiGrav:
-		if is_skidding != CollisionType.Recent:
-			velocity -= climb * climbResponsiveness
-			getVelocityX_Z()
-			forward_speed = velocityX_Z.length()
-	else:
-		forward_speed = velocity.dot(-basis.z)
-		if forward_speed < 0:
-			forward_speed = 0
+		if !antiGrav:
+			if is_skidding != CollisionType.Recent:
+				velocity -= climb * climbResponsiveness
+				getVelocityX_Z()
+				forward_speed = velocityX_Z.length()
+		else:
+			forward_speed = velocity.dot(-basis.z)
+			if forward_speed < 0:
+				forward_speed = 0
+		doVFX(delta)
+		
 	move_turret()
-	doVFX(delta)
+
+
 func checkBoost(delta):
 	if boostingFromRings:
 		boosting = false

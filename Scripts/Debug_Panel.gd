@@ -1,7 +1,7 @@
 extends PanelContainer
 
 var frames_per_second
-@onready var FPS_Label = $MarginContainer/VBoxContainer/Label
+@onready var FPS_Label = $MarginContainer/VBoxContainer/FPS
 
 
 

@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Controls/Turret_controller.gd" id="4_urwk6"]
 [ext_resource type="PackedScene" uid="uid://b2mtl2nolaf06" path="res://Prefabs/Enemies/Bullet.tscn" id="5_go1ug"]
 
-[sub_resource type="Image" id="Image_cpvwo"]
+[sub_resource type="Image" id="Image_enlor"]
 data = {
 "data": PackedByteArray(255, 255, 255, 195, 195, 195, 88, 88, 88, 0, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 242, 0, 179, 170, 0, 91, 86, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 208, 0, 0, 164, 0, 0, 119, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 0, 0, 182, 0, 0, 118, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 255, 0, 0, 153, 0, 0, 94, 0, 0, 61, 0, 168, 243, 0, 133, 193, 0, 90, 131, 255, 255, 255, 226, 123, 39, 168, 92, 29, 121, 66, 20, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 255, 193, 0, 193, 130, 0, 130, 81, 0, 81, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 240, 227, 255, 200, 150, 234, 201, 148, 219, 179, 115, 193, 148, 75, 167, 122, 48, 147, 102, 28, 92, 58, 2),
 "format": "RGB8",
@@ -18,7 +18,7 @@ data = {
 
 [sub_resource type="ImageTexture" id="ImageTexture_48b1p"]
 resource_name = "Low_poly_textures"
-image = SubResource("Image_cpvwo")
+image = SubResource("Image_enlor")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhnbg"]
 resource_name = "Material.001"

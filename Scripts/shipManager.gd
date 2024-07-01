@@ -10,6 +10,7 @@ enum shipNames {BlueLightning}
 @export var turretCameraPrefab : PackedScene
 @export var GridContainerPrefab_2P : PackedScene
 @export var GridContainerPrefab_4P : PackedScene
+@onready var countDown = %CountDown
 var player1Position : int = GlobalVariables.Player1Position
 var player1Ship
 var player2Position : int = GlobalVariables.Player2Position
@@ -25,6 +26,7 @@ func _ready():
 		get_parent().add_child(newInstance)
 		newInstance.global_position = shipPositions[i].global_position
 		newInstance.global_basis = shipPositions[i].global_basis
+		countDown.go.connect(newInstance.go)
 		if i == player1Position:
 			newInstance.Pilot = GlobalVariables.Pilot 
 			newInstance.get_node("Turret/Turret_body_y").Gunner = GlobalVariables.Gunner 

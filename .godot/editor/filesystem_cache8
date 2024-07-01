@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1719858574
+::res://::1719858850
 average_dictionary_enjoyer.gd::GDScript::-1::1719764723::0::1::::AverageDictionaryEnjoyer<>Resource<>::
 CharacterBody3d.gd::GDScript::-1::1717432711::0::1::::<>CharacterBody3D<>::
 CharacterBodyGravityTrial.gd::GDScript::-1::1719381285::0::1::::<>CharacterBody3D<>::
@@ -8,7 +8,7 @@ default_env.tres::Environment::-1::1697554147::0::1::::<><>::
 DemoScene.tscn::PackedScene::5051226948745528167::1717847210::0::1::::<><>::uid://dn0ttcbglyr12::::res://addons/kenney_prototype_textures/purple/texture_05.png<>uid://cmvu4oatcl1lr::::res://addons/kenney_prototype_textures/purple/texture_10.png<>res://CharacterBody3d.gd<>uid://fn4ue284pmgv::::res://addons/motion_blur/motion_blur.tscn
 icon.png::CompressedTexture2D::81677642418255241::1606013320::1697554196::1::::<><>::
 icon.svg::CompressedTexture2D::6085433576940941777::1717432712::1717432715::1::::<><>::
-InstanceDockSceneData.txt::TextFile::-1::1719857351::0::1::::<><>::
+InstanceDockSceneData.txt::TextFile::-1::1719858574::0::1::::<><>::
 LICENSE.md::TextFile::-1::1719764722::0::1::::<><>::
 new_dictionary_enjoyer.tres::Resource::-1::1719764723::0::1::::<><>::
 new_standard_material_3d.tres::StandardMaterial3D::3058607239832461095::1709105104::0::1::::<><>::
@@ -48,7 +48,7 @@ THIRDPARTY.txt::TextFile::-1::1717847549::0::1::::<><>::
 ::res://addons/godot-jolt/macos/godot-jolt_macos_editor.framework/::1717847549
 ::res://addons/godot-jolt/macos/godot-jolt_macos_editor.framework/Resources/::1717847549
 ::res://addons/godot-jolt/macos/godot-jolt_macos_editor.framework/_CodeSignature/::1717847549
-::res://addons/godot-jolt/windows/::1719805283
+::res://addons/godot-jolt/windows/::1719858821
 ::res://addons/InstanceDock/::1719857221
 InstanceDock.gd::GDScript::-1::1719856906::0::1::::<>Control<>::
 InstanceDock.tscn::PackedScene::268425406949137734::1719857220::0::1::::<><>::res://addons/InstanceDock/InstanceDock.gd<>uid://b81f1abox2e67::::res://addons/InstanceDock/Textures/Uncollapse.svg<>res://addons/InstanceDock/PaintMode.gd
@@ -80,8 +80,8 @@ texture_10.png::CompressedTexture2D::5659726287949727815::1717432712::1717432716
 texture_11.png::CompressedTexture2D::1809144790467937400::1717432712::1717432716::1::::<><>::
 texture_12.png::CompressedTexture2D::8112446283286680367::1717432712::1717432716::1::::<><>::
 texture_13.png::CompressedTexture2D::7601093695156940194::1717432712::1717432716::1::::<><>::
-::res://addons/motion_blur/::1719857242
-moblur_shader.gdshader::Shader::-1::1719857242::0::1::::<><>::
+::res://addons/motion_blur/::1719858637
+moblur_shader.gdshader::Shader::-1::1719858637::0::1::::<><>::
 motion_blur.gd::GDScript::-1::1719807151::0::1::::<>MeshInstance3D<>::
 motion_blur.tscn::PackedScene::379577891003110585::1719344467::0::1::::<><>::res://addons/motion_blur/moblur_shader.gdshader<>res://addons/motion_blur/motion_blur.gd
 ::res://art/::1717847225
@@ -127,7 +127,7 @@ Ship1-new_Low_poly_textures.png::CompressedTexture2D::1419133222306277549::17093
 Sin título.png::CompressedTexture2D::8366138948644405974::1719641184::1719641188::1::::<><>::
 Smoke1.png::CompressedTexture2D::2061513741910969718::1717611356::1717611360::1::::<><>::
 Smoke2.png::CompressedTexture2D::837582136064597178::1568928684::1717610698::1::::<><>::
-::res://art/Textures/Editor Textures/::1719858571
+::res://art/Textures/Editor Textures/::1719858609
 aim assist.png::CompressedTexture2D::1937118681422958349::1719858607::1719858609::1::::<><>::
 ring.png::CompressedTexture2D::2360888473413545813::1719858076::1719858079::1::::<><>::
 route node.png::CompressedTexture2D::7131415946531196946::1719858210::1719858373::1::::<><>::
@@ -161,10 +161,10 @@ RouteNode.tscn::PackedScene::2302122874349452920::1719381258::0::1::::<><>::res:
 ::res://Resources/::1719850381
 Debug_resource.tres::Theme::5005955080192976977::1719850381::0::1::::<><>::uid://di6siavtqywp6::::res://Resources/Style_box_flat.tres
 Style_box_flat.tres::StyleBoxFlat::7785875736106967253::1719807152::0::1::::<><>::
-::res://Scenes/::1719856549
+::res://Scenes/::1719858637
 character_select.tscn::PackedScene::6027499136100608689::1719344467::0::1::::<><>::res://Scripts/Menus/character_select.gd<>res://Scripts/Controls/Cursor.gd
 main_menu.tscn::PackedScene::3622791666755024439::1719853549::0::1::::<><>::res://Scripts/Menus/main_menu.gd
-Track2.tscn::PackedScene::2920996311717289731::1719856549::0::1::::<><>::uid://bk7st5tijr6ni::::res://Prefabs/Track Objects/boost_ring.tscn<>res://Scripts/Non-player prefabs/Modules/Make_invisible.gd<>res://Scripts/Non-player prefabs/AI/RouteNode.gd<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://bb4dbf6hnngj0::::res://art/3D/Track objects/boost_ring.glb<>uid://c5a054dts7q12::::res://Shaders/Day_clear_sky_material.tres<>uid://b2irm1yejya5r::::res://art/3D/Track objects/U-turn.glb<>uid://begn8j1et4l3v::::res://Prefabs/Track Objects/InvisibleAimAssist.tscn<>uid://glivbfkecfv4::::res://Prefabs/Track Objects/EnemySpawner.tscn<>uid://dn8mk1cgcgcl::::res://Prefabs/Enemies/Basic_enemy.tscn<>uid://blpqn0ovplx0r::::res://Prefabs/ship_Manager.tscn
+Track2.tscn::PackedScene::2920996311717289731::1719858637::0::1::::<><>::uid://bk7st5tijr6ni::::res://Prefabs/Track Objects/boost_ring.tscn<>res://Scripts/Non-player prefabs/Modules/Make_invisible.gd<>res://Scripts/Non-player prefabs/AI/RouteNode.gd<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://bb4dbf6hnngj0::::res://art/3D/Track objects/boost_ring.glb<>uid://c5a054dts7q12::::res://Shaders/Day_clear_sky_material.tres<>uid://b2irm1yejya5r::::res://art/3D/Track objects/U-turn.glb<>uid://begn8j1et4l3v::::res://Prefabs/Track Objects/InvisibleAimAssist.tscn<>uid://glivbfkecfv4::::res://Prefabs/Track Objects/EnemySpawner.tscn<>uid://dn8mk1cgcgcl::::res://Prefabs/Enemies/Basic_enemy.tscn<>uid://blpqn0ovplx0r::::res://Prefabs/ship_Manager.tscn
 Trials.tscn::PackedScene::2879190559522495733::1719856473::0::1::::<><>::uid://c5a054dts7q12::::res://Shaders/Day_clear_sky_material.tres<>uid://dn8mk1cgcgcl::::res://Prefabs/Enemies/Basic_enemy.tscn<>res://Scripts/Non-player prefabs/Modules/Make_invisible.gd<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://blpqn0ovplx0r::::res://Prefabs/ship_Manager.tscn<>uid://glivbfkecfv4::::res://Prefabs/Track Objects/EnemySpawner.tscn<>uid://b1sqewdwht81m::::res://art/3D/Track objects/cylinder.glb
 ::res://Scenes/Track2/::1719755972
 Track2-spawner_trials.tscn::PackedScene::953909822046189120::1719755972::0::1::::<><>::uid://he7ivklp1ig8::::res://Prefabs/Player_related/2playerCamera.tscn<>uid://bo8ptladpikfl::::res://Prefabs/Ship1/ship.tscn<>uid://bk7st5tijr6ni::::res://Prefabs/Track Objects/boost_ring.tscn<>res://Scripts/Non-player prefabs/AI/RouteNode.gd<>uid://bb4dbf6hnngj0::::res://art/3D/Track objects/boost_ring.glb<>res://Scripts/Non-player prefabs/Modules/Make_invisible.gd<>uid://72fvljgdgqke::::res://Prefabs/Track Objects/RouteNode.tscn<>uid://b2irm1yejya5r::::res://art/3D/Track objects/U-turn.glb<>uid://begn8j1et4l3v::::res://Prefabs/Track Objects/InvisibleAimAssist.tscn<>uid://glivbfkecfv4::::res://Prefabs/Track Objects/EnemySpawner.tscn<>uid://dn8mk1cgcgcl::::res://Prefabs/Enemies/Basic_enemy.tscn<>uid://c5a054dts7q12::::res://Shaders/Day_clear_sky_material.tres<>res://Scripts/shipManager.gd
