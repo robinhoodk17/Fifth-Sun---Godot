@@ -17,3 +17,8 @@ res://Prefabs/Player_related/turret_camera.tscn
 res://Scripts/global_variables.gd
 res://Scripts/Controls/speedometer.gd
 res://Scripts/Menus/Pause_Manager.gd
+res://Scripts/shipManager.gd
+res://Scripts/Controls/zenith.gd
+res://Scenes/main_menu.tscn
+res://Scripts/Controls/Turret_controller.gd
+res://addons/InstanceDock/InstanceDock.tscn

@@ -46,11 +46,11 @@ func _ready():
 		var Camera2 = turretCameraPrefab.instantiate()
 		var newInstance = GridContainerPrefab_2P.instantiate()
 		get_parent().add_child(newInstance)
-		newInstance.get_node("SubViewportContainer/SubViewport").add_child(Camera1)
-		newInstance.get_node("SubViewportContainer2/SubViewport").add_child(Camera2)
-		newInstance.Camera1 = Camera1
-		newInstance.Camera2 = Camera2
-		newInstance.ship_body = player1Ship
-		newInstance.initialize()
+		newInstance.get_node("GridContainer/SubViewportContainer/SubViewport").add_child(Camera1)
+		newInstance.get_node("GridContainer/SubViewportContainer2/SubViewport").add_child(Camera2)
+		newInstance.get_child(0).Camera1 = Camera1
+		newInstance.get_child(0).Camera2 = Camera2
+		newInstance.get_child(0).ship_body = player1Ship
+		newInstance.get_child(0).initialize()
 #endregion
 	queue_free()

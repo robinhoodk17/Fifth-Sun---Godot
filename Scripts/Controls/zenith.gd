@@ -94,7 +94,6 @@ var draft : bool = true
 func initialize():
 	if Pilot == 2:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
 func _unhandled_input(event):
 	_mouse_input = event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
 	if _mouse_input and Pilot == 2:
@@ -171,11 +170,10 @@ func _normal_movement(delta):
 				velocity += climb * climbResponsiveness
 				collision_cooldown = 0
 	else:
-		pass
-		if is_skidding == CollisionType.Normal:
-			rotateShip(delta)
-			velocityY = velocity.dot(basis.y)
-			velocity = -basis.z * forward_speed + (-basis.x * roll_input * strafe_speed) + (velocityY * basis.y)
+		#we have not implemented different movements at different collision states yet
+		rotateShip(delta)
+		velocityY = velocity.dot(basis.y)
+		velocity = -basis.z * forward_speed + (-basis.x * roll_input * strafe_speed) + (velocityY * basis.y)
 func _hooked_movement(delta):
 	rotateShip(delta)
 	climbResponsiveness = 1

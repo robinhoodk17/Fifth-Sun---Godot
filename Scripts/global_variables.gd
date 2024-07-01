@@ -3,7 +3,7 @@ enum Pilotbehaviors {normal, straight, doNothing}
 enum Gunnerbehaviors {normal, doNothing}
 
 var Pilot = 2
-var Gunner = null
+var Gunner = 1
 var Pilot2 = null
 var Gunner2 = null
 var Player1Position = 1

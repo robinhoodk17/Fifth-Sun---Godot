@@ -1,0 +1,16 @@
+[{
+"name": "Track",
+"scenes": [{
+"custom_texture": "res://art/Textures/Editor Textures/ring.png",
+"scene": "res://Prefabs/Track Objects/boost_ring.tscn"
+}, {
+"custom_texture": "res://art/Textures/Editor Textures/spawner.png",
+"scene": "res://Prefabs/Track Objects/EnemySpawner.tscn"
+}, {
+"custom_texture": "res://art/Textures/Editor Textures/aim assist.png",
+"scene": "res://Prefabs/Track Objects/InvisibleAimAssist.tscn"
+}, {
+"custom_texture": "res://art/Textures/Editor Textures/route node.png",
+"scene": "res://Prefabs/Track Objects/RouteNode.tscn"
+}]
+}]

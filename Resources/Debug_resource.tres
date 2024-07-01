@@ -3,8 +3,8 @@
 [ext_resource type="StyleBox" uid="uid://di6siavtqywp6" path="res://Resources/Style_box_flat.tres" id="1_enne8"]
 
 [resource]
-MarginContainer/constants/margin_bottom = 10
-MarginContainer/constants/margin_left = 10
-MarginContainer/constants/margin_right = 10
-MarginContainer/constants/margin_top = 10
+MarginContainer/constants/margin_bottom = 30
+MarginContainer/constants/margin_left = 30
+MarginContainer/constants/margin_right = 30
+MarginContainer/constants/margin_top = 30
 PanelContainer/styles/panel = ExtResource("1_enne8")

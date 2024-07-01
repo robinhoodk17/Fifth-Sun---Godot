@@ -68,8 +68,6 @@ func _ready():
 	aim_assist_ray.add_exception(Ship_body)
 	ray.add_exception(Ship_body)
 	ray.add_exception(turret_body_y)
-	
-	
 	if Gunner == null:
 		autoGunner = true
 	if Gunner == 2:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://he7ivklp1ig8"]
+[gd_scene load_steps=14 format=3 uid="uid://he7ivklp1ig8"]
 
 [ext_resource type="Script" path="res://Scripts/Cameras/2P_SplitScreen.gd" id="1_i86uw"]
 [ext_resource type="Script" path="res://Scripts/Controls/speedometer.gd" id="2_ciwyk"]
@@ -9,8 +9,25 @@
 [ext_resource type="Theme" uid="uid://cdk6l4g50xiub" path="res://Resources/Debug_resource.tres" id="6_dwkcd"]
 [ext_resource type="Texture2D" uid="uid://dbaa33ud0yxvr" path="res://art/Sprites/Outer aim.png" id="6_x1knn"]
 [ext_resource type="Script" path="res://Scripts/Debug_Panel.gd" id="7_e02hc"]
+[ext_resource type="Script" path="res://Scripts/Menus/Pause_Manager.gd" id="10_fch36"]
+[ext_resource type="Texture2D" uid="uid://c80mojolcw1ew" path="res://addons/kenney_prototype_textures/purple/texture_01.png" id="11_jq4t1"]
 
-[node name="GridContainer" type="GridContainer"]
+[sub_resource type="SystemFont" id="SystemFont_m72f5"]
+font_names = PackedStringArray("Cursive")
+
+[sub_resource type="SystemFont" id="SystemFont_klig6"]
+font_names = PackedStringArray("Cursive")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,19 +36,19 @@ grow_vertical = 2
 columns = 2
 script = ExtResource("1_i86uw")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="GridContainer"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(574, 648)
 render_target_update_mode = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewportContainer/SubViewport"]
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/SubViewportContainer/SubViewport"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -42,38 +59,38 @@ grow_vertical = 0
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="UI pilot" type="Control" parent="SubViewportContainer/SubViewport/MarginContainer"]
+[node name="UI pilot" type="Control" parent="GridContainer/SubViewportContainer/SubViewport/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_ciwyk")
 metadata/_edit_use_anchors_ = true
 
-[node name="Speedometer" type="Node2D" parent="SubViewportContainer/SubViewport/MarginContainer/UI pilot"]
+[node name="Speedometer" type="Node2D" parent="GridContainer/SubViewportContainer/SubViewport/MarginContainer/UI pilot"]
 
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer"]
+[node name="Sprite2D" type="Sprite2D" parent="GridContainer/SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_j4bl7")
 
-[node name="Node2D" type="Node2D" parent="SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer"]
+[node name="Node2D" type="Node2D" parent="GridContainer/SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer"]
 rotation = 1.15541
 
-[node name="Hand" type="Sprite2D" parent="SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer/Node2D"]
+[node name="Hand" type="Sprite2D" parent="GridContainer/SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer/Node2D"]
 position = Vector2(7.2, 25)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_0omqy")
 
-[node name="Node2D2" type="Node2D" parent="SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer"]
+[node name="Node2D2" type="Node2D" parent="GridContainer/SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer"]
 position = Vector2(-14.435, 16.39)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer/Node2D2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="GridContainer/SubViewportContainer/SubViewport/MarginContainer/UI pilot/Speedometer/Node2D2"]
 offset_right = 40.0
 offset_bottom = 40.0
 text = "000"
 
-[node name="Health" parent="SubViewportContainer/SubViewport" instance=ExtResource("5_82far")]
+[node name="Health" parent="GridContainer/SubViewportContainer/SubViewport" instance=ExtResource("5_82far")]
 
-[node name="Debug_Panel" type="PanelContainer" parent="SubViewportContainer/SubViewport"]
+[node name="Debug_Panel" type="PanelContainer" parent="GridContainer/SubViewportContainer/SubViewport"]
 custom_minimum_size = Vector2(200, 0)
 offset_left = 10.0
 offset_top = 10.0
@@ -82,28 +99,28 @@ offset_bottom = 50.0
 theme = ExtResource("6_dwkcd")
 script = ExtResource("7_e02hc")
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewportContainer/SubViewport/Debug_Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="GridContainer/SubViewportContainer/SubViewport/Debug_Panel"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport/Debug_Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/SubViewportContainer/SubViewport/Debug_Panel/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SubViewportContainer/SubViewport/Debug_Panel/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="GridContainer/SubViewportContainer/SubViewport/Debug_Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="GridContainer"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
+[node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer2"]
 handle_input_locally = false
 size = Vector2i(574, 648)
 render_target_update_mode = 4
 
-[node name="UI_turret" type="Control" parent="SubViewportContainer2/SubViewport"]
+[node name="UI_turret" type="Control" parent="GridContainer/SubViewportContainer2/SubViewport"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -116,12 +133,138 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="Aim" type="Node2D" parent="SubViewportContainer2/SubViewport/UI_turret"]
+[node name="Aim" type="Node2D" parent="GridContainer/SubViewportContainer2/SubViewport/UI_turret"]
 
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer2/SubViewport/UI_turret/Aim"]
+[node name="Sprite2D" type="Sprite2D" parent="GridContainer/SubViewportContainer2/SubViewport/UI_turret/Aim"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("5_pjndb")
 
-[node name="OuterAim" type="Sprite2D" parent="SubViewportContainer2/SubViewport/UI_turret/Aim"]
+[node name="OuterAim" type="Sprite2D" parent="GridContainer/SubViewportContainer2/SubViewport/UI_turret/Aim"]
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("6_x1knn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_dwkcd")
+script = ExtResource("10_fch36")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+process_mode = 2
+layout_mode = 2
+texture = ExtResource("11_jq4t1")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TextureRect"]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -194.0
+offset_right = 194.0
+offset_bottom = 207.0
+grow_horizontal = 2
+theme = ExtResource("6_dwkcd")
+theme_override_constants/separation = 50
+
+[node name="Separator" type="Control" parent="MarginContainer/TextureRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/TextureRect/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 48
+theme_override_fonts/font = SubResource("SystemFont_m72f5")
+theme_override_font_sizes/font_size = 128
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -412.0
+offset_right = 120.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TextureRect/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Separator2" type="Control" parent="MarginContainer/TextureRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Separator4" type="Control" parent="MarginContainer/TextureRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Separator5" type="Control" parent="MarginContainer/TextureRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Resume" type="Button" parent="MarginContainer/TextureRect/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(240, 64)
+layout_mode = 2
+theme = ExtResource("6_dwkcd")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("SystemFont_klig6")
+theme_override_font_sizes/font_size = 44
+text = "Resume"
+
+[node name="Settings" type="Button" parent="MarginContainer/TextureRect/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(240, 64)
+layout_mode = 2
+theme = ExtResource("6_dwkcd")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("SystemFont_klig6")
+theme_override_font_sizes/font_size = 44
+text = "Settings"
+
+[node name="Main Menu" type="Button" parent="MarginContainer/TextureRect/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(240, 64)
+layout_mode = 2
+theme = ExtResource("6_dwkcd")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("SystemFont_klig6")
+theme_override_font_sizes/font_size = 44
+text = "Main Menu"
+
+[node name="Exit Game" type="Button" parent="MarginContainer/TextureRect/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(240, 64)
+layout_mode = 2
+theme = ExtResource("6_dwkcd")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("SystemFont_klig6")
+theme_override_font_sizes/font_size = 44
+text = "Exit Game"
+
+[node name="Separator3" type="Control" parent="MarginContainer/TextureRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="button_down" from="MarginContainer/TextureRect/HBoxContainer/VBoxContainer/Resume" to="MarginContainer" method="_on_resume_button_down"]
+[connection signal="button_down" from="MarginContainer/TextureRect/HBoxContainer/VBoxContainer/Settings" to="MarginContainer" method="_on_settings_button_down"]
+[connection signal="button_down" from="MarginContainer/TextureRect/HBoxContainer/VBoxContainer/Main Menu" to="MarginContainer" method="_on_main_menu_button_down"]
+[connection signal="button_down" from="MarginContainer/TextureRect/HBoxContainer/VBoxContainer/Exit Game" to="MarginContainer" method="_on_exit_game_button_down"]
